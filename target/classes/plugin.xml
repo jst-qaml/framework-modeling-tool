@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+      <extension point="com.change_vision.astah.ui.view">
+      <view
+            id="ai.engineering.internal.MLCanvasView"
+            type="extraTab"
+            class="ai.engineering.MLCanvasView" />
+      <view
+            id="ai.engineering.internal.RelatedElementView"
+            type="extraTab"
+            class="ai.engineering.RelatedElementView" />
+   </extension>
+   <extension point="com.change_vision.astah.ui.actionSets">
+      <actionSet
+            label="%action_set_label"
+            visible="true"
+            id="com.example.helloworld.actionSet">
+         <menu
+               id="eai"
+               label="eAI Framework"
+               path="tool/eAI Framework">
+         </menu>
+         <action
+               label="Activate Consistency Checker"
+               icon="icons/sample.gif"
+               class="ai.engineering.RelationCheckerAction"
+               tooltip="%menu_tooltip"
+               menubarPath="tool/eai/"
+               id="ai.engineering.RelationCheckerAction">
+         </action>
+     </actionSet>
+   </extension>
+</plugin>

@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Astah-Edition: safety
+Astah-Version: 6.0.0
+Bnd-LastModified: 1659371582155
+Build-Jdk: 1.8.0_312
+Built-By: Jati
+Bundle-Activator: ai.engineering.Activator
+Bundle-Description: %bundle.description
+Bundle-ManifestVersion: 2
+Bundle-Name: %bundle.name
+Bundle-SymbolicName: ai.engineering.frameworktool; singleton:=true
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Embed-Dependency: *;scope=compile|runtime;type=!pom
+Embed-Transitive: true
+Export-Package: ai.engineering;version="1.0.0.SNAPSHOT";uses:="com.chang
+ e_vision.jude.api.inf.editor,com.change_vision.jude.api.inf.model,com.c
+ hange_vision.jude.api.inf.project,com.change_vision.jude.api.inf.ui,jav
+ ax.swing,javax.swing.event,javax.swing.table,org.osgi.framework"
+Import-Package: com.change_vision.jude.api.gsn.model;resolution:=optiona
+ l,com.change_vision.jude.api.inf;resolution:=optional,com.change_vision
+ .jude.api.inf.editor;resolution:=optional,com.change_vision.jude.api.in
+ f.exception;resolution:=optional,com.change_vision.jude.api.inf.model;r
+ esolution:=optional,com.change_vision.jude.api.inf.presentation;resolut
+ ion:=optional,com.change_vision.jude.api.inf.project;resolution:=option
+ al,com.change_vision.jude.api.inf.ui;resolution:=optional,com.change_vi
+ sion.jude.api.inf.view;resolution:=optional,javax.swing;resolution:=opt
+ ional,javax.swing.border;resolution:=optional,javax.swing.event;resolut
+ ion:=optional,javax.swing.table;resolution:=optional,org.osgi.framework
+ ;resolution:=optional;version="[1.8,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-4.1.0.201810181252
