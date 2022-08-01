@@ -6,6 +6,10 @@
             type="extraTab"
             class="ai.engineering.MLCanvasView" />
       <view
+            id="ai.engineering.internal.AIProjectCanvasView"
+            type="extraTab"
+            class="ai.engineering.AIProjectCanvasView" />
+      <view
             id="ai.engineering.internal.RelatedElementView"
             type="extraTab"
             class="ai.engineering.RelatedElementView" />

@@ -62,26 +62,35 @@ public class ElementPicker {
         return requirements;
     }
 
-    public static List<IRequirement> getMLCanvasElements(){
+    private static List<IRequirement> getCanvasElementsByPrefix(String prefix){
         List<IRequirement> requirements = ElementPicker.getAllRequirements();
         List<IRequirement> canvasElements = new ArrayList<IRequirement>();
         
         for (IRequirement requirement : requirements) {
             String[] stereotypes = requirement.getStereotypes();
-            boolean isMLCanvasElement = false;
+            boolean isCanvasElement = false;
 
             for (String stereotype : stereotypes) {
-                if(stereotype.startsWith("ML.")){
-                    isMLCanvasElement = true;
+                if(stereotype.startsWith(prefix)){
+                    isCanvasElement = true;
                 }
             }
 
-            if(isMLCanvasElement){
+            if(isCanvasElement){
                 canvasElements.add(requirement);
             }
         }
 
         return canvasElements;
+    }
+
+
+    public static List<IRequirement> getMLCanvasElements(){
+        return getCanvasElementsByPrefix("ML.");
+    }
+
+    public static List<IRequirement> getAIProjectCanvasElements(){
+        return getCanvasElementsByPrefix("AI.");
     }
 
     public static List<IEntity> getRelatedEntities(IHyperlinkOwner selectedHyperlinkOwner){
