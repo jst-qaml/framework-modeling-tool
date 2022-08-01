@@ -3,6 +3,7 @@ ai\engineering\MLCanvas.class
 ai\engineering\TraceabilityRecommenderView.class
 ai\engineering\CanvasModel.class
 ai\engineering\RelationChecker.class
+ai\engineering\AIProjectCanvasView.class
 ai\engineering\ElementPicker.class
 ai\engineering\Activator.class
 ai\engineering\ElementTypeChecker.class
@@ -10,6 +11,7 @@ ai\engineering\ElementTypeChecker$MLCanvasType.class
 ai\engineering\CanvasView.class
 ai\engineering\RelatedElementView.class
 ai\engineering\RelatedElementModel.class
+ai\engineering\AIProjectCanvas.class
 ai\engineering\MLCanvasView.class
 ai\engineering\TemplateAction.class
 ai\engineering\ToolUtilities.class

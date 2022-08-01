@@ -24,7 +24,7 @@ public abstract class CanvasView extends JPanel implements IPluginExtraTabView, 
  
     private IModel currentProject;
     private JLabel label;
-    private CanvasModel canvas;
+    protected CanvasModel canvas;
   
     public CanvasView(){
       initComponents();
@@ -42,10 +42,7 @@ public abstract class CanvasView extends JPanel implements IPluginExtraTabView, 
       utilities.setProjectListener(this);
     }
    
-    private Container createCanvasPane() {
-      canvas = new MLCanvas();
-      return canvas.getCanvas();
-    }
+    protected abstract Container createCanvasPane();
   
     private void updateCanvasPane(){
       this.removeAll();

@@ -20,17 +20,17 @@ import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
  
-public class MLCanvasView extends CanvasView {
+public class AIProjectCanvasView extends CanvasView {
  
   @Override
   protected Container createCanvasPane() {
-    canvas = new MLCanvas();
+    canvas = new AIProjectCanvas();
     return canvas.getCanvas();
   }
  
   @Override
-  public String getDescription() {return "ML Canvas View Class";}
+  public String getDescription() {return "AI Project Canvas View Class";}
  
   @Override
-  public String getTitle() {return "ML Canvas View";}
+  public String getTitle() {return "AI Project Canvas View";}
 }

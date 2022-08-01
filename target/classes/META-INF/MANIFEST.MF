@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Astah-Edition: safety
 Astah-Version: 6.0.0
-Bnd-LastModified: 1659373365468
+Bnd-LastModified: 1659379651642
 Build-Jdk: 1.8.0_312
 Built-By: Jati
 Bundle-Activator: ai.engineering.Activator

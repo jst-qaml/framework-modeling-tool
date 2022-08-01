@@ -16,6 +16,10 @@ public class MLCanvas extends CanvasModel{
     
     private JPanel ptPanel, isPanel, dPanel, mpPanel, vpPanel, dcPanel, bmPanel, dsPanel, fPanel, lmPanel;
 
+    public MLCanvas(){
+        super(5,20);
+    }
+
     @Override
     public void updateCanvasSize(){    
         ptPanel = generateCanvasElement("Prediction Task", 0,0,9,1);

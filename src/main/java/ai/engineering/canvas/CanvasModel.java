@@ -15,8 +15,11 @@ import com.change_vision.jude.api.inf.model.IRequirement;
 public abstract class CanvasModel {
     
     private JPanel canvasPanel;
-    
-    public CanvasModel(){      
+    protected int xGridDivider, yGridDivider;
+
+    public CanvasModel(int xGridDivider, int yGridDivider){      
+        this.xGridDivider = xGridDivider;
+        this.yGridDivider = yGridDivider;
         canvasPanel = new JPanel();
         canvasPanel.setLayout(null);
         updateCanvasSize();
@@ -49,8 +52,8 @@ public abstract class CanvasModel {
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             
         Dimension canvasDimension = new Dimension(1080, 420);
-        Dimension gridDimension = new Dimension((int) canvasDimension.getWidth()/5, (int) canvasDimension.getHeight()/20); 
-    
+        Dimension gridDimension = new Dimension((int) canvasDimension.getWidth()/xGridDivider, (int) canvasDimension.getHeight()/yGridDivider); 
+
         panel.setVisible(true);
         canvasPanel.add(panel);
     
