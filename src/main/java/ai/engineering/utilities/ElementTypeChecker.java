@@ -10,19 +10,25 @@ import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.gsn.model.IGoal;
 
 public class ElementTypeChecker {
-    
-    public static enum MLCanvasType{
-        PREDICTION_TASK,
-        IMPACT_SIMULATION,
-        DECISION,
-        MAKING_PREDICTION,
-        VALUE_PROPOSITION,
-        DATA_COLLECTION,
-        BUILDING_MODELS,
-        DATA_SOURCES,
-        FEATURES,
-        LIVE_MONITORING,
-        UNIDENTIFIED
+
+    public static ModelType getModelType(IEntity entity){
+        if(isAIProjectCanvasElement(entity)){
+            return ModelType.AI_PROJECT_CANVAS;
+        }
+
+        if(isMLCanvasElement(entity)){
+            return ModelType.ML_CANVAS;
+        }
+
+        if(isKAOSGoal(entity)){
+            return ModelType.KAOS;
+        }
+
+        if(isSafetyGoal(entity)){
+            return ModelType.SAFETY_CASE;
+        }
+
+        return ModelType.UNKNOWN;
     }
 
     public static String getMLCanvasElementName(IRequirement req){
@@ -93,6 +99,43 @@ public class ElementTypeChecker {
         }
 
         return MLCanvasType.UNIDENTIFIED;
+    }
+
+    public static boolean isMLCanvasElement(IEntity entity){
+
+        boolean isMLCanvasElement = false;
+
+        if(entity instanceof IRequirement){
+            IRequirement requirement = (IRequirement) entity;
+
+            String[] stereotypes = requirement.getStereotypes();
+
+            for (String stereotype : stereotypes) {
+                if(stereotype.startsWith("ML.")){
+                    isMLCanvasElement = true;
+                }
+            }
+        }
+
+        return isMLCanvasElement;
+    }
+
+    public static boolean isAIProjectCanvasElement(IEntity entity){
+
+        boolean isAIProjectCanvasElement = false;
+
+        if(entity instanceof IRequirement){
+            IRequirement requirement = (IRequirement) entity;
+            String[] stereotypes = requirement.getStereotypes();
+
+            for (String stereotype : stereotypes) {
+                if(stereotype.startsWith("AI.")){
+                    isAIProjectCanvasElement = true;
+                }
+            }
+        }
+
+        return isAIProjectCanvasElement;
     }
 
     public static boolean isKAOSGoal(IEntity entity){

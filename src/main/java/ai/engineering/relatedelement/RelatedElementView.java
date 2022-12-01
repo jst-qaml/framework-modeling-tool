@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -36,13 +37,14 @@ import com.change_vision.jude.api.gsn.model.IGoal;
 import com.change_vision.jude.api.gsn.model.IArgumentAsset;
 
 
-public class RelatedElementView extends JPanel implements IPluginExtraTabView, ProjectEventListener, Runnable, TableModelListener {
+public class RelatedElementView extends JPanel implements IPluginExtraTabView, ProjectEventListener, Runnable {
 
     boolean isActive;
     Thread thread;
     IEntity selectedEntity, oldSelectedEntity;
     ToolUtilities utilities;
     RelatedElementModel model;
+    TraceabilityMaps tmaps;
 
     public RelatedElementView() {
         setLayout(new BorderLayout());
@@ -70,18 +72,11 @@ public class RelatedElementView extends JPanel implements IPluginExtraTabView, P
     public void run(){
         while(isActive){
             
-            updateSelectedEntity();
+            updateTableContent();
             
-            if(isEntitySelect()){
-                if(isSelectionChanged()){
-                    oldSelectedEntity = selectedEntity;
-                    updateTableContent();
-                }
-            }
-            
-            try{
-                Thread.sleep(100);
-            }catch(Exception e){};
+            // try{
+            //     Thread.sleep(100);
+            // }catch(Exception e){};
         }
     }
 
@@ -89,22 +84,15 @@ public class RelatedElementView extends JPanel implements IPluginExtraTabView, P
         selectedEntity = utilities.getSelectedEntity();
     }
 
-    private boolean isEntitySelect(){
+    private boolean isEntitySelected(){
         return selectedEntity != null;
     }
 
     private void updateTableContent(){
-        JTable table = model.createRelatedTable(selectedEntity);
+        JTable table = model.createRelatedTable();
+        JScrollPane scrollPane = new JScrollPane(table);
         removeAll();
-        add(table);
-        addTableListener(table);
-    }
-
-    private void addTableListener(JTable table){
-        TableModel model = table.getModel();
-        if(model != null){
-            model.addTableModelListener(this);
-        }
+        add(scrollPane);
     }
 
     @Override
@@ -114,7 +102,9 @@ public class RelatedElementView extends JPanel implements IPluginExtraTabView, P
     public void projectClosed(ProjectEvent e) {isActive = false;}
 
      @Override
-    public void projectOpened(ProjectEvent e) {}
+    public void projectOpened(ProjectEvent e) {
+        
+    }
  
     @Override
     public void addSelectionListener(ISelectionListener listener) {}
@@ -127,17 +117,6 @@ public class RelatedElementView extends JPanel implements IPluginExtraTabView, P
  
     @Override
     public String getDescription() {return "Related Element View Class";}
-
-    @Override
-    public void tableChanged(TableModelEvent e){
-
-        JTable relatedElementTable = (JTable) this.getComponent(0);
-
-        TableModel tableModel = relatedElementTable.getModel();
-
-        model.updateElementsFromTable(tableModel, e);
-
-    }
 
     public void activated() {}
    

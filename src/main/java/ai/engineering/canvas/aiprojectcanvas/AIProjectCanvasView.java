@@ -22,9 +22,17 @@ import com.change_vision.jude.api.inf.ui.ISelectionListener;
  
 public class AIProjectCanvasView extends CanvasView {
  
+  public AIProjectCanvasView(){
+    super(0);
+  }
+
+  public AIProjectCanvasView(int highlightPanelIndex){
+    super(highlightPanelIndex);
+  }
+
   @Override
   protected Container createCanvasPane() {
-    canvas = new AIProjectCanvas();
+    canvas = new AIProjectCanvas(highlightPanelIndex);
     return canvas.getCanvas();
   }
  

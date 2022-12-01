@@ -16,68 +16,101 @@ import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.inf.model.IDiagram;
 import com.change_vision.jude.api.inf.model.IEntity;
 
-import com.change_vision.jude.api.gsn.model.IGoal;
+import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.gsn.model.IArgumentAsset;
+
 
 public class RelatedElementModel {
        
     private List<IEntity> tabledEntities;
-    private static String[] COLUMN_NAMES = {"Model Location", "Model Name/ID", "Model Description"};
+    private static String[] COLUMN_NAMES = {"Source Model", "Source Element", "Destination Model", "Destination Element", "Status"};
+    private MetamodelRelationship relationships;
 
-    public JTable createRelatedTable(IEntity selectedEntity){
-        List<IEntity> relatedEntities = ElementPicker.getRelatedEntities(selectedEntity);
-        Object[][] tableData = createRelatedTableContent(relatedEntities);
+    public RelatedElementModel(){
+        MetamodelXMLParser parser = new MetamodelXMLParser();
+        relationships = parser.parseMetamodelXML();
+    }
+
+    public JTable createRelatedTable(){
+        Object[][] tableData = createRelatedTableContent();
         JTable relatedElementTable = new JTable(tableData, COLUMN_NAMES);
         return relatedElementTable;
     }
 
-    private Object[][] createRelatedTableContent(List<IEntity> relatedEntities){
-        Object[][] tableData = new Object[relatedEntities.size()][3];
-        tabledEntities = new ArrayList<IEntity>();
+    private Object[][] createRelatedTableContent(){
 
-        for(int index = 0; index < relatedEntities.size(); index++){
-            IEntity relatedEntity = relatedEntities.get(index);
-            if (relatedEntity instanceof IRequirement){
-                writeMLCanvasTableData(tableData, relatedEntity, index);
+        List<IEntity> badRelationships = relationships.checkAllElementHyperlinks();
+
+        Object[][] tableData = new Object[badRelationships.size()/2][5];
+
+        for(int index = 0; index < badRelationships.size(); index += 2){
+            IEntity sourceEntity = badRelationships.get(index);
+
+            if (sourceEntity instanceof IRequirement){
+                writeMLCanvasTableData(tableData, sourceEntity, index/2, 0);
             }
-            else if (relatedEntity instanceof IGoal){
-                writeKAOSTableData(tableData, relatedEntity, index);
+            if (sourceEntity instanceof IGoal){
+                writeKAOSTableData(tableData, sourceEntity, index/2, 0);
             }
-            else if (relatedEntity instanceof IArgumentAsset){
-                writeSafetyCaseTableData(tableData, relatedEntity, index);
+            if (sourceEntity instanceof IArgumentAsset){
+                writeSafetyCaseTableData(tableData, sourceEntity, index/2, 0);
             }
-            tabledEntities.add(relatedEntity);
+
+            IEntity destinationEntity = badRelationships.get(index + 1);
+
+            if (destinationEntity instanceof IRequirement){
+                writeMLCanvasTableData(tableData, destinationEntity, index/2, 2);
+            }
+            if (destinationEntity instanceof IGoal){
+                writeKAOSTableData(tableData, destinationEntity, index/2, 2);
+            }
+            if (destinationEntity instanceof IArgumentAsset){
+                writeSafetyCaseTableData(tableData, destinationEntity, index/2, 2);
+            }
+
+            tableData[index/2][4] = "Violation";
         }
 
         return tableData;
     }
 
-    private void writeMLCanvasTableData(Object[][] tableData, IEntity entity, int index){
+    private void writeMLCanvasTableData(Object[][] tableData, IEntity entity, int rowIndex, int columnIndex){
         IRequirement canvasElement = (IRequirement) entity;
-        tableData[index][0] = "ML Canvas";
-        tableData[index][1] = canvasElement.getName();
-        tableData[index][2] = canvasElement.getRequirementText();
+        tableData[rowIndex][columnIndex] = "ML Canvas";
+        tableData[rowIndex][columnIndex + 1] = canvasElement.getName();
     }
 
-    private void writeKAOSTableData(Object[][] tableData, IEntity entity, int index){
+    private void writeKAOSTableData(Object[][] tableData, IEntity entity, int rowIndex, int columnIndex){
         IGoal goalElement = (IGoal) entity;
         try{
             IPresentation[] presentations = goalElement.getPresentations();
             IDiagram diagram = presentations[0].getDiagram();
             String diagramName = diagram.getName();
             if(diagramName.equals("KAOS")){
-                tableData[index][0] = "KAOS Goal Model"; 
-                tableData[index][1] = goalElement.getName();
-                tableData[index][2] = goalElement.getContent();
+                tableData[rowIndex][columnIndex] = "KAOS Goal Model"; 
+                tableData[rowIndex][columnIndex + 1] = goalElement.getName();
             }
         }catch(Exception e){}
     }
 
-    private void writeSafetyCaseTableData(Object[][] tableData, IEntity entity, int index){
+    private void writeSafetyCaseTableData(Object[][] tableData, IEntity entity, int rowIndex, int columnIndex){
         IArgumentAsset safetyCaseElement = (IArgumentAsset) entity;
-        tableData[index][0] = "Safety Case"; 
-        tableData[index][1] = safetyCaseElement.getName();
-        tableData[index][2] = safetyCaseElement.getContent();
+        String elementType = "";
+        
+        if(entity instanceof IGoal){
+            elementType = "Safety Goal";
+        }
+
+        if(entity instanceof IStrategy){
+            elementType = "Safety Argument";
+        }
+
+        if(entity instanceof ISolution){
+            elementType = "Safety Solution";
+        }
+
+        tableData[rowIndex][columnIndex] = elementType; 
+        tableData[rowIndex][columnIndex + 1] = safetyCaseElement.getContent();
     }
 
     public void updateElementsFromTable(TableModel tableModel, TableModelEvent e){

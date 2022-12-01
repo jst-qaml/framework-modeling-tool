@@ -10,9 +10,9 @@
             type="extraTab"
             class="ai.engineering.AIProjectCanvasView" />
       <view
-            id="ai.engineering.internal.RelatedElementView"
+            id="ai.engineering.internal.ProcessGuideView"
             type="extraTab"
-            class="ai.engineering.RelatedElementView" />
+            class="ai.engineering.ProcessGuideView" />
    </extension>
    <extension point="com.change_vision.astah.ui.actionSets">
       <actionSet

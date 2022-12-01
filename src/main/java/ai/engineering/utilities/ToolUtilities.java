@@ -6,10 +6,15 @@ import com.change_vision.jude.api.inf.project.ProjectAccessor;
 import com.change_vision.jude.api.inf.project.ProjectAccessorFactory;
 import com.change_vision.jude.api.inf.project.ProjectEventListener;
 
+import javax.swing.text.rtf.RTFEditorKit;
+
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
+import com.change_vision.jude.api.inf.editor.IModelEditorFactory;
+import com.change_vision.jude.api.inf.editor.SysmlModelEditor;
 
 import com.change_vision.jude.api.inf.view.IViewManager;
 import com.change_vision.jude.api.inf.view.IProjectViewManager;
+import com.change_vision.jude.api.inf.view.IDiagramViewManager;
 
 import com.change_vision.jude.api.inf.model.IModel;
 import com.change_vision.jude.api.inf.model.IEntity;
@@ -80,6 +85,23 @@ public class ToolUtilities{
 
     public ITransactionManager getTransactionManager(){
         return projectAccessor.getTransactionManager();
+    }
+
+    public SysmlModelEditor getSysmlModelEditor(){
+        try {
+            IModelEditorFactory editorFactory = projectAccessor.getModelEditorFactory();
+            return editorFactory.getSysmlModelEditor();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public IDiagramViewManager getDiagramViewManager(){
+        try {
+            return projectAccessor.getViewManager().getDiagramViewManager();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }

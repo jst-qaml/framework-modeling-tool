@@ -20,11 +20,19 @@ import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
  
-public class MLCanvasView extends CanvasView {
+public class MLCanvasView extends CanvasView{
  
+  public MLCanvasView(){
+    super(0);
+  }
+
+  public MLCanvasView(int highlightPanelIndex){
+    super(highlightPanelIndex);
+  }
+
   @Override
   protected Container createCanvasPane() {
-    canvas = new MLCanvas();
+    canvas = new MLCanvas(highlightPanelIndex);
     return canvas.getCanvas();
   }
  

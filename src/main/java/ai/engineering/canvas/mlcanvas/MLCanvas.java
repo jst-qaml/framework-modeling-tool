@@ -16,22 +16,30 @@ public class MLCanvas extends CanvasModel{
     
     private JPanel ptPanel, isPanel, dPanel, mpPanel, vpPanel, dcPanel, bmPanel, dsPanel, fPanel, lmPanel;
 
+    public MLCanvas(int highlightPanelIndex){
+        super(5,20, highlightPanelIndex);
+        this.highlightPanelIndex = highlightPanelIndex;
+    }
+
     public MLCanvas(){
-        super(5,20);
+        super(5,20, 0);
     }
 
     @Override
-    public void updateCanvasSize(){    
-        ptPanel = generateCanvasElement("Prediction Task", 0,0,9,1);
-        isPanel = generateCanvasElement("Impact Simulation", 0, 9, 11, 1);
-        dPanel = generateCanvasElement("Decision", 1, 0, 9, 1);
-        mpPanel = generateCanvasElement("Making Prediction", 1, 9, 7, 1);
-        vpPanel = generateCanvasElement("Value Proposition", 2, 0, 16, 1);
-        dcPanel = generateCanvasElement("Data Collection", 3, 0, 9, 1);
-        bmPanel = generateCanvasElement("Building Models", 3, 9, 7, 1);
-        dsPanel = generateCanvasElement("Data Sources", 4, 0, 9, 1);
-        fPanel = generateCanvasElement("Features", 4, 9, 11, 1);
-        lmPanel = generateCanvasElement("Live Monitoring", 1, 16, 4, 3);
+    public void updateCanvasLayout(){
+
+        System.out.println("Highlighted panel:"+highlightPanelIndex);
+
+        ptPanel = generateCanvasElement("Prediction Task", 0,0,9,1,highlightPanelIndex == 2);
+        isPanel = generateCanvasElement("Impact Simulation", 0, 9, 11, 1,highlightPanelIndex == 4);
+        dPanel = generateCanvasElement("Decision", 1, 0, 9, 1,highlightPanelIndex == 3);
+        mpPanel = generateCanvasElement("Making Prediction", 1, 9, 7, 1,highlightPanelIndex == 5);
+        vpPanel = generateCanvasElement("Value Proposition", 2, 0, 16, 1,highlightPanelIndex == 1);
+        dcPanel = generateCanvasElement("Data Collection", 3, 0, 9, 1,highlightPanelIndex == 7);
+        bmPanel = generateCanvasElement("Building Models", 3, 9, 7, 1,highlightPanelIndex == 6);
+        dsPanel = generateCanvasElement("Data Sources", 4, 0, 9, 1,highlightPanelIndex == 8);
+        fPanel = generateCanvasElement("Features", 4, 9, 11, 1,highlightPanelIndex == 9);
+        lmPanel = generateCanvasElement("Live Monitoring", 1, 16, 4, 3,highlightPanelIndex == 10);
     }
 
     @Override

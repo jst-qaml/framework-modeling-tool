@@ -11,6 +11,7 @@ import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.inf.model.IHyperlink;
 import com.change_vision.jude.api.inf.model.IHyperlinkOwner;
 
+import com.change_vision.jude.api.gsn.model.IGoal;
 
 import com.change_vision.jude.api.inf.project.ModelFinder;
 
@@ -42,6 +43,21 @@ public class ElementPicker {
                 return iNamedElement;
             }
         }
+        return null;
+    }
+
+    public static IGoal getGoalbyId(String id){
+        INamedElement[] allNamedElements = ElementPicker.getAllNamedElements();
+
+        for (INamedElement iNamedElement : allNamedElements) {
+            if(iNamedElement instanceof IGoal){
+                IGoal iGoal = (IGoal) iNamedElement;
+                if(id.equals(iGoal.getIdentifier())){
+                    return iGoal;
+                }
+            }
+        }
+
         return null;
     }
 
@@ -84,9 +100,12 @@ public class ElementPicker {
         return canvasElements;
     }
 
-
     public static List<IRequirement> getMLCanvasElements(){
         return getCanvasElementsByPrefix("ML.");
+    }
+
+    public static List<IRequirement> getMLCanvasElements(String stereotype){
+        return getCanvasElementsByPrefix(stereotype);
     }
 
     public static List<IRequirement> getAIProjectCanvasElements(){

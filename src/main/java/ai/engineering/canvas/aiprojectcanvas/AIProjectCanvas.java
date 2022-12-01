@@ -16,21 +16,25 @@ public class AIProjectCanvas extends CanvasModel{
     
     private JPanel dataPanel, skillsPanel, outputPanel, valuePropositionPanel, integrationPanel, stakeholdersPanel, customersPanel, costPanel, revenuePanel;
 
+    public AIProjectCanvas(int highlightPanelIndex){
+        super(10,5, highlightPanelIndex);
+    }
+
     public AIProjectCanvas(){
-        super(10,5);
+        super(10,5, 0);
     }
 
     @Override
-    public void updateCanvasSize(){    
-        dataPanel = generateCanvasElement("Data", 0, 0, 4, 2);
-        skillsPanel = generateCanvasElement("Skills", 2, 0, 2, 2);
-        outputPanel = generateCanvasElement("Output", 2, 2, 2, 2);
-        valuePropositionPanel = generateCanvasElement("Value Proposition", 4, 0, 4, 2);
-        integrationPanel = generateCanvasElement("Integration", 6, 0, 2, 2);
-        stakeholdersPanel = generateCanvasElement("Stakeholders", 6, 2, 2, 2);
-        customersPanel = generateCanvasElement("Skills", 8, 0, 4, 2);
-        costPanel = generateCanvasElement("Cost", 0, 4, 1, 5);
-        revenuePanel = generateCanvasElement("Revenue", 5, 4, 1, 5);
+    public void updateCanvasLayout(){    
+        dataPanel = generateCanvasElement("Data", 0, 0, 4, 2, highlightPanelIndex == 6);
+        skillsPanel = generateCanvasElement("Skills", 2, 0, 2, 2, highlightPanelIndex == 7);
+        outputPanel = generateCanvasElement("Output", 2, 2, 2, 2, highlightPanelIndex == 5);
+        valuePropositionPanel = generateCanvasElement("Value Proposition", 4, 0, 4, 2, highlightPanelIndex == 1);
+        integrationPanel = generateCanvasElement("Integration", 6, 0, 2, 2, highlightPanelIndex == 4);
+        stakeholdersPanel = generateCanvasElement("Stakeholders", 6, 2, 2, 2, highlightPanelIndex == 3);
+        customersPanel = generateCanvasElement("Customer", 8, 0, 4, 2, highlightPanelIndex == 2);
+        costPanel = generateCanvasElement("Cost", 0, 4, 1, 5, highlightPanelIndex == 8);
+        revenuePanel = generateCanvasElement("Revenue", 5, 4, 1, 5, highlightPanelIndex == 9);
     }
 
     @Override

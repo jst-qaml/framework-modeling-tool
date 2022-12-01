@@ -1,6 +1,7 @@
 package ai.engineering;
  
 import java.awt.*;
+import java.awt.event.*;
 
 import java.util.List;
 
@@ -9,24 +10,28 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.text.AttributeSet.FontAttribute;
 
 import com.change_vision.jude.api.inf.model.IRequirement;
 
-public abstract class CanvasModel {
+public abstract class CanvasModel implements ComponentListener{
     
     private JPanel canvasPanel;
     protected int xGridDivider, yGridDivider;
+    private Dimension canvasDimension;
+    protected int highlightPanelIndex;
 
-    public CanvasModel(int xGridDivider, int yGridDivider){      
+    public CanvasModel(int xGridDivider, int yGridDivider, int highlightPanelIndex){      
+        this.highlightPanelIndex = highlightPanelIndex;
         this.xGridDivider = xGridDivider;
         this.yGridDivider = yGridDivider;
         canvasPanel = new JPanel();
         canvasPanel.setLayout(null);
-        updateCanvasSize();
-        updateModel();
     }
     
-    public void updateCanvasSize(){}
+    public void updateCanvasLayout(){}
     
     public void updateModel(){}
     
@@ -41,17 +46,21 @@ public abstract class CanvasModel {
     protected void addRequirementToPanel(JPanel panel, IRequirement req){
         JTextArea textArea = new JTextArea(req.getRequirementID() + " - " + req.getName());
         textArea.setLineWrap(true);
+        textArea.getDocument().addDocumentListener(new CanvasModelListener(req, textArea));
         panel.add(textArea);
     }
     
-    protected JPanel generateCanvasElement(String title, int gridx, int gridy, int height, int width) {
+    protected JPanel generateCanvasElement(String title, int gridx, int gridy, int height, int width, boolean isHiglighted) {
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.add(new JLabel(title));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         
-        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            
-        Dimension canvasDimension = new Dimension(1080, 420);
+        if(isHiglighted){
+            panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.RED, Color.RED));
+        }else{
+            panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        }
+
         Dimension gridDimension = new Dimension((int) canvasDimension.getWidth()/xGridDivider, (int) canvasDimension.getHeight()/yGridDivider); 
 
         panel.setVisible(true);
@@ -59,12 +68,42 @@ public abstract class CanvasModel {
     
         panel.setSize(width * (int) gridDimension.getWidth(), height * (int) gridDimension.getHeight());
         panel.setLocation(gridx * (int) gridDimension.getWidth(), gridy * (int) gridDimension.getHeight());
-    
+        
+        JLabel titleLabel = new JLabel(title);
+        panel.add(titleLabel);
+        titleLabel.setSize(panel.getWidth(), titleLabel.getHeight());
+
         return panel;
     }
     
     public JPanel getCanvas(){
         return canvasPanel;
-    }   
+    }
+
+    private void updateSize(JPanel parentPanel){
+        canvasDimension = parentPanel.getSize();
+    }
+
+    @Override
+    public void componentResized(ComponentEvent e){
+        canvasPanel.removeAll();
+        JPanel parentPanel = (JPanel) e.getComponent();
+        updateSize(parentPanel);
+        updateCanvasLayout();
+        updateModel();
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e){}
+
+    public void componentMoved(ComponentEvent e){}
+
+    public void componentShown(ComponentEvent e){
+        canvasPanel.removeAll();
+        JPanel parentPanel = (JPanel) e.getComponent();
+        updateSize(parentPanel);
+        updateCanvasLayout();
+        updateModel();
+    }
 
 }

@@ -5,16 +5,11 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import com.change_vision.jude.api.inf.project.*;
 import com.change_vision.jude.api.inf.exception.*;
-
-import com.change_vision.jude.api.inf.model.IEntity;
-import com.change_vision.jude.api.inf.model.INamedElement;
-import com.change_vision.jude.api.inf.model.IRequirement;
-import com.change_vision.jude.api.inf.model.IHyperlink;
-import com.change_vision.jude.api.inf.model.IHyperlinkOwner;
-
-import com.change_vision.jude.api.gsn.model.IGoal;
-import com.change_vision.jude.api.gsn.model.IStrategy;
+import com.change_vision.jude.api.inf.view.*;
+import com.change_vision.jude.api.inf.model.*;
+import com.change_vision.jude.api.gsn.model.*;
 
 import com.change_vision.jude.api.inf.ui.IWindow;
 
@@ -79,59 +74,108 @@ public class RelationChecker implements Runnable{
     }
 
     private boolean isRelationshipIllegal(IHyperlinkOwner owner, IEntity relatedEntity){
-        boolean isIllegal = true;
+
+        if(owner instanceof IGoal){
+            IGoal goal = (IGoal) owner;
+            return isGoalRelationshipIllegal(goal, relatedEntity);
+        }
 
         if(owner instanceof IRequirement){
             IRequirement req = (IRequirement) owner;
-            isIllegal = isMLCanvasRelationshipIllegal(req, relatedEntity);
+            return isCanvasRelationshipIllegal(req, relatedEntity);
         }
 
-        return isIllegal;
+        return false;
     }
 
-    private boolean isMLCanvasRelationshipIllegal(IRequirement req, IEntity relatedEntity){
+    private boolean isGoalRelationshipIllegal(IGoal sourceEntity, IEntity relatedEntity){
         
-        boolean isIllegal = true;
+        if(relatedEntity instanceof IRequirement){
+            IRequirement req = (IRequirement) relatedEntity;
+            if(req.hasStereotype("ML.DataSources")){
+                return true;
+            }
+            if(req.hasStereotype("ML.Features")){
+                return true;
+            }
+            if(req.hasStereotype("ML.BuildingModels")){
+                return true;
+            }
+            if(req.hasStereotype("ML.DataCollection")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Stakeholders")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Customers")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Revenue")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Cost")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Skills")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Integration")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Output")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Data")){
+                return true;
+            }            
+        }
+        
+        return false;
 
-        if(req.hasStereotype("ML.PredictionTask")){
-            if(ElementTypeChecker.isKAOSGoal(relatedEntity)){
-                isIllegal = false;
+    }
+
+    private boolean isCanvasRelationshipIllegal(IRequirement req, IEntity relatedEntity){
+        
+        if(relatedEntity instanceof IGoal){
+            if(req.hasStereotype("ML.DataSources")){
+                return true;
             }
-        }
-        else if(req.hasStereotype("ML.ImpactSimulation")){
-            
-        }
-        else if(req.hasStereotype("ML.Decision")){
-            
-        }
-        else if(req.hasStereotype("ML.MakingPrediction")){
-            
-        }
-        else if(req.hasStereotype("ML.ValueProposition")){
-            if(ElementTypeChecker.isKAOSGoal(relatedEntity)){
-                isIllegal = false;
+            if(req.hasStereotype("ML.Features")){
+                return true;
             }
-            if(ElementTypeChecker.isSafetyGoal(relatedEntity)){
-                isIllegal = false;
+            if(req.hasStereotype("ML.BuildingModels")){
+                return true;
             }
-        }
-        else if(req.hasStereotype("ML.DataCollection")){
-            
-        }
-        else if(req.hasStereotype("ML.BuildingModels")){
-            
-        }
-        else if(req.hasStereotype("ML.DataSources")){
-            
-        }
-        else if(req.hasStereotype("ML.Features")){
-            
-        }
-        else if(req.hasStereotype("ML.LiveMonitoring")){
-            
+            if(req.hasStereotype("ML.DataCollection")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Stakeholders")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Customers")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Revenue")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Cost")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Skills")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Integration")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Output")){
+                return true;
+            }
+            if(req.hasStereotype("AI.Data")){
+                return true;
+            }            
         }
 
-        return isIllegal;
+        return false;
 
     }
 
@@ -139,6 +183,7 @@ public class RelationChecker implements Runnable{
 
         IHyperlink[] hyperlinks = owner.getHyperlinks();
         INamedElement namedElement = (INamedElement) relatedEntity;
+        INamedElement ownerElement = (INamedElement) owner;
 
         for (IHyperlink hyperlink : hyperlinks) {
             String relatedElementId = hyperlink.getName();
@@ -147,12 +192,24 @@ public class RelationChecker implements Runnable{
                 ToolUtilities utilities = ToolUtilities.getToolUtilities();
                 ITransactionManager transactionManager = utilities.getTransactionManager();
                 try{
+                    ProjectAccessor projectAccessor = utilities.getProjectAccessor();
+                    IFacet facet = projectAccessor.getFacet(IGsnFacet.FACET_SYMBOLIC_NAME);
+                    IModule module = facet.getRootElement(IModule.class);
+                    IProjectViewManager pvm = projectAccessor.getViewManager().getProjectViewManager();
+                    pvm.showInPropertyView(namedElement);
+
+                    Thread.sleep(10);
+
                     transactionManager.beginTransaction();
                     owner.deleteHyperlink(hyperlink);
                     transactionManager.endTransaction();
-                } catch (InvalidEditingException  ex) {System.out.println(ex);}
+
+                    Thread.sleep(10);
+                    pvm.showInPropertyView(ownerElement);
+
+                } catch (Exception  ex) {System.out.println(ex);}
             }
-        }
+        }      
 
     }
 
