@@ -10,8 +10,9 @@ public class RelationCheckerAction implements IPluginActionDelegate{
     public Object run(IWindow window){
 	    
         RelationChecker checker = new RelationChecker(window);
-        Thread thread = new Thread(checker);
-        thread.start();
+        checker.run();
+        //Thread thread = new Thread(checker);
+        //thread.start();
 
 	    return null;
 	}

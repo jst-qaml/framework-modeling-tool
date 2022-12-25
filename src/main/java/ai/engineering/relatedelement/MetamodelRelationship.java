@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import com.change_vision.jude.api.inf.model.IEntity;
 import com.change_vision.jude.api.inf.model.IHyperlinkOwner;
+import com.change_vision.jude.api.stpa.model.IIdentifiedElement;
 
 import org.w3c.dom.Element;
 
@@ -21,6 +22,7 @@ public class MetamodelRelationship {
     }
 
     public boolean isRelationshipValid(ClassNode sourceNode, ClassNode destinationNode){
+
         if(sourceNode == null){
             System.out.println("Source Node is Null");
             return false;
@@ -32,12 +34,19 @@ public class MetamodelRelationship {
         }
         
         for (RelationNode relation : relationList) {
-            if(relation.source.name.equals(sourceNode.name)){
-                if(relation.destination.name.equals(destinationNode.name)){
-                    return true;
-                }
+            if(relation.source.name.equals(sourceNode.name) && relation.destination.name.equals(destinationNode.name)){
+                System.out.println("Valid Between: " + sourceNode.name + " and " + destinationNode.name);
+                return true;
+            }
+
+            if(relation.source.name.equals(destinationNode.name) && relation.destination.name.equals(sourceNode.name)){
+                System.out.println("Valid Between: " + sourceNode.name + " and " + destinationNode.name);
+                return true;
             }
         }
+
+        System.out.println("Invalid Between: " + sourceNode.name + " and " + destinationNode.name);
+
         return false;
     }
 
@@ -49,7 +58,12 @@ public class MetamodelRelationship {
         for (IHyperlinkOwner hyperlinkOwner : hyperlinkOwners) {
 
             IEntity sourceEntity = (IEntity) hyperlinkOwner;
+
             ClassNode sourceNode = new ClassNode(sourceEntity);
+
+            if(hyperlinkOwner instanceof IIdentifiedElement){
+                System.out.println("checking " + sourceNode.name);
+            }
 
             List<IEntity> relatedEntities = ElementPicker.getRelatedEntities(hyperlinkOwner);
 

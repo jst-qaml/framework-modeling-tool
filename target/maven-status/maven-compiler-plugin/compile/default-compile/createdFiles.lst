@@ -23,6 +23,7 @@ ai\engineering\RelatedElementModel.class
 ai\engineering\AIProjectCanvas.class
 ai\engineering\MLCanvasView.class
 ai\engineering\TemplateAction.class
+ai\engineering\AIProjectCanvasType.class
 ai\engineering\ToolUtilities.class
 ai\engineering\CanvasModelListener.class
 ai\engineering\StereotypeNode.class

@@ -3,6 +3,7 @@ D:\Projects\framework-tool\src\main\java\ai\engineering\relatedelement\metamodel
 D:\Projects\framework-tool\src\main\java\ai\engineering\TemplateAction.java
 D:\Projects\framework-tool\src\main\java\ai\engineering\canvas\mlcanvas\MLCanvas.java
 D:\Projects\framework-tool\src\main\java\ai\engineering\canvas\CanvasModel.java
+D:\Projects\framework-tool\src\main\java\ai\engineering\utilities\Enum\AIProjectCanvasType.java
 D:\Projects\framework-tool\src\main\java\ai\engineering\canvas\aiprojectcanvas\AIProjectCanvasView.java
 D:\Projects\framework-tool\src\main\java\ai\engineering\TraceabilityRecommenderView.java
 D:\Projects\framework-tool\src\main\java\ai\engineering\relatedelement\metamodelNodes\RelationNode.java

@@ -11,6 +11,8 @@ import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.inf.model.IHyperlink;
 import com.change_vision.jude.api.inf.model.IHyperlinkOwner;
 
+import com.change_vision.jude.api.stpa.model.*;
+
 import com.change_vision.jude.api.gsn.model.IGoal;
 
 import com.change_vision.jude.api.inf.project.ModelFinder;
@@ -30,6 +32,52 @@ public class ElementPicker {
             return projectAccessor.findElements(new NamedElementPicker());
         } catch (ProjectNotFoundException e){
             String message = "Please open a project";
+        }
+
+        return null;
+    }
+
+    public static List<IIdentifiedElement> getAllIdentifiedElements(){
+        INamedElement[] namedElements = getAllNamedElements();
+
+        for (int i = 0; i < namedElements.length; i++) {
+            if(namedElements[i] instanceof IStpaAnalysis){
+                IStpaAnalysis stpa = (IStpaAnalysis) namedElements[i];
+
+                List<IIdentifiedElement> identifiedElements = new ArrayList<IIdentifiedElement>();
+                
+                List<IAccident> accidents = stpa.getAccidents();
+                for (IAccident accident : accidents) {
+                    identifiedElements.add((IIdentifiedElement) accident);
+                }
+                
+                List<ICountermeasure> countermeasures = stpa.getCountermeasures();
+                for (ICountermeasure countermeasure : countermeasures) {
+                    identifiedElements.add((IIdentifiedElement) countermeasure);
+                }
+
+                List<IHazardCausalFactor> hcfs = stpa.getHazardCausalFactors();
+                for (IHazardCausalFactor hcf : hcfs) {
+                    identifiedElements.add((IIdentifiedElement) hcf);
+                }
+
+                List<IHazard> hazards = stpa.getHazards();
+                for (IHazard hazard : hazards) {
+                    identifiedElements.add((IIdentifiedElement) hazard);
+                }
+
+                List<ISafetyConstraint> safetyConstraints = stpa.getSafetyConstraints();
+                for (ISafetyConstraint safetyConstraint : safetyConstraints) {
+                    identifiedElements.add((IIdentifiedElement) safetyConstraint);
+                }
+
+                List<IUnsafeControlAction> unsafeControlActions = stpa.getUnsafeControlActions();
+                for (IUnsafeControlAction unsafeControlAction : unsafeControlActions) {
+                    identifiedElements.add((IIdentifiedElement) unsafeControlAction);
+                }
+
+                return identifiedElements;
+            }
         }
 
         return null;
@@ -159,6 +207,15 @@ public class ElementPicker {
                     IHyperlinkOwner hyperlinkOwner = (IHyperlinkOwner) iNamedElement;
                     hyperlinkOwners.add(hyperlinkOwner);
                 }
+            }
+        }
+
+        List<IIdentifiedElement> identifiedElements = getAllIdentifiedElements();
+
+        for (IIdentifiedElement iIdentifiedElement : identifiedElements) {
+            if(iIdentifiedElement instanceof IHyperlinkOwner){
+                IHyperlinkOwner hyperlinkOwner = (IHyperlinkOwner) iIdentifiedElement;
+                hyperlinkOwners.add(hyperlinkOwner);
             }
         }
 

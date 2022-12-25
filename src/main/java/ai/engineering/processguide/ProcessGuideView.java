@@ -148,6 +148,15 @@ public class ProcessGuideView extends JSplitPane implements IPluginExtraTabView,
         firstLevel = new DefaultMutableTreeNode("4. Develop Architectural Diagram");
         topNode.add(firstLevel);
 
+        secondLevel = new DefaultMutableTreeNode("4.1. Derive ML Components");
+        firstLevel.add(secondLevel);
+
+        secondLevel = new DefaultMutableTreeNode("4.2. Add non-ML Components");
+        firstLevel.add(secondLevel);
+
+        secondLevel = new DefaultMutableTreeNode("4.3. Connect Components");
+        firstLevel.add(secondLevel);
+
         // STAMP/STPA
         firstLevel = new DefaultMutableTreeNode("5. Develop STAMP/STPA Analysis");
         topNode.add(firstLevel);

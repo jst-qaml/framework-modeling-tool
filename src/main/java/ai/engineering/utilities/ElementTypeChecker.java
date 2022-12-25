@@ -4,10 +4,9 @@ import com.change_vision.jude.api.inf.exception.*;
 
 import com.change_vision.jude.api.inf.presentation.IPresentation;
 
-import com.change_vision.jude.api.inf.model.IDiagram;
-import com.change_vision.jude.api.inf.model.IEntity;
-import com.change_vision.jude.api.inf.model.IRequirement;
-import com.change_vision.jude.api.gsn.model.IGoal;
+import com.change_vision.jude.api.inf.model.*;
+import com.change_vision.jude.api.gsn.model.*;
+import com.change_vision.jude.api.stpa.model.*;
 
 public class ElementTypeChecker {
 
@@ -24,8 +23,16 @@ public class ElementTypeChecker {
             return ModelType.KAOS;
         }
 
-        if(isSafetyGoal(entity)){
+        if(isArchitectureElement(entity)){
+            return ModelType.ARCHITECTURAL;
+        }
+
+        if(isSafetyCaseElement(entity)){
             return ModelType.SAFETY_CASE;
+        }
+
+        if(isStpaElement(entity)){
+            return ModelType.STPA;
         }
 
         return ModelType.UNKNOWN;
@@ -138,6 +145,38 @@ public class ElementTypeChecker {
         return isAIProjectCanvasElement;
     }
 
+    public static AIProjectCanvasType getAIProjectCanvasElementType(IRequirement req){
+        if(req.hasStereotype("AI.Data")){
+            return AIProjectCanvasType.DATA;
+        }
+        else if(req.hasStereotype("AI.Skills")){
+            return AIProjectCanvasType.SKILLS;
+        }
+        else if(req.hasStereotype("AI.Output")){
+            return AIProjectCanvasType.OUTPUT;
+        }
+        else if(req.hasStereotype("AI.ValueProposition")){
+            return AIProjectCanvasType.VALUE_PROPOSITION;
+        }
+        else if(req.hasStereotype("AI.Integration")){
+            return AIProjectCanvasType.INTEGRATION;
+        }
+        else if(req.hasStereotype("AI.Stakeholders")){
+            return AIProjectCanvasType.STAKEHOLDERS;
+        }
+        else if(req.hasStereotype("AI.Customers")){
+            return AIProjectCanvasType.CUSTOMERS;
+        }
+        else if(req.hasStereotype("AI.Cost")){
+            return AIProjectCanvasType.COST;
+        }
+        else if(req.hasStereotype("AI.Revenue")){
+            return AIProjectCanvasType.REVENUE;
+        }
+
+        return AIProjectCanvasType.UNIDENTIFIED;
+    }
+
     public static boolean isKAOSGoal(IEntity entity){
         
         boolean isGoal = false;
@@ -149,7 +188,7 @@ public class ElementTypeChecker {
                 IPresentation[] presentations = goalElement.getPresentations();
                 IDiagram diagram = presentations[0].getDiagram();
                 String diagramName = diagram.getName();
-                if(diagramName.equals("KAOS")){
+                if(diagramName.contains("KAOS")){
                     isGoal = true;
                 }
             }catch(Exception e){}
@@ -158,19 +197,27 @@ public class ElementTypeChecker {
         return isGoal;
     }
 
-    public static boolean isSafetyGoal(IEntity entity){
+    public static boolean isSafetyCaseElement(IEntity entity){
         
-        boolean isSafetyGoal = false;
-        
-        if(entity instanceof IGoal){
-            IGoal goalElement = (IGoal) entity;
-            
-            if(!isKAOSGoal(entity)){
-                isSafetyGoal = true;
-            }
+        if(isKAOSGoal(entity)){
+            return false;
         }
 
-        return isSafetyGoal;
+        return (entity instanceof IGsnElement);
+        
+    }
+
+    public static boolean isArchitectureElement(IEntity entity){
+        return (entity instanceof IBlock);
+    }
+
+    public static boolean isStpaElement(IEntity entity){
+
+        if(entity instanceof IStampElement){
+            return true;
+        }
+
+        return false;
     }
 
 }
