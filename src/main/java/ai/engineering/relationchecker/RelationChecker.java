@@ -15,13 +15,19 @@ import com.change_vision.jude.api.inf.ui.IWindow;
 
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
 
+import com.change_vision.jude.api.stpa.model.IIdentifiedElement;
+
 public class RelationChecker implements Runnable{
 
     private boolean isActive;
     private IWindow window;
+    private MetamodelRelationship metamodel;
 
     public RelationChecker(IWindow window){
         this.window = window;
+        
+        MetamodelXMLParser metamodelParser = new MetamodelXMLParser();
+        metamodel = metamodelParser.parseMetamodelXML();
     }
 
     public void activateChecking(){isActive = true;}
@@ -30,33 +36,22 @@ public class RelationChecker implements Runnable{
 
     public void run(){
         
-        activateChecking();
+       activateChecking();
 
-        while(isActive){
-            checkAllElementHyperlinks();
+       checkAllElementHyperlinks();
 
-            try{
-                Thread.sleep(200);
-            }catch(Exception e){};
-        }
     }
 
     private void checkAllElementHyperlinks(){
 
-        List<IHyperlinkOwner> hyperlinkOwners = ElementPicker.getAllHyperlinksOwner();
+        List<IEntity> invalidRelatedEntities = metamodel.checkAllElementHyperlinks();
 
-        for (IHyperlinkOwner hyperlinkOwner : hyperlinkOwners) {
+        for (int i = 0; i < invalidRelatedEntities.size(); i+=2) {
+            IHyperlinkOwner sourceEntity = (IHyperlinkOwner) invalidRelatedEntities.get(i);
+            IEntity destinationEntity = invalidRelatedEntities.get(i+1);
 
-            List<IEntity> relatedEntities = ElementPicker.getRelatedEntities(hyperlinkOwner);
-
-            for (IEntity relatedEntity : relatedEntities) {
-                
-                if(isRelationshipIllegal(hyperlinkOwner, relatedEntity)){
-                    triggerErrorWindow(hyperlinkOwner, relatedEntity);
-                    deleteRelationship(hyperlinkOwner, relatedEntity);
-                }
-
-            }
+            triggerErrorWindow(sourceEntity, destinationEntity);
+            deleteRelationship(sourceEntity, destinationEntity);
         }
     }
 
@@ -66,129 +61,39 @@ public class RelationChecker implements Runnable{
     }
 
     private String generateErrorMessage(IHyperlinkOwner owner, IEntity relatedEntity){
-        INamedElement namedOwner = (INamedElement) owner;
-        INamedElement namedRelatedElement = (INamedElement) relatedEntity;
+
+        String ownerName;
+        String relatedName;
+
+        if (owner instanceof INamedElement) {
+            INamedElement namedOwner = (INamedElement) owner;
+            ownerName = namedOwner.getName();
+        } else {
+            IIdentifiedElement identifiedOwner = (IIdentifiedElement) owner;
+            ownerName = identifiedOwner.getDescription();
+        }
         
-        String elementNameInfo = "Illegal relationship found between " + namedOwner.getName() + " and " + namedRelatedElement.getName() + ". \n The hyperlink will be deleted.";
+        if (relatedEntity instanceof INamedElement) {
+            INamedElement namedRelatedElement = (INamedElement) relatedEntity;
+            relatedName = namedRelatedElement.getName();
+        } else {
+            IIdentifiedElement identifiedRelated = (IIdentifiedElement) relatedEntity;
+            relatedName = identifiedRelated.getDescription();
+        }
+        
+        String elementNameInfo = "Illegal relationship found between " + ownerName + " and " + relatedName + ". \n The hyperlink will be deleted.";
         return elementNameInfo;
-    }
-
-    private boolean isRelationshipIllegal(IHyperlinkOwner owner, IEntity relatedEntity){
-
-        if(owner instanceof IGoal){
-            IGoal goal = (IGoal) owner;
-            return isGoalRelationshipIllegal(goal, relatedEntity);
-        }
-
-        if(owner instanceof IRequirement){
-            IRequirement req = (IRequirement) owner;
-            return isCanvasRelationshipIllegal(req, relatedEntity);
-        }
-
-        return false;
-    }
-
-    private boolean isGoalRelationshipIllegal(IGoal sourceEntity, IEntity relatedEntity){
-        
-        if(relatedEntity instanceof IRequirement){
-            IRequirement req = (IRequirement) relatedEntity;
-            if(req.hasStereotype("ML.DataSources")){
-                return true;
-            }
-            if(req.hasStereotype("ML.Features")){
-                return true;
-            }
-            if(req.hasStereotype("ML.BuildingModels")){
-                return true;
-            }
-            if(req.hasStereotype("ML.DataCollection")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Stakeholders")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Customers")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Revenue")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Cost")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Skills")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Integration")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Output")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Data")){
-                return true;
-            }            
-        }
-        
-        return false;
-
-    }
-
-    private boolean isCanvasRelationshipIllegal(IRequirement req, IEntity relatedEntity){
-        
-        if(relatedEntity instanceof IGoal){
-            if(req.hasStereotype("ML.DataSources")){
-                return true;
-            }
-            if(req.hasStereotype("ML.Features")){
-                return true;
-            }
-            if(req.hasStereotype("ML.BuildingModels")){
-                return true;
-            }
-            if(req.hasStereotype("ML.DataCollection")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Stakeholders")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Customers")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Revenue")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Cost")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Skills")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Integration")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Output")){
-                return true;
-            }
-            if(req.hasStereotype("AI.Data")){
-                return true;
-            }            
-        }
-
-        return false;
-
     }
 
     private void deleteRelationship(IHyperlinkOwner owner, IEntity relatedEntity){
 
         IHyperlink[] hyperlinks = owner.getHyperlinks();
-        INamedElement namedElement = (INamedElement) relatedEntity;
-        INamedElement ownerElement = (INamedElement) owner;
+        IElement namedElement = (IElement) relatedEntity;
+        IElement ownerElement = (IElement) owner;
 
         for (IHyperlink hyperlink : hyperlinks) {
             String relatedElementId = hyperlink.getName();
             if(relatedElementId.equals(namedElement.getId())){
-                System.out.println("deleting now!");
                 ToolUtilities utilities = ToolUtilities.getToolUtilities();
                 ITransactionManager transactionManager = utilities.getTransactionManager();
                 try{
