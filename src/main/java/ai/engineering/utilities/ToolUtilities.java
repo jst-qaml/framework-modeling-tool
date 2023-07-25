@@ -16,6 +16,8 @@ import com.change_vision.jude.api.inf.view.IViewManager;
 import com.change_vision.jude.api.inf.view.IProjectViewManager;
 import com.change_vision.jude.api.inf.view.IDiagramViewManager;
 
+import com.change_vision.jude.api.inf.presentation.IPresentation;
+
 import com.change_vision.jude.api.inf.model.IModel;
 import com.change_vision.jude.api.inf.model.IEntity;
 
@@ -80,6 +82,24 @@ public class ToolUtilities{
             e.printStackTrace();
         } 
 
+        return null;
+    }
+
+    public IPresentation getSelectedPresentation(){
+        try {
+            IViewManager viewManager = projectAccessor.getViewManager();
+            IDiagramViewManager diagramViewManager = viewManager.getDiagramViewManager();
+
+            IPresentation[] presentations = diagramViewManager.getSelectedPresentations();
+
+            if(presentations.length > 0){
+                return presentations[0];
+            }else{
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        
         return null;
     }
 

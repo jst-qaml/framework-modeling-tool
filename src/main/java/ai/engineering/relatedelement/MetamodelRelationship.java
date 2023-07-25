@@ -29,23 +29,18 @@ public class MetamodelRelationship {
         }
 
         if(destinationNode == null){
-            System.out.println("Destination Node is Null");
             return false;
         }
         
         for (RelationNode relation : relationList) {
             if(relation.source.name.equals(sourceNode.name) && relation.destination.name.equals(destinationNode.name)){
-                System.out.println("Valid Between: " + sourceNode.name + " and " + destinationNode.name);
                 return true;
             }
 
             if(relation.source.name.equals(destinationNode.name) && relation.destination.name.equals(sourceNode.name)){
-                System.out.println("Valid Between: " + sourceNode.name + " and " + destinationNode.name);
                 return true;
             }
         }
-
-        System.out.println("Invalid Between: " + sourceNode.name + " and " + destinationNode.name);
 
         return false;
     }

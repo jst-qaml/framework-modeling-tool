@@ -1,0 +1,17 @@
+{
+  "common": {
+    "dataset": "<dataset>",
+    "batch_size": <batch_size>
+  },
+  "prepare": {
+    "divide_rate": <divide_rate>,
+    "random_state": <random_state>
+  },
+  "train": {
+    "model": "<model>",
+    "epochs": <epochs>,
+    "validation_split": <validation_split>,
+    "gpu": <gpu>
+  },
+  "test": {}
+}

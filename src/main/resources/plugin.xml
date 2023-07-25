@@ -13,6 +13,22 @@
             id="ai.engineering.internal.ProcessGuideView"
             type="extraTab"
             class="ai.engineering.ProcessGuideView" />
+      <view
+            id="ai.engineering.internal.PipelinePerformanceView"
+            type="extraTab"
+            class="ai.engineering.PipelinePerformanceView" />
+      <view
+            id="ai.engineering.internal.MonitoringSummaryView"
+            type="extraTab"
+            class="ai.engineering.MonitoringSummaryView" />
+      <view
+            id="ai.engineering.internal.RepairConfigurationView"
+            type="extraTab"
+            class="ai.engineering.RepairConfigurationView" />
+      <view
+            id="ai.engineering.internal.RepairConfigurationSummaryView"
+            type="extraTab"
+            class="ai.engineering.RepairConfigurationSummaryView" />
    </extension>
    <extension point="com.change_vision.astah.ui.actionSets">
       <actionSet
@@ -31,6 +47,30 @@
                tooltip="%menu_tooltip"
                menubarPath="tool/eai/"
                id="ai.engineering.RelationCheckerAction">
+         </action>
+         <action
+               label="Train New Version of ML Model"
+               icon="icons/sample.gif"
+               class="ai.engineering.ModelTrainer"
+               tooltip="%menu_tooltip"
+               menubarPath="tool/eai/"
+               id="ai.engineering.ModelTrainer">
+         </action>
+         <action
+               label="Repair ML Model"
+               icon="icons/sample.gif"
+               class="ai.engineering.RepairModelAction"
+               tooltip="%menu_tooltip"
+               menubarPath="tool/eai/"
+               id="ai.engineering.RepairModelAction">
+         </action>
+         <action
+               label="Fetch ML Performance Data"
+               icon="icons/sample.gif"
+               class="ai.engineering.PerformanceCheckerAction"
+               tooltip="%menu_tooltip"
+               menubarPath="tool/eai/"
+               id="ai.engineering.PerformanceCheckerAction">
          </action>
      </actionSet>
    </extension>

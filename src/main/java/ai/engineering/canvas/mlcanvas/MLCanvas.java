@@ -27,9 +27,6 @@ public class MLCanvas extends CanvasModel{
 
     @Override
     public void updateCanvasLayout(){
-
-        System.out.println("Highlighted panel:"+highlightPanelIndex);
-
         ptPanel = generateCanvasElement("Prediction Task", 0,0,9,1,highlightPanelIndex == 2);
         isPanel = generateCanvasElement("Impact Simulation", 0, 9, 11, 1,highlightPanelIndex == 4);
         dPanel = generateCanvasElement("Decision", 1, 0, 9, 1,highlightPanelIndex == 3);

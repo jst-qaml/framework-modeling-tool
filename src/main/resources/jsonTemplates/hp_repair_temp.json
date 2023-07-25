@@ -1,0 +1,22 @@
+{
+    "common": {
+      "dataset": "GTSRB",
+      "method": "Athena",
+      "batch_size": 32
+    },
+    "localize": {
+      "target_layer": null,
+      "verbose": 0
+    },
+    "optimize": {
+      "verbose": 0,
+      "num_particles": 5,
+      "num_iterations": 5,
+      "num_input_pos_sampled": 4
+    },
+    "evaluate": {
+      "num_runs": 10,
+      "num_particles": 5,
+      "num_iterations": 5
+    }
+  }

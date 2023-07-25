@@ -18,6 +18,7 @@ public class AIProjectCanvas extends CanvasModel{
 
     public AIProjectCanvas(int highlightPanelIndex){
         super(10,5, highlightPanelIndex);
+        this.highlightPanelIndex = highlightPanelIndex;
     }
 
     public AIProjectCanvas(){

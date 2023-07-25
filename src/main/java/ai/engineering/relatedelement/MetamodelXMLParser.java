@@ -28,7 +28,7 @@ public class MetamodelXMLParser {
 
    private NodeList getNodeListByTagName(String tagName){   
       try {
-         File inputFile = new File("D:\\Projects\\framework-tool\\src\\main\\java\\ai\\engineering\\metamodelIntegration.xml");
+         File inputFile = new File("src\\main\\resources\\metamodelIntegration.xml");
          DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
          DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
          Document doc = dBuilder.parse(inputFile);

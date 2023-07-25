@@ -1,24 +1,47 @@
 Manifest-Version: 1.0
 Astah-Edition: safety
 Astah-Version: 6.0.0
-Bnd-LastModified: 1671778125023
+Bnd-LastModified: 1688625686689
 Build-Jdk: 1.8.0_345
 Built-By: jatihusen
 Bundle-Activator: ai.engineering.Activator
+Bundle-ClassPath: .,jsch-0.1.55.jar,opencsv-5.3.jar,commons-lang3-3.11.j
+ ar,commons-text-1.9.jar,commons-beanutils-1.9.4.jar,commons-logging-1.2
+ .jar,commons-collections-3.2.2.jar,commons-collections4-4.4.jar,ikonli-
+ swing-2.4.0.jar,ikonli-core-2.4.0.jar,ikonli-entypo-pack-2.4.0.jar,jack
+ son-core-2.9.6.jar,jackson-annotations-2.9.6.jar,jackson-databind-2.9.6
+ .jar
 Bundle-Description: %bundle.description
 Bundle-ManifestVersion: 2
 Bundle-Name: %bundle.name
 Bundle-SymbolicName: ai.engineering.frameworktool; singleton:=true
-Bundle-Version: 1.3.0.SNAPSHOT
+Bundle-Version: 1.5.0.EXPERIMENT
 Created-By: Apache Maven Bundle Plugin
 Embed-Dependency: *;scope=compile|runtime;type=!pom
 Embed-Transitive: true
-Export-Package: ai.engineering;version="1.3.0.SNAPSHOT";uses:="com.chang
- e_vision.jude.api.gsn.model,com.change_vision.jude.api.inf.editor,com.c
- hange_vision.jude.api.inf.model,com.change_vision.jude.api.inf.project,
- com.change_vision.jude.api.inf.ui,com.change_vision.jude.api.inf.view,c
- om.change_vision.jude.api.stpa.model,javax.swing,javax.swing.event,java
- x.swing.table,org.osgi.framework,org.w3c.dom"
+Embedded-Artifacts: jsch-0.1.55.jar;g="com.jcraft";a="jsch";v="0.1.55",o
+ pencsv-5.3.jar;g="com.opencsv";a="opencsv";v="5.3",commons-lang3-3.11.j
+ ar;g="org.apache.commons";a="commons-lang3";v="3.11",commons-text-1.9.j
+ ar;g="org.apache.commons";a="commons-text";v="1.9",commons-beanutils-1.
+ 9.4.jar;g="commons-beanutils";a="commons-beanutils";v="1.9.4",commons-l
+ ogging-1.2.jar;g="commons-logging";a="commons-logging";v="1.2",commons-
+ collections-3.2.2.jar;g="commons-collections";a="commons-collections";v
+ ="3.2.2",commons-collections4-4.4.jar;g="org.apache.commons";a="commons
+ -collections4";v="4.4",ikonli-swing-2.4.0.jar;g="org.kordamp.ikonli";a=
+ "ikonli-swing";v="2.4.0",ikonli-core-2.4.0.jar;g="org.kordamp.ikonli";a
+ ="ikonli-core";v="2.4.0",ikonli-entypo-pack-2.4.0.jar;g="org.kordamp.ik
+ onli";a="ikonli-entypo-pack";v="2.4.0",jackson-core-2.9.6.jar;g="com.fa
+ sterxml.jackson.core";a="jackson-core";v="2.9.6",jackson-annotations-2.
+ 9.6.jar;g="com.fasterxml.jackson.core";a="jackson-annotations";v="2.9.6
+ ",jackson-databind-2.9.6.jar;g="com.fasterxml.jackson.core";a="jackson-
+ databind";v="2.9.6"
+Export-Package: ai.engineering;version="1.5.0.EXPERIMENT";uses:="com.cha
+ nge_vision.jude.api.gsn.model,com.change_vision.jude.api.inf.editor,com
+ .change_vision.jude.api.inf.model,com.change_vision.jude.api.inf.presen
+ tation,com.change_vision.jude.api.inf.project,com.change_vision.jude.ap
+ i.inf.ui,com.change_vision.jude.api.inf.view,com.change_vision.jude.api
+ .stpa.model,javax.swing,javax.swing.event,javax.swing.table,org.osgi.fr
+ amework,org.w3c.dom"
 Import-Package: com.change_vision.jude.api.gsn.editor;resolution:=option
  al,com.change_vision.jude.api.gsn.model;resolution:=optional,com.change
  _vision.jude.api.inf;resolution:=optional,com.change_vision.jude.api.in
@@ -28,11 +51,20 @@ Import-Package: com.change_vision.jude.api.gsn.editor;resolution:=option
  l,com.change_vision.jude.api.inf.project;resolution:=optional,com.chang
  e_vision.jude.api.inf.ui;resolution:=optional,com.change_vision.jude.ap
  i.inf.view;resolution:=optional,com.change_vision.jude.api.stpa.model;r
- esolution:=optional,javax.swing;resolution:=optional,javax.swing.border
- ;resolution:=optional,javax.swing.event;resolution:=optional,javax.swin
- g.table;resolution:=optional,javax.swing.text;resolution:=optional,java
- x.swing.tree;resolution:=optional,javax.xml.parsers;resolution:=optiona
- l,org.osgi.framework;resolution:=optional;version="[1.8,2)",org.w3c.dom
- ;resolution:=optional
+ esolution:=optional,com.jcraft.jzlib;resolution:=optional,javax.crypto;
+ resolution:=optional,javax.crypto.interfaces;resolution:=optional,javax
+ .crypto.spec;resolution:=optional,javax.script;resolution:=optional,jav
+ ax.servlet;resolution:=optional,javax.swing;resolution:=optional,javax.
+ swing.border;resolution:=optional,javax.swing.event;resolution:=optiona
+ l,javax.swing.table;resolution:=optional,javax.swing.text;resolution:=o
+ ptional,javax.swing.tree;resolution:=optional,javax.xml.datatype;resolu
+ tion:=optional,javax.xml.namespace;resolution:=optional,javax.xml.parse
+ rs;resolution:=optional,javax.xml.xpath;resolution:=optional,org.apache
+ .avalon.framework.logger;resolution:=optional,org.apache.log;resolution
+ :=optional,org.apache.log4j;resolution:=optional,org.ietf.jgss;resoluti
+ on:=optional,org.osgi.framework;resolution:=optional;version="[1.8,2)",
+ org.w3c.dom;resolution:=optional,org.w3c.dom.bootstrap;resolution:=opti
+ onal,org.w3c.dom.ls;resolution:=optional,org.xml.sax;resolution:=option
+ al
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 Tool: Bnd-4.1.0.201810181252

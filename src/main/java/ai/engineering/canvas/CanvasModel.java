@@ -23,6 +23,7 @@ public abstract class CanvasModel implements ComponentListener{
     private Dimension canvasDimension;
     protected int highlightPanelIndex;
 
+
     public CanvasModel(int xGridDivider, int yGridDivider, int highlightPanelIndex){      
         this.highlightPanelIndex = highlightPanelIndex;
         this.xGridDivider = xGridDivider;
@@ -44,10 +45,16 @@ public abstract class CanvasModel implements ComponentListener{
     }
     
     protected void addRequirementToPanel(JPanel panel, IRequirement req){
-        JTextArea textArea = new JTextArea(req.getRequirementID() + " - " + req.getName());
-        textArea.setLineWrap(true);
-        textArea.getDocument().addDocumentListener(new CanvasModelListener(req, textArea));
-        panel.add(textArea);
+        CanvasElementCollection.clearUnusedElement();
+
+        CanvasElement canvasElement = CanvasElementCollection.findCanvasElement(req);
+        
+        if (canvasElement == null) {
+            canvasElement = new CanvasElement(req);
+            CanvasElementCollection.addCanvasElement(canvasElement);
+        }
+        
+        panel.add(canvasElement.getTextArea());
     }
     
     protected JPanel generateCanvasElement(String title, int gridx, int gridy, int height, int width, boolean isHiglighted) {

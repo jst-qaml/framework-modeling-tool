@@ -71,6 +71,7 @@ public abstract class CanvasView extends JPanel implements IPluginExtraTabView, 
    
     @Override
     public void projectOpened(ProjectEvent e) {
+      initComponents();
       isActive = true;
     }
    

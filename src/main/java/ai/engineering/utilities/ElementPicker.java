@@ -94,6 +94,21 @@ public class ElementPicker {
         return null;
     }
 
+    public static List<IGoal> getAllGoals(){
+        INamedElement[] allNamedElements = ElementPicker.getAllNamedElements();
+
+        List<IGoal> goals = new ArrayList<IGoal>();
+
+        for (INamedElement iNamedElement : allNamedElements) {
+            if(iNamedElement instanceof IGoal){
+                IGoal iGoal = (IGoal) iNamedElement;
+                goals.add(iGoal);
+            }
+        }
+
+        return goals;
+    }
+
     public static IGoal getGoalbyId(String id){
         INamedElement[] allNamedElements = ElementPicker.getAllNamedElements();
 
@@ -165,13 +180,13 @@ public class ElementPicker {
 
         if(selectedHyperlinkOwner != null){
             IHyperlink[] hyperlinks = selectedHyperlinkOwner.getHyperlinks();
-                
                 try {
                     INamedElement[] elements = ElementPicker.getAllNamedElements();
                     for (int i = 0; i < hyperlinks.length; i++){
-                        String id = hyperlinks[i].getName();                    
+                        String id = hyperlinks[i].getName();                
                         for (INamedElement element : elements) {
                             if(id.equals(element.getId())){
+                                System.out.println("found: " + id);   
                                 relatedEntities.add(element);
                             }
                         }
