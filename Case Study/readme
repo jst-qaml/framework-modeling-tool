@@ -1,0 +1,8 @@
+Editable case study files of traffic sign recognition using M3S.
+
+Files description
+1. Case study.axmz: Bare case study without any configuration 
+2. Case study_configured_prerepair.axmz: Configured case study for monitoring
+3. Case study_repair1.axmz: Configured case study for repair pattern 1
+4. Case study_repair2.axmz: Configured case study for repair pattern 2
+5. Case study_update.axmz: Final version of case study with updated AI Project Canvas
