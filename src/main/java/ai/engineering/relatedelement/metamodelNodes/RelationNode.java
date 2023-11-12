@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.relatedelement.metamodelNodes;
 
 import java.util.LinkedList;
 

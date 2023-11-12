@@ -1,8 +1,12 @@
-package ai.engineering;
+package ai.engineering.relatedelement;
 
 import java.util.List;
 import java.util.LinkedList;
 
+import ai.engineering.relatedelement.metamodelNodes.ClassNode;
+import ai.engineering.relatedelement.metamodelNodes.RelationNode;
+import ai.engineering.relatedelement.metamodelNodes.StereotypeNode;
+import ai.engineering.utilities.ElementPicker;
 import com.change_vision.jude.api.inf.model.IEntity;
 import com.change_vision.jude.api.inf.model.IHyperlinkOwner;
 import com.change_vision.jude.api.stpa.model.IIdentifiedElement;

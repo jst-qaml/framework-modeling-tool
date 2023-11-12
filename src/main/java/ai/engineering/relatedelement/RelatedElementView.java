@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.relatedelement;
 
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +14,7 @@ import javax.swing.table.TableModel;
 import java.awt.Component;
 import java.awt.BorderLayout;
 
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.inf.exception.*;
 import com.change_vision.jude.api.inf.presentation.IPresentation;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;

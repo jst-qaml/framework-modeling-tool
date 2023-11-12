@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.pipeline.monitortool;
 
 import java.awt.Color;
 
@@ -20,6 +20,12 @@ import javax.swing.plaf.DimensionUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import ai.engineering.canvas.CanvasElement;
+import ai.engineering.canvas.CanvasElementCollection;
+import ai.engineering.pipeline.VersionFetcher;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
+import ai.engineering.utilities.ElementPicker;
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.inf.ui.IPluginActionDelegate;
 import com.change_vision.jude.api.inf.ui.IWindow;
 

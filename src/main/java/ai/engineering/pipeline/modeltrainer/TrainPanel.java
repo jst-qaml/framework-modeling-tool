@@ -1,4 +1,6 @@
-package ai.engineering;
+package ai.engineering.pipeline.modeltrainer;
+
+import ai.engineering.pipeline.VersionFetcher;
 
 import javax.management.modelmbean.ModelMBean;
 import javax.swing.*;

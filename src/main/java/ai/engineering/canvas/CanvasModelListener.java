@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.canvas;
 
 import java.awt.Container;
 import javax.swing.JComponent;
@@ -6,6 +6,7 @@ import javax.swing.JTextArea;
 import javax.swing.event.*;
 import javax.swing.text.*;
 
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
 import com.change_vision.jude.api.inf.editor.SysmlModelEditor;

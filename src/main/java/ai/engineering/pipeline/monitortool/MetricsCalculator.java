@@ -1,4 +1,7 @@
-package ai.engineering;
+package ai.engineering.pipeline.monitortool;
+
+import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.MisclassificationPerformance;
 
 public class MetricsCalculator {
     

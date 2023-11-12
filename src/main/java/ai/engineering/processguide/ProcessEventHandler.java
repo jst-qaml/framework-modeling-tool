@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.processguide;
 
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.swing.tree.*;
 
+import ai.engineering.utilities.ElementPicker;
+import ai.engineering.utilities.ToolUtilities;
 import org.omg.CORBA.portable.ValueBase;
 
 import javax.swing.JTree;

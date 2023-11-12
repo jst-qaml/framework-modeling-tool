@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.canvas;
 
 import java.util.List;
 import java.util.LinkedList;

@@ -1,5 +1,9 @@
-package ai.engineering;
+package ai.engineering.pipeline.monitortool;
 
+import ai.engineering.pipeline.VersionFetcher;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.ConfusionMetricsPerformance;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.MisclassificationPerformance;
 import com.change_vision.jude.api.gsn.model.IGoal;
 
 public class GoalParser {

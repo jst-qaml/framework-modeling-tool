@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.relatedelement;
 
 import java.awt.*;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import javax.swing.*;
 
+import ai.engineering.utilities.ElementPicker;
 import com.change_vision.jude.api.inf.model.IEntity;
 
 public class TraceabilityMaps extends JComponent{

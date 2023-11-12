@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.utilities.Enum;
 
 public enum MLCanvasType{
     PREDICTION_TASK,

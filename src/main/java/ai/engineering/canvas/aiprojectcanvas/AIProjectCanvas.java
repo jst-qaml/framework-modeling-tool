@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.canvas.aiprojectcanvas;
  
 import java.awt.*;
 
@@ -10,9 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import ai.engineering.canvas.CanvasModel;
+import ai.engineering.utilities.ElementPicker;
 import com.change_vision.jude.api.inf.model.IRequirement;
 
-public class AIProjectCanvas extends CanvasModel{
+public class AIProjectCanvas extends CanvasModel {
     
     private JPanel dataPanel, skillsPanel, outputPanel, valuePropositionPanel, integrationPanel, stakeholdersPanel, customersPanel, costPanel, revenuePanel;
 

@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.canvas;
  
 import java.util.List;
 
@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.inf.project.ProjectEvent;
 import com.change_vision.jude.api.inf.project.ProjectEventListener;
 

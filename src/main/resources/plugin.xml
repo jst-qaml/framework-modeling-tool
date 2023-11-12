@@ -4,31 +4,31 @@
       <view
             id="ai.engineering.internal.MLCanvasView"
             type="extraTab"
-            class="ai.engineering.MLCanvasView" />
+            class="ai.engineering.canvas.mlcanvas.MLCanvasView" />
       <view
             id="ai.engineering.internal.AIProjectCanvasView"
             type="extraTab"
-            class="ai.engineering.AIProjectCanvasView" />
+            class="ai.engineering.canvas.aiprojectcanvas.AIProjectCanvasView" />
       <view
             id="ai.engineering.internal.ProcessGuideView"
             type="extraTab"
-            class="ai.engineering.ProcessGuideView" />
+            class="ai.engineering.processguide.ProcessGuideView" />
       <view
             id="ai.engineering.internal.PipelinePerformanceView"
             type="extraTab"
-            class="ai.engineering.PipelinePerformanceView" />
+            class="ai.engineering.pipeline.monitortool.PipelinePerformanceView" />
       <view
             id="ai.engineering.internal.MonitoringSummaryView"
             type="extraTab"
-            class="ai.engineering.MonitoringSummaryView" />
+            class="ai.engineering.pipeline.monitortool.MonitoringSummaryView" />
       <view
             id="ai.engineering.internal.RepairConfigurationView"
             type="extraTab"
-            class="ai.engineering.RepairConfigurationView" />
+            class="ai.engineering.pipeline.repairtool.RepairConfigurationView" />
       <view
             id="ai.engineering.internal.RepairConfigurationSummaryView"
             type="extraTab"
-            class="ai.engineering.RepairConfigurationSummaryView" />
+            class="ai.engineering.pipeline.repairtool.RepairConfigurationSummaryView" />
    </extension>
    <extension point="com.change_vision.astah.ui.actionSets">
       <actionSet
@@ -43,7 +43,7 @@
          <action
                label="Activate Consistency Checker"
                icon="icons/sample.gif"
-               class="ai.engineering.RelationCheckerAction"
+               class="ai.engineering.relationchecker.RelationCheckerAction"
                tooltip="%menu_tooltip"
                menubarPath="tool/eai/"
                id="ai.engineering.RelationCheckerAction">
@@ -51,7 +51,7 @@
          <action
                label="Train New Version of ML Model"
                icon="icons/sample.gif"
-               class="ai.engineering.ModelTrainer"
+               class="ai.engineering.pipeline.modeltrainer.ModelTrainer"
                tooltip="%menu_tooltip"
                menubarPath="tool/eai/"
                id="ai.engineering.ModelTrainer">
@@ -59,7 +59,7 @@
          <action
                label="Repair ML Model"
                icon="icons/sample.gif"
-               class="ai.engineering.RepairModelAction"
+               class="ai.engineering.pipeline.repairtool.RepairModelAction"
                tooltip="%menu_tooltip"
                menubarPath="tool/eai/"
                id="ai.engineering.RepairModelAction">
@@ -67,7 +67,7 @@
          <action
                label="Fetch ML Performance Data"
                icon="icons/sample.gif"
-               class="ai.engineering.PerformanceCheckerAction"
+               class="ai.engineering.pipeline.monitortool.PerformanceCheckerAction"
                tooltip="%menu_tooltip"
                menubarPath="tool/eai/"
                id="ai.engineering.PerformanceCheckerAction">

@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.relatedelement;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import javax.swing.event.TableModelEvent;
 
 import java.util.ArrayList;
 
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.inf.exception.*;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
 import com.change_vision.jude.api.inf.presentation.IPresentation;

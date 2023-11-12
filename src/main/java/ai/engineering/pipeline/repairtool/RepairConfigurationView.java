@@ -1,9 +1,11 @@
-package ai.engineering;
+package ai.engineering.pipeline.repairtool;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ai.engineering.pipeline.VersionFetcher;
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
 

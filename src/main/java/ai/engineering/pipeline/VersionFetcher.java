@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.pipeline;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 import javax.net.ssl.SNIMatcher;
 import javax.swing.CellEditor;
 
+import ai.engineering.pipeline.monitortool.ConfigJsonGenerator;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.InputStream;

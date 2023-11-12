@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.pipeline.repairtool;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -16,6 +16,7 @@ import javax.swing.JWindow;
 import javax.swing.border.Border;
 import javax.swing.plaf.DimensionUIResource;
 
+import ai.engineering.pipeline.VersionFetcher;
 import com.change_vision.jude.api.inf.ui.IPluginActionDelegate;
 
 import com.change_vision.jude.api.inf.ui.IWindow;
@@ -27,7 +28,7 @@ public class RepairModelAction implements IPluginActionDelegate{
     
     public Object run(IWindow window){
 
-        String[][] versionMap = VersionFetcher.GetVersions();   
+        String[][] versionMap = VersionFetcher.GetVersions();
         String[] versionList = versionMap[0];
 
         versionComboBox = new JComboBox(versionList);

@@ -1,10 +1,13 @@
-package ai.engineering;
+package ai.engineering.relationchecker;
 
 import java.lang.annotation.ElementType;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import ai.engineering.relatedelement.MetamodelRelationship;
+import ai.engineering.relatedelement.MetamodelXMLParser;
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.inf.project.*;
 import com.change_vision.jude.api.inf.exception.*;
 import com.change_vision.jude.api.inf.view.*;

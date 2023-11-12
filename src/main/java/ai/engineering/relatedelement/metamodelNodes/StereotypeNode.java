@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.relatedelement.metamodelNodes;
 
 import org.w3c.dom.Element;
 

@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.relationchecker;
 
 import javax.swing.JOptionPane;
 

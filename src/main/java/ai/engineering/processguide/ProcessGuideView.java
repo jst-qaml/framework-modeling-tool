@@ -1,5 +1,8 @@
-package ai.engineering;
+package ai.engineering.processguide;
 
+import ai.engineering.canvas.CanvasView;
+import ai.engineering.canvas.aiprojectcanvas.AIProjectCanvasView;
+import ai.engineering.canvas.mlcanvas.MLCanvasView;
 import com.change_vision.jude.api.inf.project.ProjectEventListener;
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 

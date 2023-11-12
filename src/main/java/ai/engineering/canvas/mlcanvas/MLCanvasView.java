@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.canvas.mlcanvas;
  
 import java.util.List;
 
@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ai.engineering.canvas.CanvasView;
 import com.change_vision.jude.api.inf.project.ProjectEvent;
 import com.change_vision.jude.api.inf.project.ProjectEventListener;
 
@@ -20,7 +21,7 @@ import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
  
-public class MLCanvasView extends CanvasView{
+public class MLCanvasView extends CanvasView {
  
   public MLCanvasView(){
     super(0);
