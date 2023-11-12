@@ -1,9 +1,9 @@
 package ai.engineering.canvas;
 
-import javax.swing.JTextArea;
-import java.awt.Color;
-
 import com.change_vision.jude.api.inf.model.IRequirement;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class CanvasElement {
  

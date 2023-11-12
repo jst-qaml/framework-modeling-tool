@@ -1,15 +1,14 @@
 package ai.engineering.canvas;
 
-import java.awt.Container;
-import javax.swing.JComponent;
-import javax.swing.JTextArea;
-import javax.swing.event.*;
-import javax.swing.text.*;
-
 import ai.engineering.utilities.ToolUtilities;
-import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
 import com.change_vision.jude.api.inf.editor.SysmlModelEditor;
+import com.change_vision.jude.api.inf.model.IRequirement;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
 
 
 public class CanvasModelListener implements DocumentListener{

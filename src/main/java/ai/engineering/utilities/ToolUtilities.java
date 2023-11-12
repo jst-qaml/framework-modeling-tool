@@ -1,25 +1,18 @@
 package ai.engineering.utilities;
 
-import com.change_vision.jude.api.inf.exception.*;
-
+import com.change_vision.jude.api.inf.editor.IModelEditorFactory;
+import com.change_vision.jude.api.inf.editor.ITransactionManager;
+import com.change_vision.jude.api.inf.editor.SysmlModelEditor;
+import com.change_vision.jude.api.inf.exception.ProjectNotFoundException;
+import com.change_vision.jude.api.inf.model.IEntity;
+import com.change_vision.jude.api.inf.model.IModel;
+import com.change_vision.jude.api.inf.presentation.IPresentation;
 import com.change_vision.jude.api.inf.project.ProjectAccessor;
 import com.change_vision.jude.api.inf.project.ProjectAccessorFactory;
 import com.change_vision.jude.api.inf.project.ProjectEventListener;
-
-import javax.swing.text.rtf.RTFEditorKit;
-
-import com.change_vision.jude.api.inf.editor.ITransactionManager;
-import com.change_vision.jude.api.inf.editor.IModelEditorFactory;
-import com.change_vision.jude.api.inf.editor.SysmlModelEditor;
-
-import com.change_vision.jude.api.inf.view.IViewManager;
-import com.change_vision.jude.api.inf.view.IProjectViewManager;
 import com.change_vision.jude.api.inf.view.IDiagramViewManager;
-
-import com.change_vision.jude.api.inf.presentation.IPresentation;
-
-import com.change_vision.jude.api.inf.model.IModel;
-import com.change_vision.jude.api.inf.model.IEntity;
+import com.change_vision.jude.api.inf.view.IProjectViewManager;
+import com.change_vision.jude.api.inf.view.IViewManager;
 
 public class ToolUtilities{
 

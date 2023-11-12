@@ -3,24 +3,15 @@ package ai.engineering.processguide;
 import ai.engineering.canvas.CanvasView;
 import ai.engineering.canvas.aiprojectcanvas.AIProjectCanvasView;
 import ai.engineering.canvas.mlcanvas.MLCanvasView;
+import com.change_vision.jude.api.inf.project.ProjectEvent;
 import com.change_vision.jude.api.inf.project.ProjectEventListener;
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
-
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.event.*;
-import java.awt.*;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTree;
-import javax.swing.text.JTextComponent;
-import javax.swing.tree.*;
-
-import com.change_vision.jude.api.inf.project.ProjectEvent;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
+
+import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import java.awt.*;
+import java.awt.event.MouseListener;
 
 public class ProcessGuideView extends JSplitPane implements IPluginExtraTabView, ProjectEventListener{
     

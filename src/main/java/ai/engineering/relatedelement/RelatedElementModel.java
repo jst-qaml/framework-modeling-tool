@@ -1,24 +1,21 @@
 package ai.engineering.relatedelement;
 
-import java.util.List;
-
-import javax.swing.JTable;
-import javax.swing.table.TableModel;
-import javax.swing.event.TableModelEvent;
-
-import java.util.ArrayList;
-
 import ai.engineering.utilities.ToolUtilities;
-import com.change_vision.jude.api.inf.exception.*;
+import com.change_vision.jude.api.gsn.model.IArgumentAsset;
+import com.change_vision.jude.api.gsn.model.IGoal;
+import com.change_vision.jude.api.gsn.model.ISolution;
+import com.change_vision.jude.api.gsn.model.IStrategy;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
-import com.change_vision.jude.api.inf.presentation.IPresentation;
-
-import com.change_vision.jude.api.inf.model.IRequirement;
+import com.change_vision.jude.api.inf.exception.InvalidEditingException;
 import com.change_vision.jude.api.inf.model.IDiagram;
 import com.change_vision.jude.api.inf.model.IEntity;
+import com.change_vision.jude.api.inf.model.IRequirement;
+import com.change_vision.jude.api.inf.presentation.IPresentation;
 
-import com.change_vision.jude.api.gsn.model.*;
-import com.change_vision.jude.api.gsn.model.IArgumentAsset;
+import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.TableModel;
+import java.util.List;
 
 
 public class RelatedElementModel {

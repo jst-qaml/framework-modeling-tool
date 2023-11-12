@@ -1,18 +1,13 @@
 package ai.engineering.pipeline.monitortool;
 
+import com.change_vision.jude.api.inf.project.ProjectEvent;
+import com.change_vision.jude.api.inf.project.ProjectEventListener;
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
 
-import com.change_vision.jude.api.inf.project.ProjectEventListener;
-import com.change_vision.jude.api.inf.project.ProjectEvent;
-
-import java.awt.Component;
-
-import javax.swing.Icon;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class MonitoringSummaryView extends JPanel implements IPluginExtraTabView, ProjectEventListener{
     

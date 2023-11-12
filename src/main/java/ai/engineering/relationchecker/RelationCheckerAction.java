@@ -1,7 +1,5 @@
 package ai.engineering.relationchecker;
 
-import javax.swing.JOptionPane;
-
 import com.change_vision.jude.api.inf.ui.IPluginActionDelegate;
 import com.change_vision.jude.api.inf.ui.IWindow;
 

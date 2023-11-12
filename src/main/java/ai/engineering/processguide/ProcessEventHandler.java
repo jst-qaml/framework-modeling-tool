@@ -1,26 +1,27 @@
 package ai.engineering.processguide;
 
-import java.awt.event.*;
-import java.awt.geom.*;
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.tree.*;
-
 import ai.engineering.utilities.ElementPicker;
 import ai.engineering.utilities.ToolUtilities;
-import org.omg.CORBA.portable.ValueBase;
-
-import javax.swing.JTree;
-
-import com.change_vision.jude.api.inf.editor.*;
-import com.change_vision.jude.api.inf.view.*;
-import com.change_vision.jude.api.inf.model.*;
-import com.change_vision.jude.api.inf.project.*;
-import com.change_vision.jude.api.gsn.editor.*;
+import com.change_vision.jude.api.gsn.editor.GsnDiagramEditor;
+import com.change_vision.jude.api.gsn.editor.GsnModelEditor;
 import com.change_vision.jude.api.gsn.model.*;
-import com.change_vision.jude.api.inf.presentation.*;
+import com.change_vision.jude.api.inf.editor.IDiagramEditorFactory;
+import com.change_vision.jude.api.inf.editor.IModelEditorFactory;
+import com.change_vision.jude.api.inf.editor.ITransactionManager;
+import com.change_vision.jude.api.inf.model.IFacet;
+import com.change_vision.jude.api.inf.model.IRequirement;
+import com.change_vision.jude.api.inf.presentation.INodePresentation;
+import com.change_vision.jude.api.inf.presentation.IPresentation;
+import com.change_vision.jude.api.inf.project.ProjectAccessor;
+import com.change_vision.jude.api.inf.view.IDiagramViewManager;
+
+import javax.swing.*;
+import javax.swing.tree.TreePath;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ProcessEventHandler extends MouseAdapter{

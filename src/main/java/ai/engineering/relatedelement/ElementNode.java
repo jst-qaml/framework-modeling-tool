@@ -1,12 +1,12 @@
 package ai.engineering.relatedelement;
 
-import java.awt.*;
-
 import ai.engineering.utilities.ElementTypeChecker;
 import ai.engineering.utilities.Enum.ModelType;
+import com.change_vision.jude.api.gsn.model.IGoal;
 import com.change_vision.jude.api.inf.model.IEntity;
 import com.change_vision.jude.api.inf.model.IRequirement;
-import com.change_vision.jude.api.gsn.model.IGoal;
+
+import java.awt.*;
 
 public class ElementNode {
     

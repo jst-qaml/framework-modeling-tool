@@ -1,9 +1,5 @@
 package ai.engineering.relatedelement.metamodelNodes;
 
-import java.util.LinkedList;
-
-import org.w3c.dom.Element;
-
 public class RelationNode{
     public ClassNode source;
     public ClassNode destination;

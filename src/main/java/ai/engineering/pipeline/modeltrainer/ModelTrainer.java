@@ -1,19 +1,10 @@
 package ai.engineering.pipeline.modeltrainer;
 
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-
 import com.change_vision.jude.api.inf.ui.IPluginActionDelegate;
 import com.change_vision.jude.api.inf.ui.IWindow;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class ModelTrainer implements IPluginActionDelegate{
 

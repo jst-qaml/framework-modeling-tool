@@ -1,14 +1,12 @@
 package ai.engineering;
 
+import com.change_vision.jude.api.inf.project.ProjectEvent;
+import com.change_vision.jude.api.inf.project.ProjectEventListener;
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
 
-import com.change_vision.jude.api.inf.project.ProjectEventListener;
-import com.change_vision.jude.api.inf.project.ProjectEvent;
-
-import java.awt.Component;
-
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class TraceabilityRecommenderView extends JPanel implements IPluginExtraTabView, ProjectEventListener, Runnable{
 

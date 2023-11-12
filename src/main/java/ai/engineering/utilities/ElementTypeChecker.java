@@ -3,13 +3,14 @@ package ai.engineering.utilities;
 import ai.engineering.utilities.Enum.AIProjectCanvasType;
 import ai.engineering.utilities.Enum.MLCanvasType;
 import ai.engineering.utilities.Enum.ModelType;
-import com.change_vision.jude.api.inf.exception.*;
-
+import com.change_vision.jude.api.gsn.model.IGoal;
+import com.change_vision.jude.api.gsn.model.IGsnElement;
+import com.change_vision.jude.api.inf.model.IBlock;
+import com.change_vision.jude.api.inf.model.IDiagram;
+import com.change_vision.jude.api.inf.model.IEntity;
+import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.inf.presentation.IPresentation;
-
-import com.change_vision.jude.api.inf.model.*;
-import com.change_vision.jude.api.gsn.model.*;
-import com.change_vision.jude.api.stpa.model.*;
+import com.change_vision.jude.api.stpa.model.IStampElement;
 
 public class ElementTypeChecker {
 

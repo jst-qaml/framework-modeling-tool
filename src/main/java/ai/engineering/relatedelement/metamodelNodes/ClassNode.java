@@ -1,18 +1,18 @@
 package ai.engineering.relatedelement.metamodelNodes;
 
-import java.lang.annotation.ElementType;
-import java.util.LinkedList;
-
 import ai.engineering.utilities.ElementTypeChecker;
 import ai.engineering.utilities.Enum.AIProjectCanvasType;
 import ai.engineering.utilities.Enum.MLCanvasType;
 import ai.engineering.utilities.Enum.ModelType;
-import org.w3c.dom.Element;
-
+import com.change_vision.jude.api.gsn.model.IGoal;
+import com.change_vision.jude.api.gsn.model.ISolution;
+import com.change_vision.jude.api.gsn.model.IStrategy;
 import com.change_vision.jude.api.inf.model.IEntity;
 import com.change_vision.jude.api.inf.model.IRequirement;
-import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.stpa.model.*;
+import org.w3c.dom.Element;
+
+import java.util.LinkedList;
 
 public class ClassNode{
     public String id;

@@ -1,52 +1,25 @@
 package ai.engineering.pipeline.monitortool;
 
-import java.awt.Color;
-
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JWindow;
-import javax.swing.border.Border;
-import javax.swing.plaf.DimensionUIResource;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 import ai.engineering.canvas.CanvasElement;
 import ai.engineering.canvas.CanvasElementCollection;
 import ai.engineering.pipeline.VersionFetcher;
 import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
 import ai.engineering.utilities.ElementPicker;
 import ai.engineering.utilities.ToolUtilities;
+import com.change_vision.jude.api.gsn.model.IGoal;
+import com.change_vision.jude.api.inf.editor.ITransactionManager;
+import com.change_vision.jude.api.inf.model.*;
+import com.change_vision.jude.api.inf.presentation.ILinkPresentation;
+import com.change_vision.jude.api.inf.presentation.IPresentation;
 import com.change_vision.jude.api.inf.ui.IPluginActionDelegate;
 import com.change_vision.jude.api.inf.ui.IWindow;
 
-import com.change_vision.jude.api.inf.presentation.IPresentation;
-import com.change_vision.jude.api.inf.presentation.INodePresentation;
-import com.change_vision.jude.api.inf.presentation.ILinkPresentation;
-
-import com.change_vision.jude.api.gsn.model.IGoal;
-
-import com.change_vision.jude.api.inf.view.IDiagramViewManager;
-import com.fasterxml.jackson.core.Version;
-
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.concurrent.CyclicBarrier;
-
-import com.change_vision.jude.api.inf.exception.*;
-import com.change_vision.jude.api.inf.model.*;
-
-import com.change_vision.jude.api.inf.editor.ITransactionManager;
-
-import java.io.InputStream;
 
 public class PerformanceCheckerAction implements IPluginActionDelegate{
     

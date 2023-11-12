@@ -1,22 +1,10 @@
 package ai.engineering.pipeline;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+import com.jcraft.jsch.*;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import java.nio.file.Paths;
+import java.io.*;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class SSHConnector{
     

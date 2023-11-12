@@ -1,20 +1,12 @@
 package ai.engineering.canvas;
- 
-import java.awt.*;
-import java.awt.event.*;
-
-import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.text.AttributeSet.FontAttribute;
 
 import com.change_vision.jude.api.inf.model.IRequirement;
+
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 public abstract class CanvasModel implements ComponentListener{
     

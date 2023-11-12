@@ -1,23 +1,18 @@
 package ai.engineering.pipeline.monitortool;
 
-import java.awt.Color;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import javax.swing.Icon;
-import javax.swing.JButton;
-
 import ai.engineering.pipeline.VersionFetcher;
 import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
 import ai.engineering.utilities.ElementPicker;
-import com.change_vision.jude.api.inf.presentation.IPresentation;
-import com.change_vision.jude.api.inf.model.INamedElement;
-import com.change_vision.jude.api.inf.model.IElement;
-
 import com.change_vision.jude.api.gsn.model.IGoal;
-
-import org.kordamp.ikonli.swing.FontIcon;
+import com.change_vision.jude.api.inf.model.IElement;
+import com.change_vision.jude.api.inf.model.INamedElement;
+import com.change_vision.jude.api.inf.presentation.IPresentation;
 import org.kordamp.ikonli.entypo.Entypo;
+import org.kordamp.ikonli.swing.FontIcon;
+
+import java.awt.*;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MonitoringConfigurations {
     

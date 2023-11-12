@@ -1,25 +1,8 @@
 package ai.engineering.canvas.aiprojectcanvas;
- 
-import java.util.List;
-
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
-
-import javax.lang.model.element.Element;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import ai.engineering.canvas.CanvasView;
-import com.change_vision.jude.api.inf.project.ProjectEvent;
-import com.change_vision.jude.api.inf.project.ProjectEventListener;
 
-import com.change_vision.jude.api.inf.model.IModel;
-import com.change_vision.jude.api.inf.model.IRequirement;
-
-import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
-import com.change_vision.jude.api.inf.ui.ISelectionListener;
+import java.awt.*;
  
 public class AIProjectCanvasView extends CanvasView {
  

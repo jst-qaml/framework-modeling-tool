@@ -1,24 +1,19 @@
 package ai.engineering.relationchecker;
 
-import java.lang.annotation.ElementType;
-import java.util.List;
-
-import javax.swing.JOptionPane;
-
 import ai.engineering.relatedelement.MetamodelRelationship;
 import ai.engineering.relatedelement.MetamodelXMLParser;
 import ai.engineering.utilities.ToolUtilities;
-import com.change_vision.jude.api.inf.project.*;
-import com.change_vision.jude.api.inf.exception.*;
-import com.change_vision.jude.api.inf.view.*;
-import com.change_vision.jude.api.inf.model.*;
-import com.change_vision.jude.api.gsn.model.*;
-
-import com.change_vision.jude.api.inf.ui.IWindow;
-
+import com.change_vision.jude.api.gsn.model.IGsnFacet;
+import com.change_vision.jude.api.gsn.model.IModule;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
-
+import com.change_vision.jude.api.inf.model.*;
+import com.change_vision.jude.api.inf.project.ProjectAccessor;
+import com.change_vision.jude.api.inf.ui.IWindow;
+import com.change_vision.jude.api.inf.view.IProjectViewManager;
 import com.change_vision.jude.api.stpa.model.IIdentifiedElement;
+
+import javax.swing.*;
+import java.util.List;
 
 public class RelationChecker implements Runnable{
 

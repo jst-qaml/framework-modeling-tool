@@ -1,12 +1,12 @@
 package ai.engineering.pipeline.repairtool;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import ai.engineering.pipeline.VersionFetcher;
-import com.change_vision.jude.api.inf.presentation.IPresentation;
-import com.change_vision.jude.api.inf.model.INamedElement;
 import com.change_vision.jude.api.inf.model.IElement;
+import com.change_vision.jude.api.inf.model.INamedElement;
+import com.change_vision.jude.api.inf.presentation.IPresentation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RepairConfiguration {
     

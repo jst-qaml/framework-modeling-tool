@@ -1,18 +1,11 @@
 package ai.engineering.canvas.aiprojectcanvas;
- 
-import java.awt.*;
-
-import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 import ai.engineering.canvas.CanvasModel;
 import ai.engineering.utilities.ElementPicker;
 import com.change_vision.jude.api.inf.model.IRequirement;
+
+import javax.swing.*;
+import java.util.List;
 
 public class AIProjectCanvas extends CanvasModel {
     

@@ -1,11 +1,10 @@
 package ai.engineering.canvas;
 
-import java.util.List;
-import java.util.LinkedList;
-
 import com.change_vision.jude.api.inf.model.IRequirement;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class CanvasElementCollection {
     

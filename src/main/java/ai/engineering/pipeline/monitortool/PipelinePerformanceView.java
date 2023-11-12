@@ -5,32 +5,22 @@ import ai.engineering.pipeline.monitortool.DesiredPerformance.ConfusionMetricsPe
 import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
 import ai.engineering.pipeline.monitortool.DesiredPerformance.MisclassificationPerformance;
 import ai.engineering.utilities.ToolUtilities;
+import com.change_vision.jude.api.gsn.model.IGoal;
+import com.change_vision.jude.api.inf.presentation.IPresentation;
+import com.change_vision.jude.api.inf.project.ProjectEvent;
+import com.change_vision.jude.api.inf.project.ProjectEventListener;
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
 import com.change_vision.jude.api.inf.view.IDiagramViewManager;
-
-import com.change_vision.jude.api.inf.project.ProjectEventListener;
-import com.change_vision.jude.api.inf.project.ProjectEvent;
-
-import com.change_vision.jude.api.inf.model.*;
-
-import com.change_vision.jude.api.inf.editor.ITransactionManager;
-
-import com.change_vision.jude.api.inf.exception.*;
-
-import com.change_vision.jude.api.inf.presentation.IPresentation;
-import com.change_vision.jude.api.inf.presentation.INodePresentation;
-import com.change_vision.jude.api.inf.presentation.ILinkPresentation;
-
-import com.change_vision.jude.api.inf.view.IEntitySelectionListener;
 import com.change_vision.jude.api.inf.view.IEntitySelectionEvent;
+import com.change_vision.jude.api.inf.view.IEntitySelectionListener;
 
-import com.change_vision.jude.api.gsn.model.*;
-
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.util.List;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class PipelinePerformanceView extends JPanel implements IPluginExtraTabView, ProjectEventListener, ActionListener, IEntitySelectionListener{
     
