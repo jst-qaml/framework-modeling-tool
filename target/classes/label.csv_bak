@@ -1,0 +1,44 @@
+﻿Number,Description
+0,Road
+1,Sidewalk
+2,Building
+3,Wall
+4,Fence
+5,Pole
+6,Traffic light
+7,Traffic sign
+8,Vegetation
+9,Terrain
+10,Sky
+11,Person
+12,Rider
+13,Car
+14,Truck
+15,Bus
+16,Train
+17,Motorcycle
+18,Bicycle
+19,Curve left
+20,Curve right
+21,Double curve (first left)
+22,Bumpy road
+23,Slippery road from wet
+24,One-sided narrowing
+25,Roadworks
+26,Traffic signals
+27,Pedestrian crosswalk
+28,Children
+29,Cycles
+30,Slippery road from snow
+31,Wild animals
+32,End of limits
+33,Right ahead
+34,Left ahead
+35,Straight ahead
+36,Straight ahead or right ahead
+37,Straight ahead or left ahead
+38,Pass on the right
+39,Pass on the left
+40,Roundabout
+41,End of no overtaking
+42,End of no overtaking for truck
