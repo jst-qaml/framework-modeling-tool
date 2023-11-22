@@ -1,6 +1,7 @@
 package ai.engineering.pipeline.monitortool.DesiredPerformance;
 
 import ai.engineering.pipeline.VersionFetcher;
+import ai.engineering.pipeline.monitortool.Metric;
 import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.gsn.model.IGoal;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
@@ -10,7 +11,7 @@ public class MisclassificationPerformance extends DesiredPerformance{
     private String targetLabel;
 
     public MisclassificationPerformance(IGoal monitoredEntity, String label, String targetLabel, float desiredValue){
-        super(monitoredEntity, label, "Misclassification", desiredValue);
+        super(monitoredEntity, label, Metric.Misclassification, desiredValue);
         this.targetLabel = targetLabel;
         updateDescription();
         System.out.println(label);

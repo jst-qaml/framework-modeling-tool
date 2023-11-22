@@ -1,13 +1,14 @@
 package ai.engineering.pipeline.monitortool.DesiredPerformance;
 
 import ai.engineering.pipeline.VersionFetcher;
+import ai.engineering.pipeline.monitortool.Metric;
 import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.gsn.model.IGoal;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
 
 public class ConfusionMetricsPerformance extends DesiredPerformance{
     
-    public ConfusionMetricsPerformance(IGoal monitoredEntity, String label, String metricsType, float desiredValue){
+    public ConfusionMetricsPerformance(IGoal monitoredEntity, String label, Metric metricsType, float desiredValue){
         super(monitoredEntity, label, metricsType, desiredValue);
         updateDescription();
     }

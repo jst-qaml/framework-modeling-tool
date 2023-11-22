@@ -25,7 +25,6 @@ import java.awt.event.ItemListener;
 public class PipelinePerformanceView extends JPanel implements IPluginExtraTabView, ProjectEventListener, ActionListener, IEntitySelectionListener{
     
     String[] labelStrings;
-    String[] metricsStrings  = {"Accuracy", "Precision", "Recall", "Misclassification"};
     JComboBox labelList, metricsList, misclassificationList;
     JTextField desiredValueField, actualValueField;
     JButton saveButton;
@@ -66,7 +65,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
 
         conclusionLabel = new JLabel();
 
-        metricsList = new JComboBox(metricsStrings);
+        metricsList = new JComboBox(Metric.values());
         metricsList.setSelectedIndex(0);
         metricsList.addItemListener(new ItemListener() {
             @Override
@@ -218,7 +217,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
 
     private void safeNewDesiredPerformance()
     {
-        int selectedMetricsIndex = metricsList.getSelectedIndex();
+        Metric selectedMetric = (Metric) metricsList.getSelectedItem();
         
         int selectedLabelIndex = labelList.getSelectedIndex()-1;
         String index = selectedLabelIndex+"";
@@ -248,7 +247,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
 
                 newDesiredPerformance = new MisclassificationPerformance(monitoredEntity, index, targetIndex, Float.parseFloat(desiredValueField.getText()));
             } else {
-                newDesiredPerformance = new ConfusionMetricsPerformance(monitoredEntity, index, metricsStrings[selectedMetricsIndex], Float.parseFloat(desiredValueField.getText()));
+                newDesiredPerformance = new ConfusionMetricsPerformance(monitoredEntity, index, selectedMetric, Float.parseFloat(desiredValueField.getText()));
             }
 
             MonitoringConfigurations.addDesiredPerformance(newDesiredPerformance);

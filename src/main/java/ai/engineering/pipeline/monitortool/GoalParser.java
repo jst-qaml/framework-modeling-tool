@@ -7,9 +7,6 @@ import ai.engineering.pipeline.monitortool.DesiredPerformance.MisclassificationP
 import com.change_vision.jude.api.gsn.model.IGoal;
 
 public class GoalParser {
-
-    private static String[] metricsStrings  = {"Accuracy", "Precision", "Recall", "Misclassification"};
-
     public static DesiredPerformance parseGoal(IGoal goal){
         
         if(!isParsable(goal)){return null;}
@@ -20,13 +17,13 @@ public class GoalParser {
         String logicalStatement = getLogicalStatement(goalStatement);
         if(logicalStatement.isEmpty()){return null;}
 
-        String monitoredMetrics = getMonitoredMetrics(logicalStatement);
-        if(monitoredMetrics.isEmpty()){return null;}
+        Metric monitoredMetrics = getMonitoredMetrics(logicalStatement);
+        if(monitoredMetrics == null){return null;}
 
         Float desiredValue = getMinimumValue(logicalStatement);
         if(desiredValue < 0.0f){return null;}
 
-        if (monitoredMetrics.equals("Misclassification")) {
+        if (monitoredMetrics == Metric.Misclassification) {
 
             System.out.println("Parsing misclassification");
 
@@ -69,18 +66,17 @@ public class GoalParser {
         return goalStatement.substring(startIndex + 1, endIndex);
     }
 
-    private static String getMonitoredMetrics(String logicalStatement){
+    private static Metric getMonitoredMetrics(String logicalStatement){
         int endIndex = logicalStatement.indexOf("(");
         String monitoredMetrics = logicalStatement.substring(0, endIndex);
-        monitoredMetrics = monitoredMetrics.toLowerCase();
         
-        for (String metricString : metricsStrings) {
-            if(metricString.toLowerCase().equals(monitoredMetrics)){
-                return metricString;
+        for (Metric metric : Metric.values()) {
+            if(metric.toString().equalsIgnoreCase(monitoredMetrics)){
+                return metric;
             }   
         }
 
-        return "";
+        return null;
     }
 
     private static String getMonitoredLabel(String logicalStatement){

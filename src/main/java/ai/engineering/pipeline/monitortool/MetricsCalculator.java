@@ -6,7 +6,7 @@ import ai.engineering.pipeline.monitortool.DesiredPerformance.MisclassificationP
 public class MetricsCalculator {
     
     public static void calculateAchievement(DesiredPerformance desiredPerformance, int[][] confusionMatrix){
-        String metricsType = desiredPerformance.getMetricsType();
+        Metric metric = desiredPerformance.getMetricsType();
         
         // for (int i = 0; i < confusionMatrix.length; i++) {
         //     System.out.print("[ ");
@@ -16,7 +16,7 @@ public class MetricsCalculator {
         //     System.out.println("]");
         // }
 
-        if(metricsType.equals("Accuracy")){
+        if(metric == Metric.Accuracy){
             float accuracy = -1.0f;
             System.out.println(desiredPerformance.getLabel());
             if (desiredPerformance.getLabel().equals("overall") || desiredPerformance.getLabel().equals("-1")) {
@@ -25,10 +25,9 @@ public class MetricsCalculator {
                 accuracy = calculateAccuracy(confusionMatrix, desiredPerformance.getLabel());
             }
             desiredPerformance.setRealPerformance(accuracy);
-            return;
         }
 
-        if(metricsType.equals("Precision")){
+        else if(metric == Metric.Precision){
             float precision = -1.0f;
             if (desiredPerformance.getLabel().equals("overall") || desiredPerformance.getLabel().equals("-1")) {
                 precision = calculatePrecision(confusionMatrix);
@@ -36,10 +35,9 @@ public class MetricsCalculator {
                 precision = calculatePrecision(confusionMatrix, desiredPerformance.getLabel());
             }
             desiredPerformance.setRealPerformance(precision);
-            return;
         }
 
-        if(metricsType.equals("Recall")){
+        else if(metric == Metric.Recall){
             float recall = -1.0f;
             if (desiredPerformance.getLabel().equals("overall") || desiredPerformance.getLabel().equals("-1")) {
                 recall = calculateRecall(confusionMatrix);
@@ -47,10 +45,9 @@ public class MetricsCalculator {
                 recall = calculateRecall(confusionMatrix, desiredPerformance.getLabel());
             }
             desiredPerformance.setRealPerformance(recall);
-            return;
         }
 
-        if(metricsType.equals("Misclassification")){
+        else if(metric == Metric.Misclassification){
             float misclassificationRate = -1.0f;
             MisclassificationPerformance misclassificationPerformance = (MisclassificationPerformance) desiredPerformance;
 
@@ -60,8 +57,6 @@ public class MetricsCalculator {
                 misclassificationRate = calculateMisclassificationRate(confusionMatrix, misclassificationPerformance.getLabel(), misclassificationPerformance.getTargetLabel());
             }
             misclassificationPerformance.setRealPerformance(misclassificationRate);
-
-            return;
         }
     }
 

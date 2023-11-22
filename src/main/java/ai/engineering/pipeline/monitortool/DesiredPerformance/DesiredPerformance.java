@@ -1,16 +1,17 @@
 package ai.engineering.pipeline.monitortool.DesiredPerformance;
 
+import ai.engineering.pipeline.monitortool.Metric;
 import com.change_vision.jude.api.gsn.model.IGoal;
 
 public abstract class DesiredPerformance {
     
     protected IGoal monitoredEntity;
     protected String label;
-    protected String metricsType;
+    protected Metric metricsType;
     protected float desiredValue;
     protected float realPerformance;
 
-    public DesiredPerformance(IGoal monitoredEntity, String label, String metricsType, float desiredValue){
+    public DesiredPerformance(IGoal monitoredEntity, String label, Metric metricsType, float desiredValue){
         this.label = label;
         this.monitoredEntity = monitoredEntity;
         this.metricsType = metricsType;
@@ -45,7 +46,7 @@ public abstract class DesiredPerformance {
         return monitoredEntity == selectedEntity;
     }
 
-    public String getMetricsType(){
+    public Metric getMetricsType(){
         return metricsType;
     }
 
