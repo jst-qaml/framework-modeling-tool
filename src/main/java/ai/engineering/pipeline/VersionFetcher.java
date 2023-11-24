@@ -1,6 +1,7 @@
 package ai.engineering.pipeline;
 
 import ai.engineering.pipeline.monitortool.ConfigJsonGenerator;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.ConfusionMatrix;
 import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
 import com.jcraft.jsch.Session;
 
@@ -105,9 +106,7 @@ public class VersionFetcher {
         return out;
     }
 
-    public static int[][] GetConfusionMatrix(String versionString){
-        int[][] out = null;
-
+    public static ConfusionMatrix GetConfusionMatrix(String versionString){
         String commandString = null;
 
         if (versionString.contains(":")) {
@@ -136,12 +135,12 @@ public class VersionFetcher {
                     cells[i][j] = Integer.parseInt(stringCells[i][j]);
                 }
             }
-            return cells;
+            return new ConfusionMatrix(cells);
         }catch(Exception e){
             System.out.println(e.toString());
         }
 
-        return out;
+        return null;
     }
 
     public static float GetPerformanceResult(DesiredPerformance desiredPerformance, String selectedVersion){

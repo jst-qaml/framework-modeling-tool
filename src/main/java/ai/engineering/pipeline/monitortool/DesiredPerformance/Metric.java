@@ -1,4 +1,4 @@
-package ai.engineering.pipeline.monitortool;
+package ai.engineering.pipeline.monitortool.DesiredPerformance;
 
 public enum Metric {
     Accuracy,

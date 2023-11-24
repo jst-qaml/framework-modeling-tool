@@ -1,17 +1,14 @@
 package ai.engineering.pipeline.monitortool.DesiredPerformance;
 
 import ai.engineering.pipeline.VersionFetcher;
-import ai.engineering.pipeline.monitortool.Metric;
-import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.gsn.model.IGoal;
-import com.change_vision.jude.api.inf.editor.ITransactionManager;
 
 public class MisclassificationPerformance extends DesiredPerformance{
     
     private String targetLabel;
 
     public MisclassificationPerformance(IGoal monitoredEntity, String label, String targetLabel, float desiredValue){
-        super(monitoredEntity, label, Metric.Misclassification, desiredValue);
+        super(monitoredEntity, label, desiredValue);
         this.targetLabel = targetLabel;
         updateDescription();
         System.out.println(label);
@@ -23,26 +20,15 @@ public class MisclassificationPerformance extends DesiredPerformance{
         return realPerformance <= desiredValue;
     }
 
-    @Override
-    protected void updateDescription(){
-
-        String goalStatement = monitoredEntity.getContent();
-
-        int logicIndex = goalStatement.indexOf("[");
-        if(logicIndex != -1){
-            goalStatement = goalStatement.substring(0, logicIndex);
-        }
-
-        goalStatement = goalStatement.trim();
-
+    public String getTargetLabel(){
         String[] labels = VersionFetcher.GetLabels(true);
-        String monitoredLabelString;
+        String monitoredLabel;
 
         if (label.equals("overall")) {
-            monitoredLabelString = "Overall";
+            monitoredLabel = "Overall";
         } else {
             int index = Integer.parseInt(label);
-            monitoredLabelString = labels[index+1];
+            monitoredLabel = labels[index+1];
         }
 
         String targetLabelString;
@@ -52,21 +38,8 @@ public class MisclassificationPerformance extends DesiredPerformance{
             int index = Integer.parseInt(targetLabel);
             targetLabelString = labels[index+1];
         }
-        
-        String logicString = " [" + metricsType + "(" + monitoredLabelString + ", " + targetLabelString + ") <= " + desiredValue + "]";
 
-        goalStatement = goalStatement + " " + logicString;
-
-        ToolUtilities toolUtilities = ToolUtilities.getToolUtilities();
-        ITransactionManager transactionManager = toolUtilities.getTransactionManager();
-
-        try {
-            transactionManager.beginTransaction();
-            monitoredEntity.setContent(goalStatement);
-            transactionManager.endTransaction();
-        } catch (Exception e) {
-            transactionManager.abortTransaction();
-        }
+        return " [" + getMetricsType() + "(" + monitoredLabel + ", " + targetLabelString + ") <= " + desiredValue + "]";
     }
 
     @Override
@@ -74,8 +47,19 @@ public class MisclassificationPerformance extends DesiredPerformance{
         return label;
     }
 
-    public String getTargetLabel(){
-        return targetLabel;
+    @Override
+    public Metric getMetricsType() {
+        return Metric.Misclassification;
+    }
+
+    @Override
+    public void setRealPerformance(ConfusionMatrix cm) {
+
+    }
+
+    @Override
+    public void setRealPerformance(ConfusionMatrix cm, int index) {
+
     }
 
 }

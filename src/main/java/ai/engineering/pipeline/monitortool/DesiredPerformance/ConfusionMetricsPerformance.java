@@ -1,15 +1,12 @@
 package ai.engineering.pipeline.monitortool.DesiredPerformance;
 
 import ai.engineering.pipeline.VersionFetcher;
-import ai.engineering.pipeline.monitortool.Metric;
-import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.gsn.model.IGoal;
-import com.change_vision.jude.api.inf.editor.ITransactionManager;
 
-public class ConfusionMetricsPerformance extends DesiredPerformance{
+public abstract class ConfusionMetricsPerformance extends DesiredPerformance{
     
-    public ConfusionMetricsPerformance(IGoal monitoredEntity, String label, Metric metricsType, float desiredValue){
-        super(monitoredEntity, label, metricsType, desiredValue);
+    public ConfusionMetricsPerformance(IGoal monitoredEntity, String label, float desiredValue){
+        super(monitoredEntity, label, desiredValue);
         updateDescription();
     }
 
@@ -19,40 +16,17 @@ public class ConfusionMetricsPerformance extends DesiredPerformance{
     }
 
     @Override
-    protected void updateDescription(){
-        String goalStatement = monitoredEntity.getContent();
-
-        int logicIndex = goalStatement.indexOf("[");
-        if(logicIndex != -1){
-            goalStatement = goalStatement.substring(0, logicIndex);
-        }
-
-        goalStatement = goalStatement.trim();
-
+    protected String getTargetLabel() {
         String[] labels = VersionFetcher.GetLabels(true);
-        String logicLabel;
-
+        String monitoredLabel;
         if (label.equals("overall")) {
-            logicLabel = "Overall";
+            monitoredLabel = "Overall";
         } else {
             int index = Integer.parseInt(label);
-            logicLabel = labels[index+1];
+            monitoredLabel = labels[index+1];
         }
-        
-        String logicString = " [" + metricsType + "(" + logicLabel + ") >= " + desiredValue + "]";
 
-        goalStatement = goalStatement + " " + logicString;
-
-        ToolUtilities toolUtilities = ToolUtilities.getToolUtilities();
-        ITransactionManager transactionManager = toolUtilities.getTransactionManager();
-
-        try {
-            transactionManager.beginTransaction();
-            monitoredEntity.setContent(goalStatement);
-            transactionManager.endTransaction();
-        } catch (Exception e) {
-            transactionManager.abortTransaction();
-        }
+        return " [" + getMetricsType() + "(" + monitoredLabel + ") >= " + desiredValue + "]";
     }
 
     @Override

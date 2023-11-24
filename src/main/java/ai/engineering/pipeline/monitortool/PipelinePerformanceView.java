@@ -1,9 +1,7 @@
 package ai.engineering.pipeline.monitortool;
 
 import ai.engineering.pipeline.VersionFetcher;
-import ai.engineering.pipeline.monitortool.DesiredPerformance.ConfusionMetricsPerformance;
-import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
-import ai.engineering.pipeline.monitortool.DesiredPerformance.MisclassificationPerformance;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.*;
 import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.gsn.model.IGoal;
 import com.change_vision.jude.api.inf.presentation.IPresentation;
@@ -232,7 +230,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
             IGoal monitoredEntity = (IGoal) selectedPresentation.getModel();
 
             DesiredPerformance newDesiredPerformance;
-
+            float desiredValue = Float.parseFloat(desiredValueField.getText());
             if (isOnMisrecognize()) {
 
                 int misclassificationListIndex = misclassificationList.getSelectedIndex()-1;
@@ -245,9 +243,21 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
                 System.out.println("Label: " + index);
                 System.out.println("Target Label: " + targetIndex);
 
-                newDesiredPerformance = new MisclassificationPerformance(monitoredEntity, index, targetIndex, Float.parseFloat(desiredValueField.getText()));
+                newDesiredPerformance = new MisclassificationPerformance(monitoredEntity, index, targetIndex, desiredValue);
             } else {
-                newDesiredPerformance = new ConfusionMetricsPerformance(monitoredEntity, index, selectedMetric, Float.parseFloat(desiredValueField.getText()));
+                switch (selectedMetric) {
+                    case Accuracy:
+                        newDesiredPerformance = new DesiredAccuracy(monitoredEntity, index, desiredValue);
+                        break;
+                    case Recall:
+                        newDesiredPerformance = new DesiredRecall(monitoredEntity, index, desiredValue);
+                        break;
+                    case Precision:
+                        newDesiredPerformance = new DesiredPrecision(monitoredEntity, index, desiredValue);
+                        break;
+                    default:
+                        newDesiredPerformance = null;
+                }
             }
 
             MonitoringConfigurations.addDesiredPerformance(newDesiredPerformance);

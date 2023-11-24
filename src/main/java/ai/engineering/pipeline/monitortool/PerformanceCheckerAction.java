@@ -3,6 +3,7 @@ package ai.engineering.pipeline.monitortool;
 import ai.engineering.canvas.CanvasElement;
 import ai.engineering.canvas.CanvasElementCollection;
 import ai.engineering.pipeline.VersionFetcher;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.ConfusionMatrix;
 import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
 import ai.engineering.utilities.ElementPicker;
 import ai.engineering.utilities.ToolUtilities;
@@ -284,7 +285,7 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         int selectedVersionIndex = versionComboBox.getSelectedIndex();
         String[][] versionMap = VersionFetcher.GetVersions();
 
-        int[][] confusionMatrix = VersionFetcher.GetConfusionMatrix(versionMap[1][selectedVersionIndex]);
+        ConfusionMatrix confusionMatrix = VersionFetcher.GetConfusionMatrix(versionMap[1][selectedVersionIndex]);
 
         for (DesiredPerformance desiredPerformance : desiredPerformances) {
             //float result = VersionFetcher.GetPerformanceResult(desiredPerformance, selectedVersionString);
@@ -294,18 +295,23 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
                 // System.out.println("result:" + result);
                 // desiredPerformance.setRealPerformance(result);
 
-                MetricsCalculator.calculateAchievement(desiredPerformance, confusionMatrix);
+                if (desiredPerformance.getLabel().equals("overall") || desiredPerformance.getLabel().equals("-1")) {
+                    desiredPerformance.setRealPerformance(confusionMatrix);
+                } else {
+                    int index = Integer.parseInt(desiredPerformance.getLabel());
+                    desiredPerformance.setRealPerformance(confusionMatrix, index);
+                }
 
                 for (IPresentation selectedPresentation : selectedPresentations) {
                     if(!desiredPerformance.isSatisfying()){
                         String hexColor = "#FF0000";
-                        setColor(selectedPresentation.getModel(), hexColor); 
+                        setColor(selectedPresentation.getModel(), hexColor);
                     }
                 }
             } catch (Exception e) {
                 // TODO: handle exception
             }
-            
+
         }
     }
 

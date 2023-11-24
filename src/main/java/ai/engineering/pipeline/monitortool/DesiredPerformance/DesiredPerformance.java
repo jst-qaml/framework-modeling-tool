@@ -1,26 +1,47 @@
 package ai.engineering.pipeline.monitortool.DesiredPerformance;
 
-import ai.engineering.pipeline.monitortool.Metric;
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.gsn.model.IGoal;
+import com.change_vision.jude.api.inf.editor.ITransactionManager;
 
 public abstract class DesiredPerformance {
     
     protected IGoal monitoredEntity;
     protected String label;
-    protected Metric metricsType;
     protected float desiredValue;
     protected float realPerformance;
 
-    public DesiredPerformance(IGoal monitoredEntity, String label, Metric metricsType, float desiredValue){
-        this.label = label;
+    public DesiredPerformance(IGoal monitoredEntity, String label, float desiredValue){
         this.monitoredEntity = monitoredEntity;
-        this.metricsType = metricsType;
+        this.label = label;
         this.desiredValue = desiredValue;
 
         realPerformance = -1.0f;
     }
 
-    protected void updateDescription(){}
+    protected abstract String getTargetLabel();
+
+    protected void updateDescription(){
+        String goalStatement = monitoredEntity.getContent();
+
+        int logicIndex = goalStatement.indexOf("[");
+        if(logicIndex != -1){
+            goalStatement = goalStatement.substring(0, logicIndex);
+        }
+
+        goalStatement = goalStatement.trim() + " " + getTargetLabel();
+
+        ToolUtilities toolUtilities = ToolUtilities.getToolUtilities();
+        ITransactionManager transactionManager = toolUtilities.getTransactionManager();
+
+        try {
+            transactionManager.beginTransaction();
+            monitoredEntity.setContent(goalStatement);
+            transactionManager.endTransaction();
+        } catch (Exception e) {
+            transactionManager.abortTransaction();
+        }
+    }
 
     public IGoal getMonitoredEntity(){
         return monitoredEntity;
@@ -30,25 +51,17 @@ public abstract class DesiredPerformance {
         return "";
     }
 
-    public void setRealPerformance(float realPerformance){
-        this.realPerformance = realPerformance;
-    }
+    public abstract Metric getMetricsType();
+
+    public abstract void setRealPerformance(ConfusionMatrix cm);
+
+    public abstract void setRealPerformance(ConfusionMatrix cm, int index);
 
     public boolean isTested(){
         return realPerformance >= 0.0;
     }
 
-    public boolean isSatisfying(){
-        return realPerformance > desiredValue;
-    }
-
-    public boolean isSame(IGoal selectedEntity){
-        return monitoredEntity == selectedEntity;
-    }
-
-    public Metric getMetricsType(){
-        return metricsType;
-    }
+    public abstract boolean isSatisfying();
 
     public float getDesiredValue(){
         return desiredValue;
