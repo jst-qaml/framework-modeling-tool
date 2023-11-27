@@ -1,5 +1,6 @@
 package ai.engineering.pipeline.monitortool.DesiredPerformance;
 
+import ai.engineering.pipeline.VersionFetcher;
 import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.gsn.model.IGoal;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
@@ -19,7 +20,18 @@ public abstract class DesiredPerformance {
         realPerformance = -1.0f;
     }
 
-    protected abstract String getTargetLabel();
+    protected String getTargetLabel() {
+        String[] labels = VersionFetcher.GetLabels(true);
+        String monitoredLabel;
+        if (label.equals("overall")) {
+            monitoredLabel = "Overall";
+        } else {
+            int index = Integer.parseInt(label);
+            monitoredLabel = labels[index + 1];
+        }
+
+        return " [" + getMetricsType() + "(" + monitoredLabel + ") >= " + desiredValue + "]";
+    }
 
     protected void updateDescription() {
         String goalStatement = monitoredEntity.getContent();
@@ -48,7 +60,7 @@ public abstract class DesiredPerformance {
     }
 
     public String getLabel() {
-        return "";
+        return label;
     }
 
     public abstract Metric getMetricsType();

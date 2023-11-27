@@ -43,11 +43,6 @@ public class MisclassificationPerformance extends DesiredPerformance {
     }
 
     @Override
-    public String getLabel() {
-        return label;
-    }
-
-    @Override
     public Metric getMetricsType() {
         return Metric.Misclassification;
     }

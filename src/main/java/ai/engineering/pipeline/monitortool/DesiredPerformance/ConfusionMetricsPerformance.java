@@ -15,23 +15,4 @@ public abstract class ConfusionMetricsPerformance extends DesiredPerformance {
         return realPerformance >= desiredValue;
     }
 
-    @Override
-    protected String getTargetLabel() {
-        String[] labels = VersionFetcher.GetLabels(true);
-        String monitoredLabel;
-        if (label.equals("overall")) {
-            monitoredLabel = "Overall";
-        } else {
-            int index = Integer.parseInt(label);
-            monitoredLabel = labels[index + 1];
-        }
-
-        return " [" + getMetricsType() + "(" + monitoredLabel + ") >= " + desiredValue + "]";
-    }
-
-    @Override
-    public String getLabel() {
-        return label;
-    }
-
 }
