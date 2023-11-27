@@ -22,12 +22,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class PerformanceCheckerAction implements IPluginActionDelegate{
-    
+public class PerformanceCheckerAction implements IPluginActionDelegate {
+
     JComboBox versionComboBox;
     JTable summaryTable, performanceTable;
 
-    public Object run(IWindow window){
+    public Object run(IWindow window) {
 
         String[][] versionMap = VersionFetcher.GetVersions();
         String[] versionList = versionMap[0];
@@ -37,13 +37,13 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         GridBagConstraints gbc = new GridBagConstraints();
 
         JButton startButton = new JButton("Fetch Data");
-        startButton.addActionListener(new ActionListener() { 
-            public void actionPerformed(ActionEvent e) { 
-                checkPerformance();
-                updateTableData();
-                MonitoringSummaryView.updateTable();
-            } 
-          }
+        startButton.addActionListener(new ActionListener() {
+                                          public void actionPerformed(ActionEvent e) {
+                                              checkPerformance();
+                                              updateTableData();
+                                              MonitoringSummaryView.updateTable();
+                                          }
+                                      }
         );
 
         JPanel panel = new JPanel();
@@ -66,11 +66,13 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         gbc.gridwidth = 1;
         panel.add(new JLabel("Result: "), gbc);
         String[] columnSummary = {"Element", "Monitored Label", "Monitored Metric", "Desired Value", "Real Value", "Result"};
-        DefaultTableModel tableModel = new DefaultTableModel(MonitoringConfigurations.createSummaryTable(true), columnSummary){
-            public Class getColumnClass(int column){
-                switch(column){
-                    case 5: return Icon.class;
-                    default: return super.getColumnClass(column);
+        DefaultTableModel tableModel = new DefaultTableModel(MonitoringConfigurations.createSummaryTable(true), columnSummary) {
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 5:
+                        return Icon.class;
+                    default:
+                        return super.getColumnClass(column);
                 }
             }
         };
@@ -95,27 +97,27 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         dialog.add(panel, BorderLayout.NORTH);
         dialog.setVisible(true);
 
-	    return null;
-	}
-    
-    private void setColor(IPresentation iPresentation, String hexColor){
+        return null;
+    }
+
+    private void setColor(IPresentation iPresentation, String hexColor) {
 
         String currentColor = iPresentation.getProperty("fill.color");
-        if(currentColor.equals(hexColor)){
+        if (currentColor.equals(hexColor)) {
             return;
         }
 
         ToolUtilities utilities = ToolUtilities.getToolUtilities();
 
         IElement model = iPresentation.getModel();
-        System.out.println("ID: " + model.getId());        
+        System.out.println("ID: " + model.getId());
 
-        if(model instanceof IRequirement){
+        if (model instanceof IRequirement) {
             System.out.println("Canvas Found");
             IRequirement req = (IRequirement) iPresentation.getModel();
             CanvasElement canvasElement = CanvasElementCollection.findCanvasElement(req);
             canvasElement.setColor(hexColor);
-        }else{
+        } else {
             ITransactionManager transactionManager = utilities.getTransactionManager();
             try {
                 transactionManager.beginTransaction();
@@ -131,22 +133,20 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         try {
             IPresentation[] presentations = openDiagram.getPresentations();
             for (IPresentation presentation : presentations) {
-                if(presentation instanceof ILinkPresentation){
+                if (presentation instanceof ILinkPresentation) {
                     ILinkPresentation linkPresentation = (ILinkPresentation) presentation;
                     IPresentation target = linkPresentation.getTargetEnd();
-                    if(target.getLabel() == iPresentation.getLabel()){
+                    if (target.getLabel().equals(iPresentation.getLabel())) {
                         IPresentation source = linkPresentation.getSourceEnd();
                         setColor(source, hexColor);
-                    }              
+                    }
                 }
             }
         } catch (Exception e) {
             // TODO: handle exception
         }
 
-        IHyperlinkOwner hyperlinkOwner = (IHyperlinkOwner) iPresentation;
-
-        List<IEntity> relatedEntities = ElementPicker.getRelatedEntities(hyperlinkOwner);
+        List<IEntity> relatedEntities = ElementPicker.getRelatedEntities((IHyperlinkOwner) iPresentation);
 
         for (IEntity iEntity : relatedEntities) {
             if (iEntity instanceof IPresentation) {
@@ -154,7 +154,7 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
                 setColor(presentation, hexColor);
             }
 
-            if(iEntity instanceof IElement){
+            if (iEntity instanceof IElement) {
                 IElement relatedElement = (IElement) iEntity;
                 try {
                     IPresentation[] presentations = relatedElement.getPresentations();
@@ -163,29 +163,29 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
                     }
                 } catch (Exception e) {
                     // TODO: handle exception
-                } 
+                }
             }
         }
     }
 
-    private void setColor(IElement element, String hexColor){
+    private void setColor(IElement element, String hexColor) {
 
-        if(element instanceof IRequirement){
+        if (element instanceof IRequirement) {
             IRequirement req = (IRequirement) element;
             CanvasElement canvasElement = CanvasElementCollection.findCanvasElement(req);
             if (canvasElement.isSameColor(hexColor)) {
-                return;   
+                return;
             } else {
                 canvasElement.setColor(hexColor);
-            }          
-        }else{
+            }
+        } else {
             ToolUtilities utilities = ToolUtilities.getToolUtilities();
             ITransactionManager transactionManager = utilities.getTransactionManager();
 
             try {
                 IPresentation[] presentations = null;
 
-                if(element != null){
+                if (element != null) {
                     presentations = element.getPresentations();
                 }
 
@@ -193,34 +193,34 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
                     for (IPresentation iPresentation : presentations) {
                         if (iPresentation != null) {
                             String currentColor = iPresentation.getProperty("fill.color");
-                        
-                            if(currentColor.equals(hexColor)){
+
+                            if (currentColor.equals(hexColor)) {
                                 return;
-                            }                      
-                        
+                            }
+
                             transactionManager.beginTransaction();
                             iPresentation.setProperty("fill.color", hexColor);
                             transactionManager.endTransaction();
-        
+
                             IDiagram openDiagram = iPresentation.getDiagram();
 
                             IPresentation[] relatedpresentations = openDiagram.getPresentations();
                             for (IPresentation presentation : relatedpresentations) {
-                                if(presentation instanceof ILinkPresentation){
+                                if (presentation instanceof ILinkPresentation) {
                                     ILinkPresentation linkPresentation = (ILinkPresentation) presentation;
                                     IPresentation target = linkPresentation.getTargetEnd();
                                     IPresentation source = linkPresentation.getSourceEnd();
-                                    if(openDiagram instanceof IInternalBlockDiagram){
-                                        if(source.getLabel().equals(iPresentation.getLabel())){
+                                    if (openDiagram instanceof IInternalBlockDiagram) {
+                                        if (source.getLabel().equals(iPresentation.getLabel())) {
                                             setColor(target.getModel(), hexColor);
                                         }
-                                    }else{
-                                        if(target.getLabel() == iPresentation.getLabel()){
+                                    } else {
+                                        if (target.getLabel().equals(iPresentation.getLabel())) {
                                             setColor(source.getModel(), hexColor);
                                         }
                                     }
                                 }
-                           }
+                            }
                         }
                     }
                 }
@@ -233,33 +233,33 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         List<IEntity> relatedEntities = ElementPicker.getRelatedEntities(hyperlinkOwner);
 
         for (IEntity iEntity : relatedEntities) {
-            if(iEntity instanceof IElement){
+            if (iEntity instanceof IElement) {
                 IElement relatedElement = (IElement) iEntity;
                 setColor(relatedElement, hexColor);
-            }    
+            }
         }
 
     }
 
-    private void updateTableData(){
+    private void updateTableData() {
         String[] columnSummary = {"Element", "Monitored Label", "Monitored Metric", "Desired Value", "Real Value", "Result"};
-        DefaultTableModel tableModel = new DefaultTableModel(MonitoringConfigurations.createSummaryTable(true), columnSummary){
-            public Class getColumnClass(int column){
-                switch(column){
-                    case 5: return Icon.class;
-                    default: return super.getColumnClass(column);
+        DefaultTableModel tableModel = new DefaultTableModel(MonitoringConfigurations.createSummaryTable(true), columnSummary) {
+            public Class getColumnClass(int column) {
+                if (column == 5) {
+                    return Icon.class;
                 }
+                return super.getColumnClass(column);
             }
         };
         summaryTable.setModel(tableModel);
     }
 
-    private void checkPerformance(){
+    private void checkPerformance() {
         removeLastResult();
         signalNewResult();
     }
 
-    private void removeLastResult(){
+    private void removeLastResult() {
         List<DesiredPerformance> desiredPerformances = MonitoringConfigurations.getDesiredPerformances();
 
         for (DesiredPerformance desiredPerformance : desiredPerformances) {
@@ -269,15 +269,15 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
 
                 for (IPresentation selectedPresentation : selectedPresentations) {
                     String hexColor = "#FFFFCC";
-                    setColor(selectedPresentation.getModel(), hexColor); 
+                    setColor(selectedPresentation.getModel(), hexColor);
                 }
             } catch (Exception e) {
                 // TODO: handle exception
-            }  
+            }
         }
     }
 
-    private void signalNewResult(){
+    private void signalNewResult() {
         List<DesiredPerformance> desiredPerformances = MonitoringConfigurations.getDesiredPerformances();
 
         String selectedVersionString = versionComboBox.getSelectedItem().toString();
@@ -303,7 +303,7 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
                 }
 
                 for (IPresentation selectedPresentation : selectedPresentations) {
-                    if(!desiredPerformance.isSatisfying()){
+                    if (!desiredPerformance.isSatisfying()) {
                         String hexColor = "#FF0000";
                         setColor(selectedPresentation.getModel(), hexColor);
                     }

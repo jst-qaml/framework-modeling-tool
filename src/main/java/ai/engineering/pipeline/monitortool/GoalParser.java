@@ -26,7 +26,7 @@ public class GoalParser {
             return null;
         }
 
-        Float desiredValue = getMinimumValue(logicalStatement);
+        float desiredValue = getMinimumValue(logicalStatement);
         if (desiredValue < 0.0f) {
             return null;
         }
@@ -110,7 +110,7 @@ public class GoalParser {
         logicalStatement = logicalStatement.substring(startIndex, endIndex);
 
         for (int i = 0; i < labels.length; i++) {
-            if (labels[i].toLowerCase().equals(logicalStatement.toLowerCase())) {
+            if (labels[i].equalsIgnoreCase(logicalStatement)) {
                 return (i - 1) + "";
             }
         }
@@ -127,7 +127,7 @@ public class GoalParser {
         logicalStatement = logicalStatement.substring(startIndex, endIndex);
 
         for (int i = 0; i < labels.length; i++) {
-            if (labels[i].toLowerCase().equals(logicalStatement.toLowerCase())) {
+            if (labels[i].equalsIgnoreCase(logicalStatement)) {
                 return (i - 1) + "";
             }
         }
@@ -146,7 +146,7 @@ public class GoalParser {
 
         for (int i = 0; i < labels.length; i++) {
             String cleanLabel = labels[i].replaceAll("\\s", "");
-            if (cleanLabel.toLowerCase().equals(logicalStatement.toLowerCase())) {
+            if (cleanLabel.equalsIgnoreCase(logicalStatement)) {
                 return (i - 1) + "";
             }
         }

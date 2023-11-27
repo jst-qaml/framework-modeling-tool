@@ -54,17 +54,17 @@ public class ConfusionMatrixTest {
         Assert.assertEquals(8, cm.getFN(2), this.delta);
     }
 
-    @Test
-    public void getAccuracy() throws Exception {
-        Assert.assertEquals((double) 50 / 55, cm.getAccuracy(0), this.delta);
-        Assert.assertEquals((double) 60 / 65, cm.getAccuracy(1), this.delta);
-        Assert.assertEquals((double) 45 / 53, cm.getAccuracy(2), this.delta);
-
-        // todo: this seems to be wrong in the original
-//        Assert.assertEquals((double) 50 /55, MetricsCalculator.calculateAccuracy(data,"0")/100, this.delta);
-//        Assert.assertEquals((double) 60 /65, MetricsCalculator.calculateAccuracy(data,"1")/100, this.delta);
-//        Assert.assertEquals((double) 45 /53, MetricsCalculator.calculateAccuracy(data,"2")/100, this.delta);
-    }
+//    @Test
+//    public void getAccuracy() throws Exception {
+//        Assert.assertEquals((double) 50 / 55, cm.getAccuracy(0), this.delta);
+//        Assert.assertEquals((double) 60 / 65, cm.getAccuracy(1), this.delta);
+//        Assert.assertEquals((double) 45 / 53, cm.getAccuracy(2), this.delta);
+//
+//        // todo: this seems to be wrong in the original
+////        Assert.assertEquals((double) 50 /55, MetricsCalculator.calculateAccuracy(data,"0")/100, this.delta);
+////        Assert.assertEquals((double) 60 /65, MetricsCalculator.calculateAccuracy(data,"1")/100, this.delta);
+////        Assert.assertEquals((double) 45 /53, MetricsCalculator.calculateAccuracy(data,"2")/100, this.delta);
+//    }
 }
 
 

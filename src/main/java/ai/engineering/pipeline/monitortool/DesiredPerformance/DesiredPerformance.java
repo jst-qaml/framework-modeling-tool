@@ -5,13 +5,13 @@ import com.change_vision.jude.api.gsn.model.IGoal;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
 
 public abstract class DesiredPerformance {
-    
+
     protected IGoal monitoredEntity;
     protected String label;
     protected float desiredValue;
     protected float realPerformance;
 
-    public DesiredPerformance(IGoal monitoredEntity, String label, float desiredValue){
+    public DesiredPerformance(IGoal monitoredEntity, String label, float desiredValue) {
         this.monitoredEntity = monitoredEntity;
         this.label = label;
         this.desiredValue = desiredValue;
@@ -21,11 +21,11 @@ public abstract class DesiredPerformance {
 
     protected abstract String getTargetLabel();
 
-    protected void updateDescription(){
+    protected void updateDescription() {
         String goalStatement = monitoredEntity.getContent();
 
         int logicIndex = goalStatement.indexOf("[");
-        if(logicIndex != -1){
+        if (logicIndex != -1) {
             goalStatement = goalStatement.substring(0, logicIndex);
         }
 
@@ -43,11 +43,11 @@ public abstract class DesiredPerformance {
         }
     }
 
-    public IGoal getMonitoredEntity(){
+    public IGoal getMonitoredEntity() {
         return monitoredEntity;
     }
 
-    public String getLabel(){
+    public String getLabel() {
         return "";
     }
 
@@ -57,17 +57,17 @@ public abstract class DesiredPerformance {
 
     public abstract void setRealPerformance(ConfusionMatrix cm, int index);
 
-    public boolean isTested(){
+    public boolean isTested() {
         return realPerformance >= 0.0;
     }
 
     public abstract boolean isSatisfying();
 
-    public float getDesiredValue(){
+    public float getDesiredValue() {
         return desiredValue;
     }
 
-    public float getRealPerformance(){
+    public float getRealPerformance() {
         return realPerformance;
     }
 

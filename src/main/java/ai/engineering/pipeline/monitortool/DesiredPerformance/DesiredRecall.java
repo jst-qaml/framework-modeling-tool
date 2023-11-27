@@ -14,12 +14,12 @@ public class DesiredRecall extends ConfusionMetricsPerformance {
 
     @Override
     public void setRealPerformance(ConfusionMatrix cm) {
-        this.realPerformance = (float) cm.getTP() / (cm.getTP()+cm.getFP());
+        this.realPerformance = (float) cm.getTP() / (cm.getTP() + cm.getFP());
     }
 
     @Override
     public void setRealPerformance(ConfusionMatrix cm, int index) {
-        this.realPerformance = (float) cm.getTP(index) / (cm.getTP(index)+cm.getFP(index));
+        this.realPerformance = (float) cm.getTP(index) / (cm.getTP(index) + cm.getFP(index));
     }
 
 }

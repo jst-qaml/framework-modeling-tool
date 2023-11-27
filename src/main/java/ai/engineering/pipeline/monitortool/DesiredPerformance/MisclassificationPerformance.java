@@ -3,11 +3,11 @@ package ai.engineering.pipeline.monitortool.DesiredPerformance;
 import ai.engineering.pipeline.VersionFetcher;
 import com.change_vision.jude.api.gsn.model.IGoal;
 
-public class MisclassificationPerformance extends DesiredPerformance{
-    
-    private String targetLabel;
+public class MisclassificationPerformance extends DesiredPerformance {
 
-    public MisclassificationPerformance(IGoal monitoredEntity, String label, String targetLabel, float desiredValue){
+    private final String targetLabel;
+
+    public MisclassificationPerformance(IGoal monitoredEntity, String label, String targetLabel, float desiredValue) {
         super(monitoredEntity, label, desiredValue);
         this.targetLabel = targetLabel;
         updateDescription();
@@ -16,11 +16,11 @@ public class MisclassificationPerformance extends DesiredPerformance{
     }
 
     @Override
-    public boolean isSatisfying(){
+    public boolean isSatisfying() {
         return realPerformance <= desiredValue;
     }
 
-    public String getTargetLabel(){
+    public String getTargetLabel() {
         String[] labels = VersionFetcher.GetLabels(true);
         String monitoredLabel;
 
@@ -28,7 +28,7 @@ public class MisclassificationPerformance extends DesiredPerformance{
             monitoredLabel = "Overall";
         } else {
             int index = Integer.parseInt(label);
-            monitoredLabel = labels[index+1];
+            monitoredLabel = labels[index + 1];
         }
 
         String targetLabelString;
@@ -36,14 +36,14 @@ public class MisclassificationPerformance extends DesiredPerformance{
             targetLabelString = "Overall";
         } else {
             int index = Integer.parseInt(targetLabel);
-            targetLabelString = labels[index+1];
+            targetLabelString = labels[index + 1];
         }
 
         return " [" + getMetricsType() + "(" + monitoredLabel + ", " + targetLabelString + ") <= " + desiredValue + "]";
     }
 
     @Override
-    public String getLabel(){
+    public String getLabel() {
         return label;
     }
 
