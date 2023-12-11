@@ -61,6 +61,8 @@ public class GoalParser {
                     return new DesiredRecall(goal, monitoredLabel, desiredValue);
                 case Precision:
                     return new DesiredPrecision(goal, monitoredLabel, desiredValue);
+                case Robustness:
+                    return new DesiredRobustness(goal, monitoredLabel, desiredValue);
                 default:
                     return null;
             }

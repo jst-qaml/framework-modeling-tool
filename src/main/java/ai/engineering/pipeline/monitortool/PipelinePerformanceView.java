@@ -2,6 +2,7 @@ package ai.engineering.pipeline.monitortool;
 
 import ai.engineering.pipeline.VersionFetcher;
 import ai.engineering.pipeline.monitortool.DesiredPerformance.*;
+import ai.engineering.pipeline.monitortool.robustness.RobustnessWizard;
 import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.gsn.model.IGoal;
 import com.change_vision.jude.api.inf.presentation.IPresentation;
@@ -25,7 +26,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
     String[] labelStrings;
     JComboBox labelList, metricsList, misclassificationList;
     JTextField desiredValueField, actualValueField;
-    JButton saveButton;
+    JButton updateRobustnessButton, saveButton;
     JLabel conclusionLabel;
 
     public PipelinePerformanceView() {
@@ -51,6 +52,9 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
         misclassificationList = new JComboBox(labelStrings);
         misclassificationList.setSelectedIndex(0);
 
+        updateRobustnessButton = new JButton("update Robustness");
+        updateRobustnessButton.addActionListener(this::updateRobustness);
+
         desiredValueField = new JTextField("90.00");
 
         actualValueField = new JTextField();
@@ -65,12 +69,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
 
         metricsList = new JComboBox(Metric.values());
         metricsList.setSelectedIndex(0);
-        metricsList.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                setupForm();
-            }
-        });
+        metricsList.addItemListener(e -> setupForm());
 
         setupForm();
     }
@@ -78,11 +77,6 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
     private IPresentation getSelectedPresentation() {
         ToolUtilities utilities = ToolUtilities.getToolUtilities();
         return utilities.getSelectedPresentation();
-    }
-
-    private boolean isOnMisrecognize() {
-        int selectedIndex = metricsList.getSelectedIndex();
-        return selectedIndex == 3;
     }
 
     private void setupForm() {
@@ -107,7 +101,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
         gbc.gridx++;
         add(metricsList, gbc);
 
-        if (isOnMisrecognize()) {
+        if (metricsList.getSelectedItem() == Metric.Misclassification) {
             gbc.gridy++;
             gbc.gridx = 0;
             add(new JLabel("Misrecognized as:"), gbc);
@@ -119,7 +113,15 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
             add(new JLabel("Desired Maximum Value:"), gbc);
             gbc.gridx++;
             add(desiredValueField, gbc);
-        } else {
+        } else if (metricsList.getSelectedItem() == Metric.Robustness) {
+            gbc.gridy++;
+            gbc.gridx = 0;
+            add(new JLabel("Desired Minimum Value:"), gbc);
+            gbc.gridx++;
+            add(desiredValueField, gbc);
+            gbc.gridx++;
+            add(updateRobustnessButton, gbc);
+        }else {
             gbc.gridy++;
             gbc.gridx = 0;
             add(new JLabel("Desired Minimum Value:"), gbc);
@@ -142,6 +144,10 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
         gbc.gridx = 1;
         gbc.insets = new Insets(10, 0, 0, 0);
         add(saveButton, gbc);
+    }
+
+    public void updateRobustness(ActionEvent e) {
+        new RobustnessWizard();
     }
 
     @Override
@@ -228,7 +234,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
 
             DesiredPerformance newDesiredPerformance;
             float desiredValue = Float.parseFloat(desiredValueField.getText());
-            if (isOnMisrecognize()) {
+            if (metricsList.getSelectedItem() == Metric.Misclassification) {
 
                 int misclassificationListIndex = misclassificationList.getSelectedIndex() - 1;
                 String targetIndex = misclassificationListIndex + "";
@@ -251,6 +257,9 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
                         break;
                     case Precision:
                         newDesiredPerformance = new DesiredPrecision(monitoredEntity, index, desiredValue);
+                        break;
+                    case Robustness:
+                        newDesiredPerformance = new DesiredRobustness(monitoredEntity, index, desiredValue);
                         break;
                     default:
                         newDesiredPerformance = null;

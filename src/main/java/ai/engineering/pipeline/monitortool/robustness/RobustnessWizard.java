@@ -1,41 +1,35 @@
-package ai.engineering.security;
+package ai.engineering.pipeline.monitortool.robustness;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
-import com.change_vision.jude.api.inf.project.ProjectEvent;
-import com.change_vision.jude.api.inf.project.ProjectEventListener;
-import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
-import com.change_vision.jude.api.inf.ui.ISelectionListener;
-
 import static javax.swing.JOptionPane.showMessageDialog;
 
-public class SecurityView extends JPanel implements IPluginExtraTabView, ProjectEventListener {
-    private JLabel imagePreview;
+public class RobustnessWizard extends JFrame {
+    private final JLabel imagePreview;
     private File[] imageFiles;
     private int currentIndex;
     private double noiseLevel = 800;
     private double changesThisRound = 0.0;
+    public RobustnessWizard() {
+        // Set the title of the window
+        setTitle("Robustness Wizard");
 
-    public SecurityView() {
-        initComponents();
-    }
+        // Set the default close operation
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-    private void initComponents() {
-        // init business logic
+        // Create a panel to hold components
+        JPanel panel = new JPanel();
+
+        // Create a button and add it to the panel
         imageFiles = null;
         currentIndex = -1;
 
         // init layout
-        setLayout(new BorderLayout());
-
-        // add image preview pane
-        imagePreview = new JLabel();
-        add(imagePreview, BorderLayout.CENTER);
+        panel.setLayout(new BorderLayout());
 
         // add buttons for selecting images and accepting/rejecting
         JButton selectFolderButton = new JButton("Select Folder");
@@ -48,45 +42,25 @@ public class SecurityView extends JPanel implements IPluginExtraTabView, Project
         buttonPanel.add(selectFolderButton);
         buttonPanel.add(acceptButton);
         buttonPanel.add(rejectButton);
-        add(buttonPanel, BorderLayout.NORTH);
+        panel.add(buttonPanel, BorderLayout.NORTH);
+
+        // add image preview pane
+        imagePreview = new JLabel();
+        imagePreview.setOpaque(true);
+        imagePreview.setHorizontalAlignment(JLabel.CENTER);
+        imagePreview.setVerticalAlignment(JLabel.CENTER);
+        panel.add(imagePreview, BorderLayout.CENTER);
+
+        // Add the panel to the content pane of the frame
+        getContentPane().add(panel);
+
+        // Set the size of the window
+        setSize(300, 200);
+
+        // Set the window to be visible
+        setVisible(true);
     }
 
-    @Override
-    public void projectChanged(ProjectEvent e) {
-    }
-
-    @Override
-    public void projectClosed(ProjectEvent e) {
-    }
-
-    @Override
-    public void projectOpened(ProjectEvent e) {
-    }
-
-    @Override
-    public void addSelectionListener(ISelectionListener listener) {
-    }
-
-    @Override
-    public Component getComponent() {
-        return this;
-    }
-
-    @Override
-    public String getDescription() {
-        return "Show SecurityView here";
-    }
-
-    @Override
-    public String getTitle() {
-        return "Security View";
-    }
-
-    public void activated() {
-    }
-
-    public void deactivated() {
-    }
 
     private void selectFolder() {
         JFileChooser fileChooser = new JFileChooser();
@@ -118,7 +92,7 @@ public class SecurityView extends JPanel implements IPluginExtraTabView, Project
         } else {
             // end of round reached
             if (changesThisRound < 0.02 * noiseLevel) {
-                showMessageDialog(null, "Finished. Acceptable L2-Norm is: " + noiseLevel + ". TODO enter this value into model and pipeline");
+                showMessageDialog(null, "Finished. Acceptable L2-Norm is: " + noiseLevel + ".");
             } else {
                 noiseLevel += changesThisRound;
                 showMessageDialog(null, "Change too great. Noise changed by: " + changesThisRound);

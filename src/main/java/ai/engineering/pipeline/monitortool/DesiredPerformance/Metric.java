@@ -4,5 +4,6 @@ public enum Metric {
     Accuracy,
     Precision,
     Recall,
-    Misclassification
+    Misclassification,
+    Robustness
 }
