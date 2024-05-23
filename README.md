@@ -8,4 +8,8 @@ Drop the .jar file in the releases into the opened Astah System Safety instance 
 Access the metamodel folder for accessing the integrated metamodel of M3S.
 
 ## case study
-Access the case study folder for accessing the Astah System Safety files of the traffic sign recognition case study.
+Access the case study folder for accessing the Astah System Safety files of the case studies.
+
+Currently, there are two case studies available:
+- Traffic sign detection for ADVs.
+- Navigable area detection for personal mobility assistants.
