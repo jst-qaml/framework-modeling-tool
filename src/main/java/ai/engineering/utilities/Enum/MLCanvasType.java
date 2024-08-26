@@ -1,6 +1,6 @@
 package ai.engineering.utilities.Enum;
 
-public enum MLCanvasType{
+public enum MLCanvasType {
     PREDICTION_TASK,
     IMPACT_SIMULATION,
     DECISION,

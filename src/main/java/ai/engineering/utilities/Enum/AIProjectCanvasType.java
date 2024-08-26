@@ -1,6 +1,6 @@
 package ai.engineering.utilities.Enum;
 
-public enum AIProjectCanvasType{
+public enum AIProjectCanvasType {
     DATA,
     SKILLS,
     OUTPUT,

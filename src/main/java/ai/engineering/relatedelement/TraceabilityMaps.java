@@ -9,18 +9,18 @@ import javax.swing.*;
 import ai.engineering.utilities.ElementPicker;
 import com.change_vision.jude.api.inf.model.IEntity;
 
-public class TraceabilityMaps extends JComponent{
+public class TraceabilityMaps extends JComponent {
 
     private List<ElementNode> nodes;
 
-    public TraceabilityMaps(){
+    public TraceabilityMaps() {
         nodes = new LinkedList<ElementNode>();
-        
+
         setOpaque(true);
         setBackground(Color.lightGray);
     }
 
-    public void setSelectedEntity(IEntity selectedEntity){     
+    public void setSelectedEntity(IEntity selectedEntity) {
         nodes.clear();
         nodes.add(new ElementNode(selectedEntity));
 
@@ -38,11 +38,11 @@ public class TraceabilityMaps extends JComponent{
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(1080,720);
+        return new Dimension(1080, 720);
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         g.setColor(Color.WHITE);
@@ -58,5 +58,5 @@ public class TraceabilityMaps extends JComponent{
             //RelationLine.drawLine(centralNode, relatedNode);
         }
     }
-    
+
 }

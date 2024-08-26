@@ -19,93 +19,93 @@ import com.change_vision.jude.api.inf.presentation.IPresentation;
 import com.change_vision.jude.api.inf.model.IModel;
 import com.change_vision.jude.api.inf.model.IEntity;
 
-public class ToolUtilities{
+public class ToolUtilities {
 
     private ProjectAccessor projectAccessor;
     private static boolean isInitialized;
     private static ToolUtilities instance;
 
-    private ToolUtilities(){
+    private ToolUtilities() {
         setupProjectAccessor();
-        isInitialized = true;        
+        isInitialized = true;
     }
 
-    public static ToolUtilities getToolUtilities(){
-        if(!isInitialized){
+    public static ToolUtilities getToolUtilities() {
+        if (!isInitialized) {
             instance = new ToolUtilities();
         }
 
         return instance;
     }
 
-    private void setupProjectAccessor(){
+    private void setupProjectAccessor() {
         try {
             projectAccessor = ProjectAccessorFactory.getProjectAccessor();
             IModel currentProject = projectAccessor.getCurrentProject();
         } catch (ClassNotFoundException e) {
             e.getMessage();
-        } catch (ProjectNotFoundException e){
+        } catch (ProjectNotFoundException e) {
             String message = "Please open a project";
         }
     }
 
-    public void setProjectListener(ProjectEventListener listener){
+    public void setProjectListener(ProjectEventListener listener) {
         projectAccessor.addProjectEventListener(listener);
     }
 
-    public ProjectAccessor getProjectAccessor(){
+    public ProjectAccessor getProjectAccessor() {
         return projectAccessor;
     }
 
-    public IModel getCurrentProject(){
+    public IModel getCurrentProject() {
         try {
-            return projectAccessor.getCurrentProject();            
-        } catch (ProjectNotFoundException e){
+            return projectAccessor.getCurrentProject();
+        } catch (ProjectNotFoundException e) {
             String message = "Please open a project";
         }
 
         return null;
     }
 
-    public IEntity getSelectedEntity(){
+    public IEntity getSelectedEntity() {
         try {
             IViewManager viewManager = projectAccessor.getViewManager();
             IProjectViewManager projectViewManager = viewManager.getProjectViewManager();
             IEntity[] entities = projectViewManager.getSelectedEntities();
-            
-            if(entities.length > 0){
+
+            if (entities.length > 0) {
                 return entities[0];
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } 
+        }
 
         return null;
     }
 
-    public IPresentation getSelectedPresentation(){
+    public IPresentation getSelectedPresentation() {
         try {
             IViewManager viewManager = projectAccessor.getViewManager();
             IDiagramViewManager diagramViewManager = viewManager.getDiagramViewManager();
 
             IPresentation[] presentations = diagramViewManager.getSelectedPresentations();
 
-            if(presentations.length > 0){
+            if (presentations.length > 0) {
                 return presentations[0];
-            }else{
+            } else {
             }
         } catch (Exception e) {
             return null;
         }
-        
+
         return null;
     }
 
-    public ITransactionManager getTransactionManager(){
+    public ITransactionManager getTransactionManager() {
         return projectAccessor.getTransactionManager();
     }
 
-    public SysmlModelEditor getSysmlModelEditor(){
+    public SysmlModelEditor getSysmlModelEditor() {
         try {
             IModelEditorFactory editorFactory = projectAccessor.getModelEditorFactory();
             return editorFactory.getSysmlModelEditor();
@@ -114,7 +114,7 @@ public class ToolUtilities{
         }
     }
 
-    public IDiagramViewManager getDiagramViewManager(){
+    public IDiagramViewManager getDiagramViewManager() {
         try {
             return projectAccessor.getViewManager().getDiagramViewManager();
         } catch (Exception e) {

@@ -23,16 +23,16 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class PipelinePerformanceView extends JPanel implements IPluginExtraTabView, ProjectEventListener, ActionListener, IEntitySelectionListener{
+public class PipelinePerformanceView extends JPanel implements IPluginExtraTabView, ProjectEventListener, ActionListener, IEntitySelectionListener {
 
     String[] labelStrings;
-    String[] metricsStrings  = {"Accuracy", "Precision", "Recall", "Misclassification"};
+    String[] metricsStrings = {"Accuracy", "Precision", "Recall", "Misclassification"};
     JComboBox labelList, metricsList, misclassificationList;
     JTextField desiredValueField, actualValueField;
     JButton saveButton;
     JLabel conclusionLabel;
 
-    public PipelinePerformanceView(){
+    public PipelinePerformanceView() {
         labelStrings = VersionFetcher.GetLabels(true);
         MonitoringConfigurations.initializeConfigurations();
         initiateForm();
@@ -41,12 +41,12 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
         diagramViewManager.addEntitySelectionListener(this);
     }
 
-    public void entitySelectionChanged(IEntitySelectionEvent e){
+    public void entitySelectionChanged(IEntitySelectionEvent e) {
         parseGoalInfo();
         setupForm();
     }
 
-    private void initiateForm(){
+    private void initiateForm() {
         setLayout(new GridBagLayout());
 
         labelList = new JComboBox(labelStrings);
@@ -79,20 +79,20 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
         setupForm();
     }
 
-    private IPresentation getSelectedPresentation(){
+    private IPresentation getSelectedPresentation() {
         ToolUtilities utilities = ToolUtilities.getToolUtilities();
         return utilities.getSelectedPresentation();
     }
 
-    private boolean isOnMisrecognize(){
+    private boolean isOnMisrecognize() {
         int selectedIndex = metricsList.getSelectedIndex();
         return selectedIndex == 3;
     }
 
-    private void setupForm(){
+    private void setupForm() {
         this.removeAll();
 
-        if(getSelectedPresentation() == null){
+        if (getSelectedPresentation() == null) {
             return;
         }
 
@@ -111,7 +111,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
         gbc.gridx++;
         add(metricsList, gbc);
 
-        if (isOnMisrecognize()) {    
+        if (isOnMisrecognize()) {
             gbc.gridy++;
             gbc.gridx = 0;
             add(new JLabel("Misrecognized as:"), gbc);
@@ -123,13 +123,13 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
             add(new JLabel("Desired Maximum Value:"), gbc);
             gbc.gridx++;
             add(desiredValueField, gbc);
-        }else{
+        } else {
             gbc.gridy++;
             gbc.gridx = 0;
             add(new JLabel("Desired Minimum Value:"), gbc);
             gbc.gridx++;
             add(desiredValueField, gbc);
-        }       
+        }
 
         gbc.gridy++;
         gbc.gridx = 0;
@@ -149,12 +149,12 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
     }
 
     @Override
-    public void actionPerformed(ActionEvent e){   
-     	safeNewDesiredPerformance();
+    public void actionPerformed(ActionEvent e) {
+        safeNewDesiredPerformance();
         MonitoringSummaryView.updateTable();
     }
 
-    private void parseGoalInfo(){
+    private void parseGoalInfo() {
         IPresentation currentPresentation = getSelectedPresentation();
 
         if (currentPresentation == null) {
@@ -163,46 +163,46 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
 
         if (currentPresentation.getModel() instanceof IGoal) {
             IGoal goal = (IGoal) currentPresentation.getModel();
-            if(GoalParser.isParsable(goal)){
+            if (GoalParser.isParsable(goal)) {
                 DesiredPerformance performance = GoalParser.parseGoal(goal);
                 System.out.println(performance.getLabel());
                 MonitoringConfigurations.addDesiredPerformance(performance);
                 updateFormValue();
                 MonitoringSummaryView.updateTable();
-            }                    
+            }
         }
     }
 
-    private void updateFormValue(){
+    private void updateFormValue() {
 
         IPresentation selectedPresentation = getSelectedPresentation();
 
         DesiredPerformance desiredPerformance = MonitoringConfigurations.findDesiredPerformance(selectedPresentation);
-    
+
         try {
             if (desiredPerformance == null) {
                 labelList.setSelectedIndex(0);
                 metricsList.setSelectedIndex(0);
                 desiredValueField.setText("90.00");
-            }else{
-    
+            } else {
+
                 String label = desiredPerformance.getLabel();
                 Integer index = 0;
-    
-                if(!label.equalsIgnoreCase("overall")){
-                    index = Integer.parseInt(label)+1;
+
+                if (!label.equalsIgnoreCase("overall")) {
+                    index = Integer.parseInt(label) + 1;
                 }
-    
+
                 labelList.setSelectedIndex(index);
                 metricsList.setSelectedItem(desiredPerformance.getMetricsType());
-                desiredValueField.setText(desiredPerformance.getDesiredValue()+"");
-    
-                if(!desiredPerformance.isTested()){
+                desiredValueField.setText(desiredPerformance.getDesiredValue() + "");
+
+                if (!desiredPerformance.isTested()) {
                     actualValueField.setText("");
                     conclusionLabel.setText("Not tested yet.");
-                }else{
-                    actualValueField.setText(desiredPerformance.getRealPerformance()+"");
-    
+                } else {
+                    actualValueField.setText(desiredPerformance.getRealPerformance() + "");
+
                     if (desiredPerformance.isSatisfying()) {
                         conclusionLabel.setText("Model performance satisfy this element");
                     } else {
@@ -214,33 +214,32 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
             System.err.println(e.toString());
         }
 
-        
+
     }
 
-    private void safeNewDesiredPerformance()
-    {
+    private void safeNewDesiredPerformance() {
         int selectedMetricsIndex = metricsList.getSelectedIndex();
-        
-        int selectedLabelIndex = labelList.getSelectedIndex()-1;
-        String index = selectedLabelIndex+"";
-        
-        if(selectedLabelIndex == -1){
+
+        int selectedLabelIndex = labelList.getSelectedIndex() - 1;
+        String index = selectedLabelIndex + "";
+
+        if (selectedLabelIndex == -1) {
             index = "overall";
         }
 
         IPresentation selectedPresentation = getSelectedPresentation();
 
-        if(selectedPresentation.getModel() instanceof IGoal){
+        if (selectedPresentation.getModel() instanceof IGoal) {
             IGoal monitoredEntity = (IGoal) selectedPresentation.getModel();
 
             DesiredPerformance newDesiredPerformance;
 
             if (isOnMisrecognize()) {
 
-                int misclassificationListIndex = misclassificationList.getSelectedIndex()-1;
-                String targetIndex = misclassificationListIndex+"";
-        
-                if(misclassificationListIndex == -1){
+                int misclassificationListIndex = misclassificationList.getSelectedIndex() - 1;
+                String targetIndex = misclassificationListIndex + "";
+
+                if (misclassificationListIndex == -1) {
                     targetIndex = "overall";
                 }
 
@@ -259,16 +258,20 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
     }
 
     @Override
-    public void projectChanged(ProjectEvent e) {}
- 
-    @Override
-    public void projectClosed(ProjectEvent e) {}
- 
-    @Override
-    public void projectOpened(ProjectEvent e) {}
+    public void projectChanged(ProjectEvent e) {
+    }
 
     @Override
-    public void addSelectionListener(ISelectionListener listener) {}
+    public void projectClosed(ProjectEvent e) {
+    }
+
+    @Override
+    public void projectOpened(ProjectEvent e) {
+    }
+
+    @Override
+    public void addSelectionListener(ISelectionListener listener) {
+    }
 
     @Override
     public void removeSelectionListener(ISelectionListener iSelectionListener) {
@@ -276,17 +279,25 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
     }
 
     @Override
-    public String getTitle() {return "Pipeline Performance View";}
+    public String getTitle() {
+        return "Pipeline Performance View";
+    }
 
     @Override
-    public Component getComponent() {return this;}
- 
-    @Override
-    public String getDescription() {return "Pipeline Performance View Class";}
+    public Component getComponent() {
+        return this;
+    }
 
-    public void activated() {}
-   
-    public void deactivated() {}
+    @Override
+    public String getDescription() {
+        return "Pipeline Performance View Class";
+    }
+
+    public void activated() {
+    }
+
+    public void deactivated() {
+    }
 
 
 }

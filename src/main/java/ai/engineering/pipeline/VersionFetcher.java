@@ -16,9 +16,9 @@ public class VersionFetcher {
 
     private static String[] labels;
 
-    public static String[] GetLabels(boolean includeOverall){
+    public static String[] GetLabels(boolean includeOverall) {
 
-        if(labels != null){
+        if (labels != null) {
             if (!includeOverall) {
                 return Arrays.copyOfRange(labels, 1, labels.length);
             }
@@ -27,23 +27,23 @@ public class VersionFetcher {
 
         String labelInfo;
 
-        try(InputStream in = VersionFetcher.class.getResourceAsStream("/label.csv")){
+        try (InputStream in = VersionFetcher.class.getResourceAsStream("/label.csv")) {
             StringBuilder sb = new StringBuilder();
-            for (int ch; (ch = in.read()) != -1;) {
+            for (int ch; (ch = in.read()) != -1; ) {
                 sb.append((char) ch);
             }
-             labelInfo = sb.toString();
-        }catch(Exception e){
+            labelInfo = sb.toString();
+        } catch (Exception e) {
             labelInfo = "";
         }
-        
+
         labelInfo = labelInfo.replaceAll("\\r?\\n", ",");
         String[] splitInfo = labelInfo.split(",");
-        
-        labels = new String[splitInfo.length/2];
+
+        labels = new String[splitInfo.length / 2];
         labels[0] = "Overall";
-        for (int i = 3; i < splitInfo.length; i+=2) {
-            labels[i/2] = splitInfo[i];
+        for (int i = 3; i < splitInfo.length; i += 2) {
+            labels[i / 2] = splitInfo[i];
         }
 
         if (!includeOverall) {
@@ -53,8 +53,8 @@ public class VersionFetcher {
         return labels;
     }
 
-    private static List<String[]> GetRepairVersions(String freshModelVersion){
-        String command = "/home/code/miniconda3/envs/eai-dvc/bin/python /home/code/eAI-Repair/experiments/astah/get_exp.py -m"; 
+    private static List<String[]> GetRepairVersions(String freshModelVersion) {
+        String command = "/home/code/miniconda3/envs/eai-dvc/bin/python /home/code/eAI-Repair/experiments/astah/get_exp.py -m";
 
         String listString = SSHConnector.ExecuteSSH(command + " \"R\" -b \"" + freshModelVersion + "\"");
 
@@ -67,16 +67,16 @@ public class VersionFetcher {
 
         for (int i = 0; i < versionInfos.length; i++) {
             String[] splittedString = versionInfos[i].split(",");
-            splittedString[0] = "[Repaired] "+ splittedString[0].replaceAll("\\s+","");
-            splittedString[1] = freshModelVersion + ":" + splittedString[1].replaceAll("\\s+","");
+            splittedString[0] = "[Repaired] " + splittedString[0].replaceAll("\\s+", "");
+            splittedString[1] = freshModelVersion + ":" + splittedString[1].replaceAll("\\s+", "");
             versionMap.add(splittedString);
         }
 
         return versionMap;
     }
 
-    public static String[][] GetVersions(){
-        String command = "/home/code/miniconda3/envs/eai-dvc/bin/python /home/code/eAI-Repair/experiments/astah/get_exp.py -m"; 
+    public static String[][] GetVersions() {
+        String command = "/home/code/miniconda3/envs/eai-dvc/bin/python /home/code/eAI-Repair/experiments/astah/get_exp.py -m";
 
         String listString = SSHConnector.ExecuteSSH(command + "\"F\"");
 
@@ -85,8 +85,8 @@ public class VersionFetcher {
 
         for (int i = 0; i < versionInfos.length; i++) {
             String[] splittedString = versionInfos[i].split(",");
-            splittedString[0] = splittedString[0].replaceAll("\\s+","");
-            splittedString[1] = splittedString[1].replaceAll("\\s+","");
+            splittedString[0] = splittedString[0].replaceAll("\\s+", "");
+            splittedString[1] = splittedString[1].replaceAll("\\s+", "");
 
             versionMap.add(splittedString);
 
@@ -106,7 +106,7 @@ public class VersionFetcher {
         return out;
     }
 
-    public static int[][] GetConfusionMatrix(String versionString){
+    public static int[][] GetConfusionMatrix(String versionString) {
         int[][] out = null;
 
         String commandString = null;
@@ -118,7 +118,7 @@ public class VersionFetcher {
             commandString = "cat /home/code/eAI-Repair/experiments/" + versionString + "/fresh_result.json";
         }
 
-        try{
+        try {
             String jsonString = SSHConnector.ExecuteSSH(commandString);
             jsonString = jsonString.replaceAll("\\s", "");
             String[] rows = jsonString.split("]");
@@ -127,8 +127,8 @@ public class VersionFetcher {
             for (int i = 0; i < rows.length; i++) {
                 rows[i] = rows[i].replace("[", "");
                 rows[i] = rows[i].replace("\n", "").replace("\r", "");
-                
-                if(rows[i].startsWith(",")){
+
+                if (rows[i].startsWith(",")) {
                     rows[i] = rows[i].replaceFirst(",", "");
                 }
 
@@ -138,25 +138,25 @@ public class VersionFetcher {
                 }
             }
             return cells;
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
 
         return out;
     }
 
-    public static float GetPerformanceResult(DesiredPerformance desiredPerformance, String selectedVersion){
+    public static float GetPerformanceResult(DesiredPerformance desiredPerformance, String selectedVersion) {
         String performanceInfo = SSHConnector.ExecuteSSH("bash Main/ssh/performance.ssh " + selectedVersion);
         performanceInfo = performanceInfo.replaceAll("\\r?\\n", ",");
         String[] splitInfo = performanceInfo.split(",");
 
         for (int i = 0; i < splitInfo.length; i++) {
-            if(splitInfo[i].equals("Label")){
-                if(splitInfo[i+1].equals(desiredPerformance.getLabel())){
+            if (splitInfo[i].equals("Label")) {
+                if (splitInfo[i + 1].equals(desiredPerformance.getLabel())) {
                     System.out.println("Label Found");
-                    for (int j = i+2; j < i+8; j++) {
-                        if(splitInfo[j].equals(desiredPerformance.getMetricsType())){
-                            float out = Float.parseFloat(splitInfo[j+1]);
+                    for (int j = i + 2; j < i + 8; j++) {
+                        if (splitInfo[j].equals(desiredPerformance.getMetricsType())) {
+                            float out = Float.parseFloat(splitInfo[j + 1]);
                             return out;
                         }
                     }
@@ -166,22 +166,22 @@ public class VersionFetcher {
         return -1.f;
     }
 
-    public static Object[][] GetPerformanceResult(String selectedVersion){
+    public static Object[][] GetPerformanceResult(String selectedVersion) {
 
         String performanceInfo = SSHConnector.ExecuteSSH("cat /home/code/eAI-Repair/experiments/" + selectedVersion + "/test_result.json");
-        
+
         performanceInfo = performanceInfo.replaceAll("\\r?\\n", ",");
         String[] splitInfo = performanceInfo.split(",");
-        
-        Object[][] out = new String[splitInfo.length/8][4];
+
+        Object[][] out = new String[splitInfo.length / 8][4];
         int j = 0;
 
         for (int i = 0; i < splitInfo.length; i++) {
-            if(splitInfo[i].equals("Label")){
-                out[j][0] = splitInfo[i+1];
-                out[j][1] = splitInfo[i+3];
-                out[j][2] = splitInfo[i+5];
-                out[j][3] = splitInfo[i+7];
+            if (splitInfo[i].equals("Label")) {
+                out[j][0] = splitInfo[i + 1];
+                out[j][1] = splitInfo[i + 3];
+                out[j][2] = splitInfo[i + 5];
+                out[j][3] = splitInfo[i + 7];
                 j++;
             }
         }
@@ -195,7 +195,7 @@ public class VersionFetcher {
         return out;
     }
 
-    public static void TrainNewModel(String expName, String datasetVersion, String modelType, String batchSize, String epochString, String splitString){
+    public static void TrainNewModel(String expName, String datasetVersion, String modelType, String batchSize, String epochString, String splitString) {
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter experimentDateFormat = DateTimeFormatter.ofPattern("yyMMddHHmm");
         String formattedDate = experimentDateFormat.format(localDateTime);
@@ -221,7 +221,7 @@ public class VersionFetcher {
         }
     }
 
-    public static void TestModel(String modelVersion, String datasetVersion){
+    public static void TestModel(String modelVersion, String datasetVersion) {
 
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter experimentDateFormat = DateTimeFormatter.ofPattern("yyMMddHHmm");
@@ -231,13 +231,13 @@ public class VersionFetcher {
 
     }
 
-    public static void RepairModel(String versionName, String baseModelVersion){
+    public static void RepairModel(String versionName, String baseModelVersion) {
 
         try {
             Session session1 = SSHConnector.openConnection();
             ConfigJsonGenerator.generateRepairHPJSON();
             SSHConnector.copyLocalToRemote(session1, "D:/temp/", "/home/code/eAI-Repair/experiments/", "hp_repair.json");
-            
+
             Session session2 = SSHConnector.openConnection();
             ConfigJsonGenerator.generateLabelJSON();
             SSHConnector.copyLocalToRemote(session2, "D:/temp/", "/home/code/eAI-Repair/experiments/" + baseModelVersion, "labels_temp.json");
@@ -245,11 +245,11 @@ public class VersionFetcher {
             System.out.println(e.toString());
         }
 
-        String command = "/bin/bash -c 'source /home/code/miniconda3/etc/profile.d/conda.sh && conda activate eai-dvc && /home/code/miniconda3/envs/eai-dvc/bin/python /home/code/eAI-Repair/experiments/astah/trigger.py -m \"R\" -v \"" + versionName + "\" -b \""+ baseModelVersion + "\"'";
-            
+        String command = "/bin/bash -c 'source /home/code/miniconda3/etc/profile.d/conda.sh && conda activate eai-dvc && /home/code/miniconda3/envs/eai-dvc/bin/python /home/code/eAI-Repair/experiments/astah/trigger.py -m \"R\" -v \"" + versionName + "\" -b \"" + baseModelVersion + "\"'";
+
         String out = SSHConnector.ExecuteSSH(command);
         System.out.println(out);
-        
+
         // jsonString = SSHConnector.ExecuteSSH("bash Main/ssh/target.ssh " + " " + "GTSRB" + " " + formattedDate + " " + baseModelVersion + " " + baseModelVersion);
         // SSHConnector.ExecuteSSH("bash Main/ssh/localize.ssh " + " " + "GTSRB" + " " + formattedDate + " " + baseModelVersion + " " + jsonString);
         // SSHConnector.ExecuteSSH("bash Main/ssh/test.ssh " + " " + "GTSRB" + " " + formattedDate + " " + formattedDate + " " + baseModelVersion);

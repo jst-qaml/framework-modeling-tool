@@ -13,28 +13,28 @@ import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.stpa.model.*;
 
-public class ClassNode{
+public class ClassNode {
     public String id;
     public String name;
     public LinkedList<StereotypeNode> stereotypes;
 
-    public ClassNode(Element element){
-       stereotypes = new LinkedList<StereotypeNode>();
-       id = element.getAttribute("xmi.id");
-       name = element.getAttribute("name").replace('+', ' ');
+    public ClassNode(Element element) {
+        stereotypes = new LinkedList<StereotypeNode>();
+        id = element.getAttribute("xmi.id");
+        name = element.getAttribute("name").replace('+', ' ');
     }
 
-    public ClassNode(IEntity entity){
+    public ClassNode(IEntity entity) {
         stereotypes = new LinkedList<StereotypeNode>();
 
         ModelType modelType = ElementTypeChecker.getModelType(entity);
 
-        switch(modelType){
+        switch (modelType) {
             case ML_CANVAS:
                 stereotypes.add(new StereotypeNode("ML Project Canvas"));
                 IRequirement canvasElement = (IRequirement) entity;
                 MLCanvasType mlCanvasType = ElementTypeChecker.getMLCanvasElementType(canvasElement);
-                switch(mlCanvasType){
+                switch (mlCanvasType) {
                     case PREDICTION_TASK:
                         name = "Prediction Task";
                         break;
@@ -71,7 +71,7 @@ public class ClassNode{
                 stereotypes.add(new StereotypeNode("AI Project Canvas"));
                 IRequirement aicanvasElement = (IRequirement) entity;
                 AIProjectCanvasType aiProjectCanvasType = ElementTypeChecker.getAIProjectCanvasElementType(aicanvasElement);
-                switch(aiProjectCanvasType){
+                switch (aiProjectCanvasType) {
                     case DATA:
                         name = "Data";
                         break;
@@ -111,37 +111,37 @@ public class ClassNode{
                 break;
             case SAFETY_CASE:
                 stereotypes.add(new StereotypeNode("Safety Case"));
-                if(entity instanceof IGoal){
+                if (entity instanceof IGoal) {
                     name = "Safety Goal";
-                }else if(entity instanceof IStrategy){
+                } else if (entity instanceof IStrategy) {
                     name = "Argument";
-                }else if(entity instanceof ISolution){
+                } else if (entity instanceof ISolution) {
                     name = "Solution";
                 }
                 break;
             case STPA:
                 stereotypes.add(new StereotypeNode("STAMP"));
-                if(entity instanceof IAccident){
+                if (entity instanceof IAccident) {
                     name = "Accident";
-                }else if(entity instanceof IHazard){
+                } else if (entity instanceof IHazard) {
                     name = "Hazard";
-                }else if(entity instanceof ISafetyConstraint){
+                } else if (entity instanceof ISafetyConstraint) {
                     name = "Safety Constraint";
-                }else if(entity instanceof IComponent){
+                } else if (entity instanceof IComponent) {
                     name = "Entity";
-                }else if(entity instanceof IHazardCausalFactor){
+                } else if (entity instanceof IHazardCausalFactor) {
                     name = "Hazard Causal Factor";
-                }else if(entity instanceof ICountermeasure){
+                } else if (entity instanceof ICountermeasure) {
                     name = "Countermeasure";
-                }else if(entity instanceof IUnsafeControlAction){
+                } else if (entity instanceof IUnsafeControlAction) {
                     name = "Unsafe Control Action";
                 }
                 break;
         }
     }
 
-    public void addStereotype(StereotypeNode stereotype){
-       stereotypes.add(stereotype);
+    public void addStereotype(StereotypeNode stereotype) {
+        stereotypes.add(stereotype);
     }
 
- }
+}

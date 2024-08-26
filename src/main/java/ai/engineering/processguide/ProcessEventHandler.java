@@ -20,12 +20,12 @@ import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.inf.presentation.*;
 
 
-public class ProcessEventHandler extends MouseAdapter{
-    
+public class ProcessEventHandler extends MouseAdapter {
+
     JTree stepsTree;
     ProcessGuideView view;
 
-    public ProcessEventHandler(ProcessGuideView view){
+    public ProcessEventHandler(ProcessGuideView view) {
         this.view = view;
         this.stepsTree = view.getStepsTree();
     }
@@ -33,50 +33,50 @@ public class ProcessEventHandler extends MouseAdapter{
     public void mousePressed(MouseEvent e) {
         int selRow = stepsTree.getRowForLocation(e.getX(), e.getY());
         TreePath selPath = stepsTree.getPathForLocation(e.getX(), e.getY());
-        if(selPath != null){
-            if(e.getClickCount() == 2 && selPath.getPathCount() == 3) {
+        if (selPath != null) {
+            if (e.getClickCount() == 2 && selPath.getPathCount() == 3) {
                 triggerAction(selPath);
             }
         }
     }
 
-    private void triggerAction(TreePath selPath){
+    private void triggerAction(TreePath selPath) {
         String selectedAction = selPath.getLastPathComponent().toString();
 
-        if(selectedAction.startsWith("1.")){
-            view.showAIProjectCanvas(Integer.parseInt(selectedAction.charAt(2)+""));
+        if (selectedAction.startsWith("1.")) {
+            view.showAIProjectCanvas(Integer.parseInt(selectedAction.charAt(2) + ""));
         }
 
-        if(selectedAction.startsWith("2.")){
-            view.showMLCanvas(Integer.parseInt(selectedAction.charAt(2)+""));
+        if (selectedAction.startsWith("2.")) {
+            view.showMLCanvas(Integer.parseInt(selectedAction.charAt(2) + ""));
         }
 
-        if(selectedAction.startsWith("3.")){
-            if (selectedAction.startsWith("3.1.")){
+        if (selectedAction.startsWith("3.")) {
+            if (selectedAction.startsWith("3.1.")) {
                 createKaosRootGoal();
-            }else{
+            } else {
                 showKAOSModel();
             }
         }
 
-        if(selectedAction.startsWith("4.")){
+        if (selectedAction.startsWith("4.")) {
 
         }
 
-        if(selectedAction.startsWith("5.")){
+        if (selectedAction.startsWith("5.")) {
 
         }
 
-        if(selectedAction.startsWith("6.")){
-            if (selectedAction.startsWith("6.1.")){
+        if (selectedAction.startsWith("6.")) {
+            if (selectedAction.startsWith("6.1.")) {
                 createSafeyCaseRootGoal();
-            }else{
+            } else {
                 showSafetyCaseModel();
             }
         }
     }
 
-    private void createKaosRootGoal(){
+    private void createKaosRootGoal() {
         ToolUtilities toolUtilities = ToolUtilities.getToolUtilities();
         ProjectAccessor projectAccessor = toolUtilities.getProjectAccessor();
         IDiagramViewManager diagramViewManager = toolUtilities.getDiagramViewManager();
@@ -94,7 +94,7 @@ public class ProcessEventHandler extends MouseAdapter{
 
             IModelEditorFactory modelEditorFactory = projectAccessor.getModelEditorFactory();
             GsnModelEditor modelEditor = modelEditorFactory.getModelEditor(GsnModelEditor.class);
-            
+
             List<IRequirement> valuePropositions = ElementPicker.getMLCanvasElements("ML.ValueProposition");
             IGoal rootGoal = modelEditor.createGoal(module, "Root KAOS Goal");
             rootGoal.setContent(valuePropositions.get(0).getName());
@@ -105,7 +105,7 @@ public class ProcessEventHandler extends MouseAdapter{
             List<IRequirement> decisions = ElementPicker.getMLCanvasElements("ML.Decision");
             List<IGoal> decisionGoals = new ArrayList<IGoal>();
             for (int i = 0; i < decisions.size(); i++) {
-                IGoal decisionGoal = modelEditor.createGoal(module, "Decision Goal " + (i+1));
+                IGoal decisionGoal = modelEditor.createGoal(module, "Decision Goal " + (i + 1));
                 decisionGoals.add(decisionGoal);
                 decisionGoal.setContent(decisions.get(i).getName());
 
@@ -121,33 +121,33 @@ public class ProcessEventHandler extends MouseAdapter{
             List<IGoal> taskGoals = new ArrayList<IGoal>();
             IGoal decisionGoal = decisionGoals.get(0);
             for (int i = 0; i < tasks.size(); i++) {
-                IGoal taskGoal = modelEditor.createGoal(module, "Prediction Task Goal " + (i+1));
+                IGoal taskGoal = modelEditor.createGoal(module, "Prediction Task Goal " + (i + 1));
                 taskGoal.setContent(tasks.get(i).getName());
 
                 ISupportedBy link = modelEditor.createSupportedBy(decisionGoal, taskGoal);
                 taskGoal.createElementHyperlink(decisionGoal, "");
                 decisionGoal.createElementHyperlink(taskGoal, "");
 
-                INodePresentation taskGoalPresentation = diagramEditor.createNodePresentation(taskGoal, new Point((i +1) * 200, 300));
+                INodePresentation taskGoalPresentation = diagramEditor.createNodePresentation(taskGoal, new Point((i + 1) * 200, 300));
 
                 IPresentation[] decisionGoalPresentations = decisionGoal.getPresentations();
                 INodePresentation decisionGoalPresentation = (INodePresentation) decisionGoalPresentations[0];
-                diagramEditor.createLinkPresentation(link, decisionGoalPresentation, taskGoalPresentation);              
+                diagramEditor.createLinkPresentation(link, decisionGoalPresentation, taskGoalPresentation);
             }
 
             diagramViewManager.open(diagram);
-            transactionManager.endTransaction();            
+            transactionManager.endTransaction();
         } catch (Exception e) {
             // TODO: handle exception
         }
 
     }
 
-    private void showKAOSModel(){
+    private void showKAOSModel() {
 
     }
 
-    private void createSafeyCaseRootGoal(){
+    private void createSafeyCaseRootGoal() {
         ToolUtilities toolUtilities = ToolUtilities.getToolUtilities();
         ProjectAccessor projectAccessor = toolUtilities.getProjectAccessor();
         IDiagramViewManager diagramViewManager = toolUtilities.getDiagramViewManager();
@@ -176,13 +176,16 @@ public class ProcessEventHandler extends MouseAdapter{
 
             diagramViewManager.open(diagram);
 
-            transactionManager.endTransaction();            
+            transactionManager.endTransaction();
         } catch (Exception e) {
             // TODO: handle exception
         }
 
     }
 
-    private void showSafetyCaseModel(){};
+    private void showSafetyCaseModel() {
+    }
+
+    ;
 
 }

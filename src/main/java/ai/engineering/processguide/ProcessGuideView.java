@@ -17,21 +17,21 @@ import javax.swing.tree.*;
 import com.change_vision.jude.api.inf.project.ProjectEvent;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
 
-public class ProcessGuideView extends JSplitPane implements IPluginExtraTabView, ProjectEventListener{
-    
+public class ProcessGuideView extends JSplitPane implements IPluginExtraTabView, ProjectEventListener {
+
     JSplitPane splitPane;
     JScrollPane guidePane, actionPane;
     JTree stepsTree;
 
-    public JTree getStepsTree(){
+    public JTree getStepsTree() {
         return stepsTree;
     }
 
-    public ProcessGuideView(){
+    public ProcessGuideView() {
         createSplitPanel();
     }
 
-    private void createSplitPanel(){
+    private void createSplitPanel() {
         createNodes();
         setMouseListener();
 
@@ -41,21 +41,21 @@ public class ProcessGuideView extends JSplitPane implements IPluginExtraTabView,
         setRightComponent(actionPane);
     }
 
-    public void showAIProjectCanvas(int highlightPanel){
+    public void showAIProjectCanvas(int highlightPanel) {
         CanvasView canvas = new AIProjectCanvasView(highlightPanel);
         actionPane = new JScrollPane(canvas);
         setRightComponent(actionPane);
     }
 
-    public void showMLCanvas(int highlightPanel){
+    public void showMLCanvas(int highlightPanel) {
         System.out.println(highlightPanel);
         CanvasView canvas = new MLCanvasView(highlightPanel);
         actionPane = new JScrollPane(canvas);
         setRightComponent(actionPane);
     }
 
-    private void createNodes(){
-        
+    private void createNodes() {
+
         DefaultMutableTreeNode topNode;
         DefaultMutableTreeNode firstLevel;
         DefaultMutableTreeNode secondLevel;
@@ -180,23 +180,30 @@ public class ProcessGuideView extends JSplitPane implements IPluginExtraTabView,
         }
     }
 
-    private void setMouseListener(){
+    private void setMouseListener() {
         MouseListener ml = new ProcessEventHandler(this);
         stepsTree.addMouseListener(ml);
     }
-    
+
 
     @Override
-    public void projectChanged(ProjectEvent e) {createSplitPanel();}
- 
-    @Override
-    public void projectClosed(ProjectEvent e) {createSplitPanel();}
+    public void projectChanged(ProjectEvent e) {
+        createSplitPanel();
+    }
 
     @Override
-    public void projectOpened(ProjectEvent e) {createSplitPanel();}
+    public void projectClosed(ProjectEvent e) {
+        createSplitPanel();
+    }
 
     @Override
-    public void addSelectionListener(ISelectionListener listener) {}
+    public void projectOpened(ProjectEvent e) {
+        createSplitPanel();
+    }
+
+    @Override
+    public void addSelectionListener(ISelectionListener listener) {
+    }
 
     @Override
     public void removeSelectionListener(ISelectionListener iSelectionListener) {
@@ -204,16 +211,24 @@ public class ProcessGuideView extends JSplitPane implements IPluginExtraTabView,
     }
 
     @Override
-    public String getTitle() {return "Process Guide View";}
- 
-    @Override
-    public Component getComponent() {return this;}
- 
-    @Override
-    public String getDescription() {return "Process Guide View Class";}
+    public String getTitle() {
+        return "Process Guide View";
+    }
 
-    public void activated() {}
-   
-    public void deactivated() {}
+    @Override
+    public Component getComponent() {
+        return this;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Process Guide View Class";
+    }
+
+    public void activated() {
+    }
+
+    public void deactivated() {
+    }
 
 }

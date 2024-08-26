@@ -22,13 +22,13 @@ import javax.swing.*;
 
 import com.change_vision.jude.api.inf.presentation.IPresentation;
 
-public class RepairConfigurationView extends JPanel implements IPluginExtraTabView, ProjectEventListener, ActionListener, IEntitySelectionListener{
-    
+public class RepairConfigurationView extends JPanel implements IPluginExtraTabView, ProjectEventListener, ActionListener, IEntitySelectionListener {
+
     String[] labelStrings;
     JComboBox labelList, priorityValueList, preventValuelist;
     JButton saveButton;
 
-    public RepairConfigurationView(){
+    public RepairConfigurationView() {
         labelStrings = VersionFetcher.GetLabels(false);
         setupForm();
         ToolUtilities utilities = ToolUtilities.getToolUtilities();
@@ -36,16 +36,16 @@ public class RepairConfigurationView extends JPanel implements IPluginExtraTabVi
         diagramViewManager.addEntitySelectionListener(this);
     }
 
-    public void entitySelectionChanged(IEntitySelectionEvent e){
+    public void entitySelectionChanged(IEntitySelectionEvent e) {
         updateFormValue(getSelectedPresentation());
     }
 
-    private IPresentation getSelectedPresentation(){
+    private IPresentation getSelectedPresentation() {
         ToolUtilities toolUtilities = ToolUtilities.getToolUtilities();
         return toolUtilities.getSelectedPresentation();
     }
 
-    private void setupForm(){
+    private void setupForm() {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -85,12 +85,12 @@ public class RepairConfigurationView extends JPanel implements IPluginExtraTabVi
     }
 
     @Override
-    public void actionPerformed(ActionEvent e){   
-     	safeNewConfig();
+    public void actionPerformed(ActionEvent e) {
+        safeNewConfig();
         RepairConfigurationSummaryView.updateTable();
     }
 
-    private void updateFormValue(IPresentation selectedPresentation){
+    private void updateFormValue(IPresentation selectedPresentation) {
         LabelConfiguration labelConfig = RepairConfiguration.findLabelConfiguration(selectedPresentation);
 
         if (labelConfig == null) {
@@ -105,23 +105,27 @@ public class RepairConfigurationView extends JPanel implements IPluginExtraTabVi
 
     }
 
-    private void safeNewConfig(){
-        LabelConfiguration labelConfig = new LabelConfiguration(getSelectedPresentation(), labelList.getSelectedIndex()+"", priorityValueList.getSelectedItem().toString(), preventValuelist.getSelectedItem().toString());
+    private void safeNewConfig() {
+        LabelConfiguration labelConfig = new LabelConfiguration(getSelectedPresentation(), labelList.getSelectedIndex() + "", priorityValueList.getSelectedItem().toString(), preventValuelist.getSelectedItem().toString());
 
         RepairConfiguration.addConfiguration(labelConfig);
     }
 
     @Override
-    public void projectChanged(ProjectEvent e) {}
- 
-    @Override
-    public void projectClosed(ProjectEvent e) {}
- 
-    @Override
-    public void projectOpened(ProjectEvent e) {}
+    public void projectChanged(ProjectEvent e) {
+    }
 
     @Override
-    public void addSelectionListener(ISelectionListener listener) {}
+    public void projectClosed(ProjectEvent e) {
+    }
+
+    @Override
+    public void projectOpened(ProjectEvent e) {
+    }
+
+    @Override
+    public void addSelectionListener(ISelectionListener listener) {
+    }
 
     @Override
     public void removeSelectionListener(ISelectionListener iSelectionListener) {
@@ -129,16 +133,24 @@ public class RepairConfigurationView extends JPanel implements IPluginExtraTabVi
     }
 
     @Override
-    public String getTitle() {return "Repair Configuration View";}
+    public String getTitle() {
+        return "Repair Configuration View";
+    }
 
     @Override
-    public Component getComponent() {return this;}
- 
-    @Override
-    public String getDescription() {return "Repair Configuration View Class";}
+    public Component getComponent() {
+        return this;
+    }
 
-    public void activated() {}
-   
-    public void deactivated() {}
+    @Override
+    public String getDescription() {
+        return "Repair Configuration View Class";
+    }
+
+    public void activated() {
+    }
+
+    public void deactivated() {
+    }
 
 }

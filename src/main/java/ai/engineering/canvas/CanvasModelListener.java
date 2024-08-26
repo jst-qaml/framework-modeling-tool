@@ -10,15 +10,15 @@ import com.change_vision.jude.api.inf.editor.ITransactionManager;
 import com.change_vision.jude.api.inf.editor.SysmlModelEditor;
 
 
-public class CanvasModelListener implements DocumentListener{
-    
+public class CanvasModelListener implements DocumentListener {
+
     IRequirement requirement;
     String oldRequirementString;
     ITransactionManager transactionManager;
     SysmlModelEditor modelEditor;
     JTextArea textArea;
 
-    CanvasModelListener(IRequirement requirement, JTextArea textArea){
+    CanvasModelListener(IRequirement requirement, JTextArea textArea) {
         this.requirement = requirement;
         ToolUtilities utilities = ToolUtilities.getToolUtilities();
         transactionManager = utilities.getTransactionManager();
@@ -28,7 +28,7 @@ public class CanvasModelListener implements DocumentListener{
             Document document = textArea.getDocument();
             oldRequirementString = document.getText(0, document.getLength());
         } catch (Exception e) {
-            
+
         }
     }
 
@@ -41,13 +41,13 @@ public class CanvasModelListener implements DocumentListener{
     }
 
     public void changedUpdate(DocumentEvent e) {
-        
+
     }
 
-    private void UpdateExistingString(Document document){
+    private void UpdateExistingString(Document document) {
         try {
             String newRequirementString = document.getText(0, document.getLength());
-            
+
             // if(oldRequirementString.equals(newRequirementString)){
             //     transactionManager.endTransaction();
             // }
@@ -70,6 +70,5 @@ public class CanvasModelListener implements DocumentListener{
         }
     }
 
-    
 
 }

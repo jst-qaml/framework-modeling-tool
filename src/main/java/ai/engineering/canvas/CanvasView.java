@@ -17,7 +17,7 @@ import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
 
 public abstract class CanvasView extends JPanel implements IPluginExtraTabView, ProjectEventListener, Runnable {
- 
+
     private IModel currentProject;
     private JLabel label;
     protected CanvasModel canvas;
@@ -25,72 +25,83 @@ public abstract class CanvasView extends JPanel implements IPluginExtraTabView, 
     private Thread thread;
     private boolean isActive;
 
-    public CanvasView(int highlightPanelIndex){
-      this.highlightPanelIndex = highlightPanelIndex;
-      initComponents();
-      thread = new Thread(this);
+    public CanvasView(int highlightPanelIndex) {
+        this.highlightPanelIndex = highlightPanelIndex;
+        initComponents();
+        thread = new Thread(this);
     }
 
-    public CanvasView(){
-      this.highlightPanelIndex = 0;
-      initComponents();
-      thread = new Thread(this);
+    public CanvasView() {
+        this.highlightPanelIndex = 0;
+        initComponents();
+        thread = new Thread(this);
     }
-   
+
     private void initComponents() {
-      setLayout(new BorderLayout());
-      add(createCanvasPane(), null);
-      addProjectEventListener();
-      addComponentListener(canvas);
+        setLayout(new BorderLayout());
+        add(createCanvasPane(), null);
+        addProjectEventListener();
+        addComponentListener(canvas);
     }
-   
+
     private void addProjectEventListener() {
-      ToolUtilities utilities = ToolUtilities.getToolUtilities();
-      utilities.setProjectListener(this);
+        ToolUtilities utilities = ToolUtilities.getToolUtilities();
+        utilities.setProjectListener(this);
     }
 
     protected abstract Container createCanvasPane();
-  
-    private void updateCanvasPane(){
-      this.removeAll();
-      add(createCanvasPane(), null);
+
+    private void updateCanvasPane() {
+        this.removeAll();
+        add(createCanvasPane(), null);
     }
-  
+
     @Override
     public void projectChanged(ProjectEvent e) {
     }
-   
+
     @Override
     public void projectClosed(ProjectEvent e) {
-      isActive = false;
+        isActive = false;
     }
-   
+
     @Override
     public void projectOpened(ProjectEvent e) {
-      initComponents();
-      isActive = true;
+        initComponents();
+        isActive = true;
     }
-   
-    @Override
-    public void addSelectionListener(ISelectionListener listener) {}
-   
-    @Override
-    public Component getComponent() {return this;}
-   
-    @Override
-    public String getDescription() {return "Canvas View Class";}
-   
-    @Override
-    public String getTitle() {return "Canvas View";}
-   
-    public void activated() {isActive = true;}
-   
-    public void deactivated() {isActive = false;}
 
-    public void run(){
-      while(true){
-        updateCanvasPane();
-      }
+    @Override
+    public void addSelectionListener(ISelectionListener listener) {
     }
-  
+
+    @Override
+    public Component getComponent() {
+        return this;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Canvas View Class";
+    }
+
+    @Override
+    public String getTitle() {
+        return "Canvas View";
+    }
+
+    public void activated() {
+        isActive = true;
+    }
+
+    public void deactivated() {
+        isActive = false;
+    }
+
+    public void run() {
+        while (true) {
+            updateCanvasPane();
+        }
+    }
+
 }

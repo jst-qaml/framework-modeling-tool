@@ -5,10 +5,10 @@ import com.change_vision.jude.api.inf.project.ModelFinder;
 
 public class NamedElementPicker implements ModelFinder {
 
-    public NamedElementPicker(){
+    public NamedElementPicker() {
 
     }
-    
+
     public boolean isTarget(INamedElement namedElement) {
         return true;
     }

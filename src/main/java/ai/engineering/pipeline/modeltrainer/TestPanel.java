@@ -5,14 +5,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class TestPanel extends JPanel {
- 
+
     private JComboBox testDataVersionBox, modelVersionBox;
 
-    public TestPanel(){
+    public TestPanel() {
         createTestTab();
     }
 
-    private void createTestTab(){
+    private void createTestTab() {
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -25,11 +25,11 @@ public class TestPanel extends JPanel {
         // testDataVersionBox = new JComboBox(dataVersionList);
 
         JButton testButton = new JButton("Test Model");
-        testButton.addActionListener(new ActionListener() { 
-            public void actionPerformed(ActionEvent e) { 
-              testModel();
-            } 
-          }
+        testButton.addActionListener(new ActionListener() {
+                                         public void actionPerformed(ActionEvent e) {
+                                             testModel();
+                                         }
+                                     }
         );
 
         gbc.anchor = GridBagConstraints.WEST;
@@ -44,7 +44,7 @@ public class TestPanel extends JPanel {
         add(new JLabel("Test dataset: "), gbc);
         gbc.gridx = 1;
         //add(testDataVersionBox, gbc);
-        
+
         gbc.gridy++;
         gbc.gridx = 2;
         gbc.insets = new Insets(10, 0, 0, 0);
@@ -52,13 +52,13 @@ public class TestPanel extends JPanel {
         add(testButton, gbc);
     }
 
-    private void testModel(){
+    private void testModel() {
         // String modelVersion = modelVersionBox.getSelectedItem().toString();
         // String datasetVersion = testDataVersionBox.getSelectedItem().toString();
         // VersionFetcher.TestModel(modelVersion, datasetVersion);
     }
 
-    public void updateList(){
+    public void updateList() {
         // String[][] versionMap = VersionFetcher.GetVersions("data");
         // String[] modelVersionBox = versionMap[1];
         // DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(modelVersionBox);

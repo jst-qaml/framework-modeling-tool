@@ -36,42 +36,42 @@ public class RelatedElementView extends JPanel implements IPluginExtraTabView, P
         setupThread();
     }
 
-    private boolean isSelectionChanged(){
+    private boolean isSelectionChanged() {
         return !Objects.equals(oldSelectedEntity, selectedEntity);
     }
 
-    private void setupInitialValues(){
+    private void setupInitialValues() {
         isActive = true;
         oldSelectedEntity = null;
 
         model = new RelatedElementModel();
     }
 
-    private void setupThread(){
+    private void setupThread() {
         thread = new Thread(this);
         thread.start();
     }
 
-    public void run(){
-        while(isActive){
-            
+    public void run() {
+        while (isActive) {
+
             updateTableContent();
-            
+
             // try{
             //     Thread.sleep(100);
             // }catch(Exception e){};
         }
     }
 
-    private void updateSelectedEntity(){
+    private void updateSelectedEntity() {
         selectedEntity = utilities.getSelectedEntity();
     }
 
-    private boolean isEntitySelected(){
+    private boolean isEntitySelected() {
         return selectedEntity != null;
     }
 
-    private void updateTableContent(){
+    private void updateTableContent() {
         JTable table = model.createRelatedTable();
         JScrollPane scrollPane = new JScrollPane(table);
         removeAll();
@@ -79,18 +79,22 @@ public class RelatedElementView extends JPanel implements IPluginExtraTabView, P
     }
 
     @Override
-    public void projectChanged(ProjectEvent e) {}
- 
-    @Override
-    public void projectClosed(ProjectEvent e) {isActive = false;}
-
-     @Override
-    public void projectOpened(ProjectEvent e) {
-        
+    public void projectChanged(ProjectEvent e) {
     }
- 
+
     @Override
-    public void addSelectionListener(ISelectionListener listener) {}
+    public void projectClosed(ProjectEvent e) {
+        isActive = false;
+    }
+
+    @Override
+    public void projectOpened(ProjectEvent e) {
+
+    }
+
+    @Override
+    public void addSelectionListener(ISelectionListener listener) {
+    }
 
     @Override
     public void removeSelectionListener(ISelectionListener iSelectionListener) {
@@ -98,19 +102,27 @@ public class RelatedElementView extends JPanel implements IPluginExtraTabView, P
     }
 
     @Override
-    public String getTitle() {return "Related Elements View";}
- 
-    @Override
-    public Component getComponent() {return this;}
- 
-    @Override
-    public String getDescription() {return "Related Element View Class";}
+    public String getTitle() {
+        return "Related Elements View";
+    }
 
-    public void activated() {}
-   
-    public void deactivated() {}
+    @Override
+    public Component getComponent() {
+        return this;
+    }
 
-    private void setupUtilities(){
+    @Override
+    public String getDescription() {
+        return "Related Element View Class";
+    }
+
+    public void activated() {
+    }
+
+    public void deactivated() {
+    }
+
+    private void setupUtilities() {
         utilities = ToolUtilities.getToolUtilities();
         utilities.setProjectListener(this);
     }

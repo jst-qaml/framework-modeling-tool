@@ -11,11 +11,11 @@ public enum ModelType {
 
     private final int modelType;
 
-    ModelType(int modelType){
+    ModelType(int modelType) {
         this.modelType = modelType;
     }
 
-    public int getModelTypeasInt(){
+    public int getModelTypeasInt() {
         return modelType;
     }
 

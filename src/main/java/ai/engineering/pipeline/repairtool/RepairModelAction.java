@@ -17,12 +17,12 @@ import com.change_vision.jude.api.inf.ui.IPluginActionDelegate;
 
 import com.change_vision.jude.api.inf.ui.IWindow;
 
-public class RepairModelAction implements IPluginActionDelegate{
-    
+public class RepairModelAction implements IPluginActionDelegate {
+
     JComboBox versionComboBox;
     JTextField versionNameField;
-    
-    public Object run(IWindow window){
+
+    public Object run(IWindow window) {
 
         String[][] versionMap = VersionFetcher.GetVersions();
         String[] versionList = versionMap[0];
@@ -33,11 +33,11 @@ public class RepairModelAction implements IPluginActionDelegate{
         GridBagConstraints gbc = new GridBagConstraints();
 
         JButton startButton = new JButton("Repair");
-        startButton.addActionListener(new ActionListener() { 
-            public void actionPerformed(ActionEvent e) { 
-              repairModel();
-            } 
-          }
+        startButton.addActionListener(new ActionListener() {
+                                          public void actionPerformed(ActionEvent e) {
+                                              repairModel();
+                                          }
+                                      }
         );
 
         JPanel panel = new JPanel();
@@ -99,18 +99,18 @@ public class RepairModelAction implements IPluginActionDelegate{
         // }
 
         // repairModel();
-        
-	    return null;
-	}
 
-    private void repairModel(){
+        return null;
+    }
 
-      int selectedVersionIndex = versionComboBox.getSelectedIndex();
-      String[][] versionMap = VersionFetcher.GetVersions();
+    private void repairModel() {
 
-      String versionName = versionNameField.getText();
+        int selectedVersionIndex = versionComboBox.getSelectedIndex();
+        String[][] versionMap = VersionFetcher.GetVersions();
 
-      VersionFetcher.RepairModel(versionName, versionMap[1][selectedVersionIndex]);
+        String versionName = versionNameField.getText();
+
+        VersionFetcher.RepairModel(versionName, versionMap[1][selectedVersionIndex]);
     }
 
 }

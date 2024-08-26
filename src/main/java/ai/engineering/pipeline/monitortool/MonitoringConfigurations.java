@@ -17,11 +17,11 @@ import org.kordamp.ikonli.swing.FontIcon;
 import org.kordamp.ikonli.entypo.Entypo;
 
 public class MonitoringConfigurations {
-    
+
     private static List<DesiredPerformance> desiredPerformances;
 
-    public static void initializeConfigurations(){
-        if(desiredPerformances == null){
+    public static void initializeConfigurations() {
+        if (desiredPerformances == null) {
             desiredPerformances = new CopyOnWriteArrayList<DesiredPerformance>();
         }
 
@@ -34,8 +34,8 @@ public class MonitoringConfigurations {
         }
     }
 
-    public static void addDesiredPerformance(DesiredPerformance newConfig){
-        if(desiredPerformances == null){
+    public static void addDesiredPerformance(DesiredPerformance newConfig) {
+        if (desiredPerformances == null) {
             desiredPerformances = new CopyOnWriteArrayList<DesiredPerformance>();
         }
 
@@ -44,10 +44,10 @@ public class MonitoringConfigurations {
         }
 
         IGoal monitoredEntity = newConfig.getMonitoredEntity();
-        DesiredPerformance oldConfig =  null;
+        DesiredPerformance oldConfig = null;
 
         for (DesiredPerformance desiredPerformance : desiredPerformances) {
-            if (desiredPerformance.getMonitoredEntity() == monitoredEntity){
+            if (desiredPerformance.getMonitoredEntity() == monitoredEntity) {
                 oldConfig = desiredPerformance;
             }
         }
@@ -60,17 +60,17 @@ public class MonitoringConfigurations {
 
     }
 
-    public static List<DesiredPerformance> getDesiredPerformances(){
-        if(desiredPerformances == null){
+    public static List<DesiredPerformance> getDesiredPerformances() {
+        if (desiredPerformances == null) {
             desiredPerformances = new CopyOnWriteArrayList<DesiredPerformance>();
         }
 
         return desiredPerformances;
     }
 
-    public static DesiredPerformance findDesiredPerformance(IPresentation presentation){
+    public static DesiredPerformance findDesiredPerformance(IPresentation presentation) {
 
-        if(desiredPerformances == null){
+        if (desiredPerformances == null) {
             desiredPerformances = new CopyOnWriteArrayList<DesiredPerformance>();
         }
 
@@ -78,16 +78,16 @@ public class MonitoringConfigurations {
             return null;
         }
 
-        if(!(presentation.getModel() instanceof IGoal)){
+        if (!(presentation.getModel() instanceof IGoal)) {
             return null;
         }
 
         IGoal goal = (IGoal) presentation.getModel();
-        
+
         DesiredPerformance out = null;
 
         for (DesiredPerformance desiredPerformance : desiredPerformances) {
-            if (desiredPerformance.getMonitoredEntity() == goal){
+            if (desiredPerformance.getMonitoredEntity() == goal) {
                 out = desiredPerformance;
             }
         }
@@ -95,22 +95,22 @@ public class MonitoringConfigurations {
         return out;
     }
 
-    public static Object[][] createSummaryTable(boolean isRealValueIncluded){
+    public static Object[][] createSummaryTable(boolean isRealValueIncluded) {
 
-        if(desiredPerformances == null){
+        if (desiredPerformances == null) {
             return new String[10][10];
         }
 
         Object[][] rowData = new Object[desiredPerformances.size()][6];
 
         String[] labels = VersionFetcher.GetLabels(true);
-        
+
         for (int i = 0; i < desiredPerformances.size(); i++) {
             DesiredPerformance desiredPerformance = desiredPerformances.get(i);
 
             IElement element = desiredPerformance.getMonitoredEntity();
 
-            if(element instanceof INamedElement){
+            if (element instanceof INamedElement) {
                 INamedElement namedElement = (INamedElement) element;
                 rowData[i][0] = namedElement.getName();
             }
@@ -118,30 +118,31 @@ public class MonitoringConfigurations {
             String labelString = desiredPerformance.getLabel();
             Integer labelIndex = 0;
 
-            if(!labelString.equalsIgnoreCase("overall")){
+            if (!labelString.equalsIgnoreCase("overall")) {
                 labelIndex = Integer.parseInt(labelString);
-                rowData[i][1] = labels[labelIndex+1];
-            }else{
+                rowData[i][1] = labels[labelIndex + 1];
+            } else {
                 rowData[i][1] = "Overall";
             }
-          
+
             rowData[i][2] = desiredPerformance.getMetricsType();
             rowData[i][3] = desiredPerformance.getDesiredValue();
 
-            if(desiredPerformance.isTested()){
-                rowData[i][4] = desiredPerformance.getRealPerformance(); 
-            }else{
+            if (desiredPerformance.isTested()) {
+                rowData[i][4] = desiredPerformance.getRealPerformance();
+            } else {
                 rowData[i][4] = "Not tested yet";
             }
 
-            if(desiredPerformance.isTested()){
+            if (desiredPerformance.isTested()) {
                 if (desiredPerformance.isSatisfying()) {
                     rowData[i][5] = FontIcon.of(Entypo.CHECK, Color.GREEN);
                 } else {
                     rowData[i][5] = FontIcon.of(Entypo.CROSS, Color.RED);
                 }
-            }else{
-                rowData[i][5] = "";;
+            } else {
+                rowData[i][5] = "";
+                ;
             }
 
         }

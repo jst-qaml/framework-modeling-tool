@@ -5,24 +5,24 @@ import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.gsn.model.IGoal;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
 
-public class ConfusionMetricsPerformance extends DesiredPerformance{
-    
-    public ConfusionMetricsPerformance(IGoal monitoredEntity, String label, String metricsType, float desiredValue){
+public class ConfusionMetricsPerformance extends DesiredPerformance {
+
+    public ConfusionMetricsPerformance(IGoal monitoredEntity, String label, String metricsType, float desiredValue) {
         super(monitoredEntity, label, metricsType, desiredValue);
         updateDescription();
     }
 
     @Override
-    public boolean isSatisfying(){
+    public boolean isSatisfying() {
         return realPerformance >= desiredValue;
     }
 
     @Override
-    protected void updateDescription(){
+    protected void updateDescription() {
         String goalStatement = monitoredEntity.getContent();
 
         int logicIndex = goalStatement.indexOf("[");
-        if(logicIndex != -1){
+        if (logicIndex != -1) {
             goalStatement = goalStatement.substring(0, logicIndex);
         }
 
@@ -35,9 +35,9 @@ public class ConfusionMetricsPerformance extends DesiredPerformance{
             logicLabel = "Overall";
         } else {
             int index = Integer.parseInt(label);
-            logicLabel = labels[index+1];
+            logicLabel = labels[index + 1];
         }
-        
+
         String logicString = " [" + metricsType + "(" + logicLabel + ") >= " + desiredValue + "]";
 
         goalStatement = goalStatement + " " + logicString;
@@ -55,7 +55,7 @@ public class ConfusionMetricsPerformance extends DesiredPerformance{
     }
 
     @Override
-    public String getLabel(){
+    public String getLabel() {
         return label;
     }
 

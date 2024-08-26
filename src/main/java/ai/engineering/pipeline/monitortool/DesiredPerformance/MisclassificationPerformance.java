@@ -5,11 +5,11 @@ import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.gsn.model.IGoal;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
 
-public class MisclassificationPerformance extends DesiredPerformance{
-    
+public class MisclassificationPerformance extends DesiredPerformance {
+
     private String targetLabel;
 
-    public MisclassificationPerformance(IGoal monitoredEntity, String label, String targetLabel, float desiredValue){
+    public MisclassificationPerformance(IGoal monitoredEntity, String label, String targetLabel, float desiredValue) {
         super(monitoredEntity, label, "Misclassification", desiredValue);
         this.targetLabel = targetLabel;
         updateDescription();
@@ -18,17 +18,17 @@ public class MisclassificationPerformance extends DesiredPerformance{
     }
 
     @Override
-    public boolean isSatisfying(){
+    public boolean isSatisfying() {
         return realPerformance <= desiredValue;
     }
 
     @Override
-    protected void updateDescription(){
+    protected void updateDescription() {
 
         String goalStatement = monitoredEntity.getContent();
 
         int logicIndex = goalStatement.indexOf("[");
-        if(logicIndex != -1){
+        if (logicIndex != -1) {
             goalStatement = goalStatement.substring(0, logicIndex);
         }
 
@@ -41,7 +41,7 @@ public class MisclassificationPerformance extends DesiredPerformance{
             monitoredLabelString = "Overall";
         } else {
             int index = Integer.parseInt(label);
-            monitoredLabelString = labels[index+1];
+            monitoredLabelString = labels[index + 1];
         }
 
         String targetLabelString;
@@ -49,9 +49,9 @@ public class MisclassificationPerformance extends DesiredPerformance{
             targetLabelString = "Overall";
         } else {
             int index = Integer.parseInt(targetLabel);
-            targetLabelString = labels[index+1];
+            targetLabelString = labels[index + 1];
         }
-        
+
         String logicString = " [" + metricsType + "(" + monitoredLabelString + ", " + targetLabelString + ") <= " + desiredValue + "]";
 
         goalStatement = goalStatement + " " + logicString;
@@ -69,11 +69,11 @@ public class MisclassificationPerformance extends DesiredPerformance{
     }
 
     @Override
-    public String getLabel(){
+    public String getLabel() {
         return label;
     }
 
-    public String getTargetLabel(){
+    public String getTargetLabel() {
         return targetLabel;
     }
 

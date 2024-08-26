@@ -4,10 +4,10 @@ import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance
 import ai.engineering.pipeline.monitortool.DesiredPerformance.MisclassificationPerformance;
 
 public class MetricsCalculator {
-    
-    public static void calculateAchievement(DesiredPerformance desiredPerformance, int[][] confusionMatrix){
+
+    public static void calculateAchievement(DesiredPerformance desiredPerformance, int[][] confusionMatrix) {
         String metricsType = desiredPerformance.getMetricsType();
-        
+
         // for (int i = 0; i < confusionMatrix.length; i++) {
         //     System.out.print("[ ");
         //     for (int j = 0; j < confusionMatrix[i].length; j++) {
@@ -16,7 +16,7 @@ public class MetricsCalculator {
         //     System.out.println("]");
         // }
 
-        if(metricsType.equals("Accuracy")){
+        if (metricsType.equals("Accuracy")) {
             float accuracy = -1.0f;
             System.out.println(desiredPerformance.getLabel());
             if (desiredPerformance.getLabel().equals("overall") || desiredPerformance.getLabel().equals("-1")) {
@@ -28,7 +28,7 @@ public class MetricsCalculator {
             return;
         }
 
-        if(metricsType.equals("Precision")){
+        if (metricsType.equals("Precision")) {
             float precision = -1.0f;
             if (desiredPerformance.getLabel().equals("overall") || desiredPerformance.getLabel().equals("-1")) {
                 precision = calculatePrecision(confusionMatrix);
@@ -39,7 +39,7 @@ public class MetricsCalculator {
             return;
         }
 
-        if(metricsType.equals("Recall")){
+        if (metricsType.equals("Recall")) {
             float recall = -1.0f;
             if (desiredPerformance.getLabel().equals("overall") || desiredPerformance.getLabel().equals("-1")) {
                 recall = calculateRecall(confusionMatrix);
@@ -50,7 +50,7 @@ public class MetricsCalculator {
             return;
         }
 
-        if(metricsType.equals("Misclassification")){
+        if (metricsType.equals("Misclassification")) {
             float misclassificationRate = -1.0f;
             MisclassificationPerformance misclassificationPerformance = (MisclassificationPerformance) desiredPerformance;
 
@@ -65,7 +65,7 @@ public class MetricsCalculator {
         }
     }
 
-    public static float calculateAccuracy(int[][] confusionMatrix, String labelIndex){
+    public static float calculateAccuracy(int[][] confusionMatrix, String labelIndex) {
         float accuracy = -1.0f;
         int index = Integer.parseInt(labelIndex);
 
@@ -79,7 +79,7 @@ public class MetricsCalculator {
         return accuracy * 100;
     }
 
-    public static float calculateAccuracy(int[][] confusionMatrix){
+    public static float calculateAccuracy(int[][] confusionMatrix) {
         float accuracy = -1.0f;
 
         int TP = 0;
@@ -93,13 +93,13 @@ public class MetricsCalculator {
                 }
             }
         }
-        
+
         accuracy = (float) TP / total;
 
         return accuracy * 100;
     }
 
-    public static float calculatePrecision(int[][] confusionMatrix, String labelIndex){
+    public static float calculatePrecision(int[][] confusionMatrix, String labelIndex) {
         float precision = -1.0f;
         int index = Integer.parseInt(labelIndex);
 
@@ -111,11 +111,11 @@ public class MetricsCalculator {
         return precision * 100;
     }
 
-    public static float calculatePrecision(int[][] confusionMatrix){
+    public static float calculatePrecision(int[][] confusionMatrix) {
         float precision = 0.0f;
 
         for (int i = 0; i < confusionMatrix.length; i++) {
-            precision += calculatePrecision(confusionMatrix, i+"");
+            precision += calculatePrecision(confusionMatrix, i + "");
         }
 
         precision = precision / confusionMatrix.length;
@@ -123,7 +123,7 @@ public class MetricsCalculator {
         return precision;
     }
 
-    public static float calculateRecall(int[][] confusionMatrix, String labelIndex){
+    public static float calculateRecall(int[][] confusionMatrix, String labelIndex) {
         float recall = -1.0f;
         int index = Integer.parseInt(labelIndex);
 
@@ -135,11 +135,11 @@ public class MetricsCalculator {
         return recall * 100;
     }
 
-    public static float calculateRecall(int[][] confusionMatrix){
+    public static float calculateRecall(int[][] confusionMatrix) {
         float recall = 0.0f;
 
         for (int i = 0; i < confusionMatrix.length; i++) {
-            recall += calculateRecall(confusionMatrix, i+"");
+            recall += calculateRecall(confusionMatrix, i + "");
         }
 
         recall = recall / confusionMatrix.length;
@@ -147,11 +147,11 @@ public class MetricsCalculator {
         return recall;
     }
 
-    public static float calculateMisclassificationRate(int[][] confusionMatrix, String labelIndex){
+    public static float calculateMisclassificationRate(int[][] confusionMatrix, String labelIndex) {
         return 100 - calculateRecall(confusionMatrix, labelIndex);
     }
 
-    public static float calculateMisclassificationRate(int[][] confusionMatrix, String expectedLabelIndex, String mispredictedLabelIndex){
+    public static float calculateMisclassificationRate(int[][] confusionMatrix, String expectedLabelIndex, String mispredictedLabelIndex) {
         int expected = Integer.parseInt(expectedLabelIndex);
         int mispredict = Integer.parseInt(mispredictedLabelIndex);
 
@@ -162,11 +162,11 @@ public class MetricsCalculator {
         return (float) mispredictedNumber / total * 100;
     }
 
-    private static int calculateTruePositive(int[][] confusionMatrix, int index){
-        return confusionMatrix[index][index];        
+    private static int calculateTruePositive(int[][] confusionMatrix, int index) {
+        return confusionMatrix[index][index];
     }
 
-    private static int calculateFalseNegative(int[][] confusionMatrix, int index){
+    private static int calculateFalseNegative(int[][] confusionMatrix, int index) {
         int out = 0;
 
         for (int i = 0; i < confusionMatrix[index].length; i++) {
@@ -176,7 +176,7 @@ public class MetricsCalculator {
         return out - confusionMatrix[index][index];
     }
 
-    private static int calculateFalsePositive(int[][] confusionMatrix, int index){
+    private static int calculateFalsePositive(int[][] confusionMatrix, int index) {
         int out = 0;
 
         for (int i = 0; i < confusionMatrix.length; i++) {
@@ -186,7 +186,7 @@ public class MetricsCalculator {
         return out - confusionMatrix[index][index];
     }
 
-    private static int calculateTrueNegative(int[][] confusionMatrix, int index){
+    private static int calculateTrueNegative(int[][] confusionMatrix, int index) {
         int out = 0;
 
         for (int i = 0; i < confusionMatrix.length; i++) {
@@ -200,7 +200,7 @@ public class MetricsCalculator {
         return out;
     }
 
-    private static int calculateTotalData(int[][] confusionMatrix){
+    private static int calculateTotalData(int[][] confusionMatrix) {
         int out = 0;
 
         for (int i = 0; i < confusionMatrix.length; i++) {

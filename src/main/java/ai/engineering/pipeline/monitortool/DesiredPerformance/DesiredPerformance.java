@@ -3,14 +3,14 @@ package ai.engineering.pipeline.monitortool.DesiredPerformance;
 import com.change_vision.jude.api.gsn.model.IGoal;
 
 public abstract class DesiredPerformance {
-    
+
     protected IGoal monitoredEntity;
     protected String label;
     protected String metricsType;
     protected float desiredValue;
     protected float realPerformance;
 
-    public DesiredPerformance(IGoal monitoredEntity, String label, String metricsType, float desiredValue){
+    public DesiredPerformance(IGoal monitoredEntity, String label, String metricsType, float desiredValue) {
         this.label = label;
         this.monitoredEntity = monitoredEntity;
         this.metricsType = metricsType;
@@ -19,41 +19,42 @@ public abstract class DesiredPerformance {
         realPerformance = -1.0f;
     }
 
-    protected void updateDescription(){}
+    protected void updateDescription() {
+    }
 
-    public IGoal getMonitoredEntity(){
+    public IGoal getMonitoredEntity() {
         return monitoredEntity;
     }
 
-    public String getLabel(){
+    public String getLabel() {
         return "";
     }
 
-    public void setRealPerformance(float realPerformance){
+    public void setRealPerformance(float realPerformance) {
         this.realPerformance = realPerformance;
     }
 
-    public boolean isTested(){
+    public boolean isTested() {
         return realPerformance >= 0.0;
     }
 
-    public boolean isSatisfying(){
+    public boolean isSatisfying() {
         return realPerformance > desiredValue;
     }
 
-    public boolean isSame(IGoal selectedEntity){
+    public boolean isSame(IGoal selectedEntity) {
         return monitoredEntity == selectedEntity;
     }
 
-    public String getMetricsType(){
+    public String getMetricsType() {
         return metricsType;
     }
 
-    public float getDesiredValue(){
+    public float getDesiredValue() {
         return desiredValue;
     }
 
-    public float getRealPerformance(){
+    public float getRealPerformance() {
         return realPerformance;
     }
 

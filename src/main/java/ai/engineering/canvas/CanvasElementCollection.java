@@ -8,16 +8,16 @@ import com.change_vision.jude.api.inf.model.IRequirement;
 import java.util.Iterator;
 
 public class CanvasElementCollection {
-    
+
     private static List<CanvasElement> canvasElements;
 
-    private static void initiate(){
+    private static void initiate() {
         if (canvasElements == null) {
             canvasElements = new LinkedList<CanvasElement>();
         }
     }
 
-    public static CanvasElement findCanvasElement(IRequirement req){
+    public static CanvasElement findCanvasElement(IRequirement req) {
         initiate();
 
         clearUnusedElement();
@@ -25,7 +25,7 @@ public class CanvasElementCollection {
         String inputText = req.getName();
 
         for (CanvasElement canvasElement : canvasElements) {
-            if(canvasElement.isSame(req)){
+            if (canvasElement.isSame(req)) {
                 return canvasElement;
             }
         }
@@ -33,21 +33,21 @@ public class CanvasElementCollection {
         return null;
     }
 
-    public static void addCanvasElement(CanvasElement canvasElement){
+    public static void addCanvasElement(CanvasElement canvasElement) {
         initiate();
         canvasElements.add(canvasElement);
     }
 
-    public static void clearUnusedElement(){
+    public static void clearUnusedElement() {
 
         if (canvasElements == null) {
             return;
         }
 
-        for(Iterator<CanvasElement> iterator = canvasElements.iterator(); iterator.hasNext();){
+        for (Iterator<CanvasElement> iterator = canvasElements.iterator(); iterator.hasNext(); ) {
             CanvasElement element = iterator.next();
 
-            if(element.getRequirement() == null){
+            if (element.getRequirement() == null) {
                 iterator.remove();
             }
         }

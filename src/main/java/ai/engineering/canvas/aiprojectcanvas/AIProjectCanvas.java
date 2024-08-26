@@ -11,21 +11,21 @@ import com.change_vision.jude.api.inf.model.IRequirement;
 
 import ai.engineering.canvas.CanvasModel;
 
-public class AIProjectCanvas extends CanvasModel{
+public class AIProjectCanvas extends CanvasModel {
 
     private JPanel dataPanel, skillsPanel, outputPanel, valuePropositionPanel, integrationPanel, stakeholdersPanel, customersPanel, costPanel, revenuePanel;
 
-    public AIProjectCanvas(int highlightPanelIndex){
-        super(10,5, highlightPanelIndex);
+    public AIProjectCanvas(int highlightPanelIndex) {
+        super(10, 5, highlightPanelIndex);
         this.highlightPanelIndex = highlightPanelIndex;
     }
 
-    public AIProjectCanvas(){
-        super(10,5, 0);
+    public AIProjectCanvas() {
+        super(10, 5, 0);
     }
 
     @Override
-    public void updateCanvasLayout(){    
+    public void updateCanvasLayout() {
         dataPanel = generateCanvasElement("Data", 0, 0, 4, 2, highlightPanelIndex == 6);
         skillsPanel = generateCanvasElement("Skills", 2, 0, 2, 2, highlightPanelIndex == 7);
         outputPanel = generateCanvasElement("Output", 2, 2, 2, 2, highlightPanelIndex == 5);
@@ -38,37 +38,29 @@ public class AIProjectCanvas extends CanvasModel{
     }
 
     @Override
-    public void updateModel(){
+    public void updateModel() {
         List<IRequirement> requirements = ElementPicker.getAIProjectCanvasElements();
 
-        if(!requirements.isEmpty()){
+        if (!requirements.isEmpty()) {
             clearExistingCanvas();
-            for (IRequirement req : requirements) {           
-                if(req.hasStereotype("AI.Data")){
+            for (IRequirement req : requirements) {
+                if (req.hasStereotype("AI.Data")) {
                     addRequirementToPanel(dataPanel, req);
-                }
-                else if(req.hasStereotype("AI.Skills")){
+                } else if (req.hasStereotype("AI.Skills")) {
                     addRequirementToPanel(skillsPanel, req);
-                }
-                else if(req.hasStereotype("AI.Output")){
+                } else if (req.hasStereotype("AI.Output")) {
                     addRequirementToPanel(outputPanel, req);
-                }
-                else if(req.hasStereotype("AI.ValueProposition")){
+                } else if (req.hasStereotype("AI.ValueProposition")) {
                     addRequirementToPanel(valuePropositionPanel, req);
-                }
-                else if(req.hasStereotype("AI.Integration")){
+                } else if (req.hasStereotype("AI.Integration")) {
                     addRequirementToPanel(integrationPanel, req);
-                }
-                else if(req.hasStereotype("AI.Stakeholders")){
+                } else if (req.hasStereotype("AI.Stakeholders")) {
                     addRequirementToPanel(stakeholdersPanel, req);
-                }
-                else if(req.hasStereotype("AI.Customers")){
+                } else if (req.hasStereotype("AI.Customers")) {
                     addRequirementToPanel(customersPanel, req);
-                }
-                else if(req.hasStereotype("AI.Cost")){
+                } else if (req.hasStereotype("AI.Cost")) {
                     addRequirementToPanel(costPanel, req);
-                }
-                else if(req.hasStereotype("AI.Revenue")){
+                } else if (req.hasStereotype("AI.Revenue")) {
                     addRequirementToPanel(revenuePanel, req);
                 }
             }
@@ -76,7 +68,7 @@ public class AIProjectCanvas extends CanvasModel{
     }
 
     @Override
-    protected void clearExistingCanvas(){
+    protected void clearExistingCanvas() {
         clearExisting(dataPanel);
         clearExisting(skillsPanel);
         clearExisting(outputPanel);

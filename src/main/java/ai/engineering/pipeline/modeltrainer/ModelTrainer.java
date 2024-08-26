@@ -8,12 +8,12 @@ import javax.swing.JDialog;
 import com.change_vision.jude.api.inf.ui.IPluginActionDelegate;
 import com.change_vision.jude.api.inf.ui.IWindow;
 
-public class ModelTrainer implements IPluginActionDelegate{
+public class ModelTrainer implements IPluginActionDelegate {
 
     public static TrainPanel TrainingPanel;
     public static TestPanel TestPanel;
 
-    public Object run(IWindow window){
+    public Object run(IWindow window) {
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -28,7 +28,7 @@ public class ModelTrainer implements IPluginActionDelegate{
         dialog.add(tabbedPane, BorderLayout.CENTER);
         dialog.setVisible(true);
 
-	    return null;
-	}
+        return null;
+    }
 
 }

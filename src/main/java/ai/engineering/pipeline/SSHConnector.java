@@ -16,32 +16,32 @@ import java.io.OutputStream;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
-public class SSHConnector{
-    
-    static String host="192.168.11.80";
-	static String user="code";
-	static String password="#CodeBase@eAI";
-    static String remoteLoc="Main/";
+public class SSHConnector {
+
+    static String host = "192.168.11.80";
+    static String user = "code";
+    static String password = "#CodeBase@eAI";
+    static String remoteLoc = "Main/";
     static String local = "D:";
     static String fileName = "/PerformanceTest.csv";
 
     static Session session;
     static Channel channel;
 
-    public static Session openConnection(){
+    public static Session openConnection() {
         try {
-            java.util.Properties config = new java.util.Properties(); 
-	        config.put("StrictHostKeyChecking", "no");
-	        JSch jsch = new JSch();
-	        Session session=jsch.getSession(user, host, 22);
-	        session.setPassword(password);
-	        session.setConfig(config);
-	        session.connect();
-	        //System.out.println("Connected to " + host);
+            java.util.Properties config = new java.util.Properties();
+            config.put("StrictHostKeyChecking", "no");
+            JSch jsch = new JSch();
+            Session session = jsch.getSession(user, host, 22);
+            session.setPassword(password);
+            session.setConfig(config);
+            session.connect();
+            //System.out.println("Connected to " + host);
             return session;
         } catch (Exception e) {
             return null;
-        }       
+        }
     }
 
     public static int checkAck(InputStream in) throws IOException {
@@ -71,7 +71,7 @@ public class SSHConnector{
         return b;
     }
 
-    public static String ExecuteSSH(String command){
+    public static String ExecuteSSH(String command) {
 
         String out = "";
 
@@ -80,28 +80,31 @@ public class SSHConnector{
             Channel channel = session.openChannel("exec");
 
             ((ChannelExec) channel).setCommand(command);
-            
+
             channel.setInputStream(null);
-	        ((ChannelExec)channel).setErrStream(System.err);
-	        
-	        InputStream in=channel.getInputStream();
-	        channel.connect();
-	        byte[] tmp=new byte[1024];
-	        while(true){
-	          while(in.available()>0){
-	            int i=in.read(tmp, 0, 1024);
-	            if(i<0)break;
-                out = out + (new String(tmp, 0, i));
-                System.out.println(new String(tmp, 0, i));
-	          }
-	          if(channel.isClosed()){
-	            //out = out + "exit-status: " + channel.getExitStatus();
-	            break;
-	          }
-	          try{Thread.sleep(1000);}catch(Exception ee){}
-	        }
-	        channel.disconnect();
-	        session.disconnect();
+            ((ChannelExec) channel).setErrStream(System.err);
+
+            InputStream in = channel.getInputStream();
+            channel.connect();
+            byte[] tmp = new byte[1024];
+            while (true) {
+                while (in.available() > 0) {
+                    int i = in.read(tmp, 0, 1024);
+                    if (i < 0) break;
+                    out = out + (new String(tmp, 0, i));
+                    System.out.println(new String(tmp, 0, i));
+                }
+                if (channel.isClosed()) {
+                    //out = out + "exit-status: " + channel.getExitStatus();
+                    break;
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ee) {
+                }
+            }
+            channel.disconnect();
+            session.disconnect();
         } catch (Exception e) {
             out = "Command execution failed";
         }
@@ -110,7 +113,7 @@ public class SSHConnector{
         return out;
     }
 
-    public static String openSSH(){
+    public static String openSSH() {
 
         String out = "";
 
@@ -125,31 +128,34 @@ public class SSHConnector{
         return out;
     }
 
-    public static String sendSSH(String command){
+    public static String sendSSH(String command) {
 
         String out = "";
 
         try {
             ((ChannelExec) channel).setCommand(command);
-            
+
             channel.setInputStream(null);
-	        ((ChannelExec)channel).setErrStream(System.err);
-	        
-	        InputStream in=channel.getInputStream();
-	        channel.connect();
-	        byte[] tmp=new byte[1024];
-	        while(true){
-	          while(in.available()>0){
-	            int i=in.read(tmp, 0, 1024);
-	            if(i<0)break;
-                out = out + (new String(tmp, 0, i));
-	          }
-	          if(channel.isClosed()){
-	            out = out + "exit-status: " + channel.getExitStatus();
-	            break;
-	          }
-	          try{Thread.sleep(1000);}catch(Exception ee){}
-	        }
+            ((ChannelExec) channel).setErrStream(System.err);
+
+            InputStream in = channel.getInputStream();
+            channel.connect();
+            byte[] tmp = new byte[1024];
+            while (true) {
+                while (in.available() > 0) {
+                    int i = in.read(tmp, 0, 1024);
+                    if (i < 0) break;
+                    out = out + (new String(tmp, 0, i));
+                }
+                if (channel.isClosed()) {
+                    out = out + "exit-status: " + channel.getExitStatus();
+                    break;
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ee) {
+                }
+            }
         } catch (Exception e) {
             out = "Command execution failed";
         }
@@ -158,13 +164,13 @@ public class SSHConnector{
         return out;
     }
 
-    public static String closeSSH(){
+    public static String closeSSH() {
 
         String out = "";
 
         try {
-	        channel.disconnect();
-	        session.disconnect();
+            channel.disconnect();
+            session.disconnect();
         } catch (Exception e) {
             out = "Command execution failed";
         }
@@ -173,15 +179,15 @@ public class SSHConnector{
         return out;
     }
 
-    public static void copyRemoteToLocal(){
-        
+    public static void copyRemoteToLocal() {
+
         Session session = openConnection();
 
         String from = remoteLoc + File.separator + fileName;
         String prefix = null;
         String to = local;
 
-        try{ 
+        try {
             if (new File(to).isDirectory()) {
                 prefix = to + File.separator;
             }
@@ -224,7 +230,7 @@ public class SSHConnector{
                 }
 
                 String file = null;
-            
+
                 for (int i = 0; ; i++) {
                     in.read(buf, i, 1);
                     if (buf[i] == (byte) 0x0a) {
@@ -245,7 +251,7 @@ public class SSHConnector{
                 int foo;
                 while (true) {
                     if (buf.length < filesize) foo = buf.length;
-                        else foo = (int) filesize;
+                    else foo = (int) filesize;
                     foo = in.read(buf, 0, foo);
                     if (foo < 0) {
                         // error
@@ -270,12 +276,12 @@ public class SSHConnector{
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }
-        
+
                 channel.disconnect();
                 session.disconnect();
             }
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

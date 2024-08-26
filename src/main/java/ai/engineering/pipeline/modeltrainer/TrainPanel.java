@@ -6,16 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class TrainPanel extends JPanel{
+public class TrainPanel extends JPanel {
 
     private JComboBox trainingDataVersionBox, modelTypeBox;
     private JTextField versionNameField, batchSizeField, epochsField, validationSplitField;
 
-    public TrainPanel(){
+    public TrainPanel() {
         createTrainTab();
     }
 
-    private void createTrainTab(){
+    private void createTrainTab() {
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -74,13 +74,13 @@ public class TrainPanel extends JPanel{
         add(validationSplitField, gbc);
 
         JButton trainButton = new JButton("Train Model");
-        trainButton.addActionListener(new ActionListener() { 
-            public void actionPerformed(ActionEvent e) { 
-              trainModel();
-            } 
-          }
-        );        
-        
+        trainButton.addActionListener(new ActionListener() {
+                                          public void actionPerformed(ActionEvent e) {
+                                              trainModel();
+                                          }
+                                      }
+        );
+
         gbc.gridy++;
         gbc.gridx = 1;
         gbc.insets = new Insets(10, 0, 0, 0);
@@ -88,9 +88,9 @@ public class TrainPanel extends JPanel{
         add(trainButton, gbc);
     }
 
-    private void trainModel(){
+    private void trainModel() {
         //String datasetVersion = trainingDataVersionBox.getSelectedItem().toString();
-        
+
         JOptionPane.showMessageDialog(this, "Now training on the server...");
 
         String experimentName = versionNameField.getText();
@@ -107,7 +107,7 @@ public class TrainPanel extends JPanel{
         //ModelTrainer.TestPanel.updateList();
     }
 
-    public void updateList(){
+    public void updateList() {
         // String[][] versionMap = VersionFetcher.GetVersions("data");
         // String[] dataVersionList = versionMap[1];
         // DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(dataVersionList);
