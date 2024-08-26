@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.pipeline.repairtool;
 
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
@@ -14,12 +14,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
-public class RepairConfigurationSummaryView extends JPanel implements IPluginExtraTabView, ProjectEventListener{
+public class RepairConfigurationSummaryView extends JPanel implements IPluginExtraTabView, ProjectEventListener {
 
     private static JTable summaryTable;
     private static String[] headerString = {"Element", "Label", "Repair Priority", "Prevent Degradation"};
 
-    public RepairConfigurationSummaryView(){
+    public RepairConfigurationSummaryView() {
 
         Object[][] tableData = RepairConfiguration.generateTableData();
 
@@ -27,38 +27,54 @@ public class RepairConfigurationSummaryView extends JPanel implements IPluginExt
         summaryTable = new JTable(tableModel);
 
         add(new JScrollPane(summaryTable));
-    } 
+    }
 
-    public static void updateTable(){
+    public static void updateTable() {
         Object[][] tableData = RepairConfiguration.generateTableData();
         DefaultTableModel tableModel = new DefaultTableModel(tableData, headerString);
 
         summaryTable.setModel(tableModel);
     }
-    
-    @Override
-    public void projectChanged(ProjectEvent e) {}
 
     @Override
-    public void projectClosed(ProjectEvent e) {}
- 
-    @Override
-    public void projectOpened(ProjectEvent e) {}
+    public void projectChanged(ProjectEvent e) {
+    }
 
     @Override
-    public void addSelectionListener(ISelectionListener listener) {}
- 
-    @Override
-    public String getTitle() {return "Repair Configuration Summary";}
+    public void projectClosed(ProjectEvent e) {
+    }
 
     @Override
-    public Component getComponent() {return this;}
- 
-    @Override
-    public String getDescription() {return "Repair Configuration Summary Class";}
+    public void projectOpened(ProjectEvent e) {
+    }
 
-    public void activated() {}
-   
-    public void deactivated() {}
+    @Override
+    public void addSelectionListener(ISelectionListener listener) {
+    }
+
+    @Override
+    public void removeSelectionListener(ISelectionListener iSelectionListener) {
+    }
+
+    @Override
+    public String getTitle() {
+        return "Repair Configuration Summary";
+    }
+
+    @Override
+    public Component getComponent() {
+        return this;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Repair Configuration Summary Class";
+    }
+
+    public void activated() {
+    }
+
+    public void deactivated() {
+    }
 
 }

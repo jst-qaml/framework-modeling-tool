@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.pipeline;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,20 +6,11 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import javax.net.ssl.SNIMatcher;
-import javax.swing.CellEditor;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import java.io.InputStream;
-import java.lang.ClassLoader;
-import java.lang.reflect.Array;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import ai.engineering.pipeline.monitortool.ConfigJsonGenerator;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
 import com.jcraft.jsch.Session;
-import com.jcraft.jsch.ConfigRepository.Config;
 
 public class VersionFetcher {
 

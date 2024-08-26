@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.canvas;
 
 import javax.swing.JTextArea;
 import java.awt.Color;

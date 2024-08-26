@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.pipeline.repairtool;
 
 import com.change_vision.jude.api.inf.presentation.IPresentation;
 

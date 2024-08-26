@@ -1,6 +1,5 @@
-package ai.engineering;
+package ai.engineering.pipeline.monitortool.DesiredPerformance;
 
-import com.change_vision.jude.api.inf.model.IEntity;
 import com.change_vision.jude.api.gsn.model.IGoal;
 
 public abstract class DesiredPerformance {

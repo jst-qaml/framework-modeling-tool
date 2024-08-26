@@ -1,9 +1,11 @@
-package ai.engineering;
+package ai.engineering.pipeline.repairtool;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ai.engineering.pipeline.VersionFetcher;
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
 
@@ -11,12 +13,8 @@ import com.change_vision.jude.api.inf.project.ProjectEventListener;
 import com.change_vision.jude.api.inf.project.ProjectEvent;
 import com.change_vision.jude.api.inf.view.IDiagramViewManager;
 
-import com.change_vision.jude.api.inf.exception.*;
-
 import com.change_vision.jude.api.inf.view.IEntitySelectionListener;
 import com.change_vision.jude.api.inf.view.IEntitySelectionEvent;
-
-import java.util.List;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -124,7 +122,12 @@ public class RepairConfigurationView extends JPanel implements IPluginExtraTabVi
 
     @Override
     public void addSelectionListener(ISelectionListener listener) {}
- 
+
+    @Override
+    public void removeSelectionListener(ISelectionListener iSelectionListener) {
+
+    }
+
     @Override
     public String getTitle() {return "Repair Configuration View";}
 

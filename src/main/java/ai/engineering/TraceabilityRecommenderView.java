@@ -29,7 +29,12 @@ public class TraceabilityRecommenderView extends JPanel implements IPluginExtraT
 
     @Override
     public void addSelectionListener(ISelectionListener listener) {}
- 
+
+    @Override
+    public void removeSelectionListener(ISelectionListener iSelectionListener) {
+
+    }
+
     @Override
     public String getTitle() {return "Traceability Recommender View";}
 

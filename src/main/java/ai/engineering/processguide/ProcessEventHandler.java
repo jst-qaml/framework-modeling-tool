@@ -1,17 +1,16 @@
-package ai.engineering;
+package ai.engineering.processguide;
 
 import java.awt.event.*;
-import java.awt.geom.*;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.tree.*;
 
-import org.omg.CORBA.portable.ValueBase;
-
 import javax.swing.JTree;
 
+import ai.engineering.utilities.ElementPicker;
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.inf.editor.*;
 import com.change_vision.jude.api.inf.view.*;
 import com.change_vision.jude.api.inf.model.*;
@@ -102,20 +101,20 @@ public class ProcessEventHandler extends MouseAdapter{
             rootGoal.createElementHyperlink(valuePropositions.get(0), "");
             valuePropositions.get(0).createElementHyperlink(rootGoal, "");
             INodePresentation rootGoalPresentation = diagramEditor.createNodePresentation(rootGoal, new Point(500, 50));
-            
+
             List<IRequirement> decisions = ElementPicker.getMLCanvasElements("ML.Decision");
             List<IGoal> decisionGoals = new ArrayList<IGoal>();
             for (int i = 0; i < decisions.size(); i++) {
                 IGoal decisionGoal = modelEditor.createGoal(module, "Decision Goal " + (i+1));
                 decisionGoals.add(decisionGoal);
                 decisionGoal.setContent(decisions.get(i).getName());
-                
-                ISupportedBy link = modelEditor.createSupportedBy(rootGoal, decisionGoal);
+
+                var link = modelEditor.createSupportedBy(rootGoal, decisionGoal);
                 decisionGoal.createElementHyperlink(rootGoal, "");
                 rootGoal.createElementHyperlink(decisionGoal, "");
 
                 INodePresentation decisionGoalPresentation = diagramEditor.createNodePresentation(decisionGoal, new Point(500, 200));
-                diagramEditor.createLinkPresentation(link, rootGoalPresentation, decisionGoalPresentation);              
+                diagramEditor.createLinkPresentation(link, rootGoalPresentation, decisionGoalPresentation);
             }
 
             List<IRequirement> tasks = ElementPicker.getMLCanvasElements("ML.PredictionTask");
@@ -124,7 +123,7 @@ public class ProcessEventHandler extends MouseAdapter{
             for (int i = 0; i < tasks.size(); i++) {
                 IGoal taskGoal = modelEditor.createGoal(module, "Prediction Task Goal " + (i+1));
                 taskGoal.setContent(tasks.get(i).getName());
-                
+
                 ISupportedBy link = modelEditor.createSupportedBy(decisionGoal, taskGoal);
                 taskGoal.createElementHyperlink(decisionGoal, "");
                 decisionGoal.createElementHyperlink(taskGoal, "");

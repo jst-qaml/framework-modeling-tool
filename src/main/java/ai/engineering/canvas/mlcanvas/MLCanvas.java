@@ -1,18 +1,14 @@
-package ai.engineering;
+package ai.engineering.canvas.mlcanvas;
  
-import java.awt.*;
-
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
+import ai.engineering.canvas.CanvasModel;
+import ai.engineering.utilities.ElementPicker;
 import com.change_vision.jude.api.inf.model.IRequirement;
 
-public class MLCanvas extends CanvasModel{
+public class MLCanvas extends CanvasModel {
     
     private JPanel ptPanel, isPanel, dPanel, mpPanel, vpPanel, dcPanel, bmPanel, dsPanel, fPanel, lmPanel;
 

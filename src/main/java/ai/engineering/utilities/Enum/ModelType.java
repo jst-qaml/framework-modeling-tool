@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.utilities.Enum;
 
 public enum ModelType {
     AI_PROJECT_CANVAS(0),

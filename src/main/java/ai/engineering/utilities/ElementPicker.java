@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.utilities;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -15,11 +15,7 @@ import com.change_vision.jude.api.stpa.model.*;
 
 import com.change_vision.jude.api.gsn.model.IGoal;
 
-import com.change_vision.jude.api.inf.project.ModelFinder;
-
 import com.change_vision.jude.api.inf.project.ProjectAccessor;
-import com.change_vision.jude.api.inf.project.ProjectAccessorFactory;
-
 
 
 public class ElementPicker {

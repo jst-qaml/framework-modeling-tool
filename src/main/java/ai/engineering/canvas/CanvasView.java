@@ -1,21 +1,17 @@
-package ai.engineering;
- 
-import java.util.List;
+package ai.engineering.canvas;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 
-import javax.lang.model.element.Element;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.inf.project.ProjectEvent;
 import com.change_vision.jude.api.inf.project.ProjectEventListener;
 
 import com.change_vision.jude.api.inf.model.IModel;
-import com.change_vision.jude.api.inf.model.IRequirement;
 
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;

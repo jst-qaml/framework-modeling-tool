@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.pipeline.modeltrainer;
 
 import javax.swing.*;
 import java.awt.*;

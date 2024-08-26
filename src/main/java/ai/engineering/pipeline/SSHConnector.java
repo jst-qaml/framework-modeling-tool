@@ -1,6 +1,4 @@
-package ai.engineering;
-
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+package ai.engineering.pipeline;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;

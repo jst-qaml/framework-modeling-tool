@@ -1,4 +1,4 @@
-package ai.engineering;
+package ai.engineering.pipeline.monitortool;
 
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
@@ -65,7 +65,12 @@ public class MonitoringSummaryView extends JPanel implements IPluginExtraTabView
 
     @Override
     public void addSelectionListener(ISelectionListener listener) {}
- 
+
+    @Override
+    public void removeSelectionListener(ISelectionListener iSelectionListener) {
+
+    }
+
     @Override
     public String getTitle() {return "Pipeline Monitoring Summary";}
 

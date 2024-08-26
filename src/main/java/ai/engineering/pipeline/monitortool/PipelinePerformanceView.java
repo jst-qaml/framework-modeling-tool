@@ -1,5 +1,10 @@
-package ai.engineering;
+package ai.engineering.pipeline.monitortool;
 
+import ai.engineering.pipeline.VersionFetcher;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.ConfusionMetricsPerformance;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.DesiredPerformance;
+import ai.engineering.pipeline.monitortool.DesiredPerformance.MisclassificationPerformance;
+import ai.engineering.utilities.ToolUtilities;
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
 import com.change_vision.jude.api.inf.view.IDiagramViewManager;
@@ -7,15 +12,7 @@ import com.change_vision.jude.api.inf.view.IDiagramViewManager;
 import com.change_vision.jude.api.inf.project.ProjectEventListener;
 import com.change_vision.jude.api.inf.project.ProjectEvent;
 
-import com.change_vision.jude.api.inf.model.*;
-
-import com.change_vision.jude.api.inf.editor.ITransactionManager;
-
-import com.change_vision.jude.api.inf.exception.*;
-
 import com.change_vision.jude.api.inf.presentation.IPresentation;
-import com.change_vision.jude.api.inf.presentation.INodePresentation;
-import com.change_vision.jude.api.inf.presentation.ILinkPresentation;
 
 import com.change_vision.jude.api.inf.view.IEntitySelectionListener;
 import com.change_vision.jude.api.inf.view.IEntitySelectionEvent;
@@ -25,10 +22,9 @@ import com.change_vision.jude.api.gsn.model.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.List;
 
 public class PipelinePerformanceView extends JPanel implements IPluginExtraTabView, ProjectEventListener, ActionListener, IEntitySelectionListener{
-    
+
     String[] labelStrings;
     String[] metricsStrings  = {"Accuracy", "Precision", "Recall", "Misclassification"};
     JComboBox labelList, metricsList, misclassificationList;
@@ -273,7 +269,12 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
 
     @Override
     public void addSelectionListener(ISelectionListener listener) {}
- 
+
+    @Override
+    public void removeSelectionListener(ISelectionListener iSelectionListener) {
+
+    }
+
     @Override
     public String getTitle() {return "Pipeline Performance View";}
 

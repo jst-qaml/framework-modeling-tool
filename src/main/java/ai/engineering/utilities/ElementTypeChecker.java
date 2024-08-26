@@ -1,6 +1,8 @@
-package ai.engineering;
+package ai.engineering.utilities;
 
-import com.change_vision.jude.api.inf.exception.*;
+import ai.engineering.utilities.Enum.AIProjectCanvasType;
+import ai.engineering.utilities.Enum.MLCanvasType;
+import ai.engineering.utilities.Enum.ModelType;
 
 import com.change_vision.jude.api.inf.presentation.IPresentation;
 
