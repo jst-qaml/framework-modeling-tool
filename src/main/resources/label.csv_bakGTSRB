@@ -1,0 +1,44 @@
+﻿Number,Description
+0,Speed limit 20
+1,Speed limit 30
+2,Speed limit 50
+3,Speed limit 60
+4,Speed limit 70
+5,Speed limit 80
+6,Speed limit 80 (rural)
+7,Speed limit 100
+8,Speed limit 120
+9,No overtaking
+10,No overtaking for trucks
+11,Crossroad ahead
+12,Right of way
+13,Yield
+14,Stop
+15,No vehicle
+16,No over 3.5 tons
+17,No entry
+18,Danger
+19,Curve left
+20,Curve right
+21,Double curve (first left)
+22,Bumpy road
+23,Slippery road from wet
+24,One-sided narrowing
+25,Roadworks
+26,Traffic signals
+27,Pedestrian crosswalk
+28,Children
+29,Cycles
+30,Slippery road from snow
+31,Wild animals
+32,End of limits
+33,Right ahead
+34,Left ahead
+35,Straight ahead
+36,Straight ahead or right ahead
+37,Straight ahead or left ahead
+38,Pass on the right
+39,Pass on the left
+40,Roundabout
+41,End of no overtaking
+42,End of no overtaking for truck

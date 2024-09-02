@@ -1,5 +1,9 @@
 package ai.engineering;
 
+import com.change_vision.jude.api.inf.project.*;
+import com.change_vision.jude.api.inf.editor.*;
+import com.change_vision.jude.api.gsn.editor.*;
+
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
 import com.change_vision.jude.api.inf.view.IDiagramViewManager;
@@ -24,14 +28,17 @@ import com.change_vision.jude.api.gsn.model.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Point2D;
+
 import javax.swing.*;
 import java.util.List;
 
 public class PipelinePerformanceView extends JPanel implements IPluginExtraTabView, ProjectEventListener, ActionListener, IEntitySelectionListener{
     
     String[] labelStrings;
-    String[] metricsStrings  = {"Accuracy", "Precision", "Recall", "Misclassification"};
-    JComboBox labelList, metricsList, misclassificationList;
+    String[] metricsStrings  = {"Accuracy", "Precision", "Recall", "Misclassification", "IoU"};
+    String[] desiredValueStrings = {"Very Low", "Low", "Medium", "High", "Very High", "Specific Threshold"};
+    JComboBox labelList, metricsList, desiredValueList, misclassificationList;
     JTextField desiredValueField, actualValueField;
     JButton saveButton;
     JLabel conclusionLabel;
@@ -58,6 +65,15 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
 
         misclassificationList = new JComboBox(labelStrings);
         misclassificationList.setSelectedIndex(0);
+
+        desiredValueList = new JComboBox(desiredValueStrings);
+        desiredValueList.setSelectedIndex(0);
+        desiredValueList.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                setupForm();
+            }
+        });
 
         desiredValueField = new JTextField("90.00");
 
@@ -93,6 +109,11 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
         return selectedIndex == 3;
     }
 
+    private boolean isDesiredOnSpecificThreshold(){
+        int selectedIndex = desiredValueList.getSelectedIndex();
+        return selectedIndex == 5;
+    }
+
     private void setupForm(){
         this.removeAll();
 
@@ -124,16 +145,24 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
 
             gbc.gridy++;
             gbc.gridx = 0;
-            add(new JLabel("Desired Maximum Value:"), gbc);
+            add(new JLabel("Desired Maximum Value Range:"), gbc);
             gbc.gridx++;
-            add(desiredValueField, gbc);
+            add(desiredValueList, gbc);
         }else{
             gbc.gridy++;
             gbc.gridx = 0;
-            add(new JLabel("Desired Minimum Value:"), gbc);
+            add(new JLabel("Desired Minimum Value Range:"), gbc);
+            gbc.gridx++;
+            add(desiredValueList, gbc);
+        }       
+
+        if (isDesiredOnSpecificThreshold()){
+            gbc.gridy++;
+            gbc.gridx = 0;
+            add(new JLabel("Specific Threshold Value:"), gbc);
             gbc.gridx++;
             add(desiredValueField, gbc);
-        }       
+        }
 
         gbc.gridy++;
         gbc.gridx = 0;
@@ -155,6 +184,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
     @Override
     public void actionPerformed(ActionEvent e){   
      	safeNewDesiredPerformance();
+        addAssumptionNode();
         MonitoringSummaryView.updateTable();
     }
 
@@ -187,6 +217,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
             if (desiredPerformance == null) {
                 labelList.setSelectedIndex(0);
                 metricsList.setSelectedIndex(0);
+                desiredValueList.setSelectedIndex(0);
                 desiredValueField.setText("90.00");
             }else{
     
@@ -248,18 +279,62 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
                     targetIndex = "overall";
                 }
 
-                System.out.println("Label: " + index);
-                System.out.println("Target Label: " + targetIndex);
-
-                newDesiredPerformance = new MisclassificationPerformance(monitoredEntity, index, targetIndex, Float.parseFloat(desiredValueField.getText()));
+                if (isDesiredOnSpecificThreshold()) {
+                    newDesiredPerformance = new MisclassificationPerformance(monitoredEntity, index, targetIndex, Float.parseFloat(desiredValueField.getText()), "");
+                }else{
+                    newDesiredPerformance = new MisclassificationPerformance(monitoredEntity, index, targetIndex, -1.0f, desiredValueList.getSelectedItem().toString());
+                }
             } else {
-                newDesiredPerformance = new ConfusionMetricsPerformance(monitoredEntity, index, metricsStrings[selectedMetricsIndex], Float.parseFloat(desiredValueField.getText()));
+                if (isDesiredOnSpecificThreshold()) {
+                    newDesiredPerformance = new ConfusionMetricsPerformance(monitoredEntity, index, metricsStrings[selectedMetricsIndex], Float.parseFloat(desiredValueField.getText()), "");
+                }else{
+                    newDesiredPerformance = new ConfusionMetricsPerformance(monitoredEntity, index, metricsStrings[selectedMetricsIndex], -1.0f, desiredValueList.getSelectedItem().toString());
+                }
             }
 
             MonitoringConfigurations.addDesiredPerformance(newDesiredPerformance);
 
             GoalParser.parseGoal(monitoredEntity);
         }
+    }
+
+    private void addAssumptionNode(){
+        ToolUtilities toolUtilities = ToolUtilities.getToolUtilities();
+        ProjectAccessor projectAccessor = toolUtilities.getProjectAccessor();
+        ITransactionManager transactionManager = toolUtilities.getTransactionManager();
+        IPresentation selectedPresentation = getSelectedPresentation();
+
+        try {
+            transactionManager.beginTransaction();
+
+            IDiagramEditorFactory diagramEditorFactory = projectAccessor.getDiagramEditorFactory();
+            IFacet facet = projectAccessor.getFacet(IGsnFacet.FACET_SYMBOLIC_NAME);
+            IModule module = facet.getRootElement(IModule.class);
+
+            GsnDiagramEditor diagramEditor = diagramEditorFactory.getDiagramEditor(GsnDiagramEditor.class);
+            IGsnDiagram diagram = (IGsnDiagram) selectedPresentation.getDiagram();
+            diagramEditor.setDiagram(diagram);
+
+            IModelEditorFactory modelEditorFactory = projectAccessor.getModelEditorFactory();
+            GsnModelEditor modelEditor = modelEditorFactory.getModelEditor(GsnModelEditor.class);
+
+            INodePresentation selectedNodePresentation = (INodePresentation) selectedPresentation;
+            Point2D selectedPresentationLocation = selectedNodePresentation.getLocation();
+            Point2D assumptionNodeLocation = new Point((int) selectedPresentationLocation.getX(), (int) (selectedPresentationLocation.getY() + 100));
+
+            IAssumption assumption = modelEditor.createAssumption(module, selectedPresentation.getLabel());
+            assumption.setContent("To be updated with a baseline experiment.");
+            INodePresentation assumptionPresentation = diagramEditor.createNodePresentation(assumption, assumptionNodeLocation);
+            
+            IInContextOf connection = modelEditor.createInContextOf((IArgumentAsset) selectedPresentation.getModel(), assumption);
+            diagramEditor.createLinkPresentation(connection, selectedNodePresentation, assumptionPresentation);
+
+            transactionManager.endTransaction();  
+        } catch (Exception e) {
+            System.err.println("Assumption Generation Failed");
+            System.err.println(e);
+        }
+
     }
 
     @Override

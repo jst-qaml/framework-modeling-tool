@@ -5,8 +5,8 @@ import com.change_vision.jude.api.inf.editor.ITransactionManager;
 
 public class ConfusionMetricsPerformance extends DesiredPerformance{
     
-    public ConfusionMetricsPerformance(IGoal monitoredEntity, String label, String metricsType, float desiredValue){
-        super(monitoredEntity, label, metricsType, desiredValue);
+    public ConfusionMetricsPerformance(IGoal monitoredEntity, String label, String metricsType, float desiredValue, String desiredValueRange){
+        super(monitoredEntity, label, metricsType, desiredValue, desiredValueRange);
         updateDescription();
     }
 
@@ -16,7 +16,7 @@ public class ConfusionMetricsPerformance extends DesiredPerformance{
     }
 
     @Override
-    protected void updateDescription(){
+    public void updateDescription(){
         String goalStatement = monitoredEntity.getContent();
 
         int logicIndex = goalStatement.indexOf("[");
@@ -36,7 +36,13 @@ public class ConfusionMetricsPerformance extends DesiredPerformance{
             logicLabel = labels[index+1];
         }
         
-        String logicString = " [" + metricsType + "(" + logicLabel + ") >= " + desiredValue + "]";
+        String desiredValueString = desiredValueRange;
+
+        if (desiredValue >= 0) {
+            desiredValueString = desiredValue + "";
+        }
+
+        String logicString = " [" + metricsType + "(" + logicLabel + ") >= " + desiredValueString + "]";
 
         goalStatement = goalStatement + " " + logicString;
 

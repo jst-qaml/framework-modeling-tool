@@ -4,7 +4,7 @@ import com.change_vision.jude.api.gsn.model.IGoal;
 
 public class GoalParser {
 
-    private static String[] metricsStrings  = {"Accuracy", "Precision", "Recall", "Misclassification"};
+    private static String[] metricsStrings  = {"Accuracy", "Precision", "Recall", "Misclassification", "IoU"};
 
     public static DesiredPerformance parseGoal(IGoal goal){
         
@@ -20,7 +20,12 @@ public class GoalParser {
         if(monitoredMetrics.isEmpty()){return null;}
 
         Float desiredValue = getMinimumValue(logicalStatement);
-        if(desiredValue < 0.0f){return null;}
+        
+        String desiredValueRange = "";
+        if(desiredValue < 0.0f){
+            desiredValueRange = getValueRange(logicalStatement);
+            System.out.println(desiredValueRange);
+        }
 
         if (monitoredMetrics.equals("Misclassification")) {
 
@@ -34,11 +39,11 @@ public class GoalParser {
             System.out.println("Target: " + targetLabel);
             if (targetLabel.isEmpty()){return null;}
 
-            return new MisclassificationPerformance(goal, monitoredLabel, targetLabel, desiredValue);
+            return new MisclassificationPerformance(goal, monitoredLabel, targetLabel, desiredValue, desiredValueRange);
         } else {
             String monitoredLabel = getMonitoredLabel(logicalStatement);
             if(monitoredLabel.isEmpty()){return null;} 
-            return new ConfusionMetricsPerformance(goal, monitoredLabel, monitoredMetrics, desiredValue);
+            return new ConfusionMetricsPerformance(goal, monitoredLabel, monitoredMetrics, desiredValue, desiredValueRange);
         }
     }
 
@@ -67,6 +72,10 @@ public class GoalParser {
 
     private static String getMonitoredMetrics(String logicalStatement){
         int endIndex = logicalStatement.indexOf("(");
+        if (endIndex < 0) {
+            return "";
+        }
+
         String monitoredMetrics = logicalStatement.substring(0, endIndex);
         monitoredMetrics = monitoredMetrics.toLowerCase();
         
@@ -151,6 +160,19 @@ public class GoalParser {
         }
         
         return out;
+    }
+
+    private static String getValueRange(String logicalStatement){
+
+        int startIndex = logicalStatement.indexOf("=");
+
+        if(startIndex == -1){
+            startIndex = logicalStatement.indexOf(">");
+        }
+
+        String valueString = logicalStatement.substring(startIndex + 1);
+        
+        return valueString.replaceFirst(" ", "");
     }
 
 }

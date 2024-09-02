@@ -93,7 +93,7 @@ public class MonitoringConfigurations {
         }
 
         return out;
-    }
+    }    
 
     public static Object[][] createSummaryTable(boolean isRealValueIncluded){
 
@@ -101,7 +101,7 @@ public class MonitoringConfigurations {
             return new String[10][10];
         }
 
-        Object[][] rowData = new Object[desiredPerformances.size()][6];
+        Object[][] rowData = new Object[desiredPerformances.size()][8];
 
         String[] labels = VersionFetcher.GetLabels(true);
         
@@ -125,8 +125,20 @@ public class MonitoringConfigurations {
                 rowData[i][1] = "Overall";
             }
           
-            rowData[i][2] = desiredPerformance.getMetricsType();
-            rowData[i][3] = desiredPerformance.getDesiredValue();
+            if (desiredPerformance instanceof MisclassificationPerformance) {
+                MisclassificationPerformance misclassificationPerformance = (MisclassificationPerformance) desiredPerformance;
+                labelIndex = Integer.parseInt(misclassificationPerformance.getTargetLabel());
+                rowData[i][2] = desiredPerformance.getMetricsType() + " (" + labels[labelIndex+1] + ")";
+            }else{
+                rowData[i][2] = desiredPerformance.getMetricsType();
+            }
+
+            if(desiredPerformance.getDesiredValue() < 0.0f){
+                rowData[i][3] = desiredPerformance.getDesiredValueRange();
+            }else{
+                rowData[i][3] = desiredPerformance.getDesiredValue();
+            }            
+            
 
             if(desiredPerformance.isTested()){
                 rowData[i][4] = desiredPerformance.getRealPerformance(); 
@@ -144,6 +156,13 @@ public class MonitoringConfigurations {
                 rowData[i][5] = "";;
             }
 
+            if(desiredPerformance.isTested()){
+                rowData[i][6] = false;
+            }else{
+                rowData[i][6] = false;
+            }
+
+            rowData[i][7] = desiredPerformance;
         }
 
         return rowData;

@@ -72,6 +72,14 @@
                menubarPath="tool/eai/"
                id="ai.engineering.PerformanceCheckerAction">
          </action>
+         <action
+               label="Propagate Test Evidence"
+               icon="icons/sample.gif"
+               class="ai.engineering.TestEvidenceChecker"
+               tooltip="%menu_tooltip"
+               menubarPath="tool/eai/"
+               id="ai.engineering.TestEvidenceChecker">
+         </action>
      </actionSet>
    </extension>
 </plugin>
