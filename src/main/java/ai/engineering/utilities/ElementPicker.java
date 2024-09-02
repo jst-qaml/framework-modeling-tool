@@ -14,6 +14,7 @@ import com.change_vision.jude.api.inf.model.IHyperlinkOwner;
 import com.change_vision.jude.api.stpa.model.*;
 
 import com.change_vision.jude.api.gsn.model.IGoal;
+import com.change_vision.jude.api.gsn.model.IJustification;
 
 import com.change_vision.jude.api.inf.project.ModelFinder;
 
@@ -107,6 +108,21 @@ public class ElementPicker {
         }
 
         return goals;
+    }
+
+    public static List<IJustification> getAllJustifications(){
+        INamedElement[] allNamedElements = ElementPicker.getAllNamedElements();
+
+        List<IJustification> justifications = new ArrayList<IJustification>();
+
+        for (INamedElement iNamedElement : allNamedElements) {
+            if(iNamedElement instanceof IJustification){
+                IJustification iJustification = (IJustification) iNamedElement;
+                justifications.add(iJustification);
+            }
+        }
+
+        return justifications;
     }
 
     public static IGoal getGoalbyId(String id){

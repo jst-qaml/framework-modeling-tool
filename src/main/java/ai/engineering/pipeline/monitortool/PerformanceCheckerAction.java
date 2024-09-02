@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Point2D;
 
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -19,6 +20,11 @@ import javax.swing.border.Border;
 import javax.swing.plaf.DimensionUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import com.change_vision.jude.api.inf.project.*;
+import com.change_vision.jude.api.inf.editor.*;
+import com.change_vision.jude.api.gsn.editor.*;
+import com.change_vision.jude.api.gsn.model.*;
 
 import com.change_vision.jude.api.inf.ui.IPluginActionDelegate;
 import com.change_vision.jude.api.inf.ui.IWindow;
@@ -45,7 +51,8 @@ import java.io.InputStream;
 public class PerformanceCheckerAction implements IPluginActionDelegate{
     
     JComboBox versionComboBox;
-    JTable summaryTable, performanceTable;
+    JTable summaryTable;
+    Object[][] latestResult;
 
     public Object run(IWindow window){
 
@@ -60,6 +67,16 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         startButton.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
                 checkPerformance();
+                updateTableData();
+                MonitoringSummaryView.updateTable();
+            } 
+          }
+        );
+
+        JButton copyButton = new JButton("Use Performance As Baseline");
+        copyButton.addActionListener(new ActionListener() { 
+            public void actionPerformed(ActionEvent e) { 
+                updateBaseline();
                 updateTableData();
                 MonitoringSummaryView.updateTable();
             } 
@@ -85,11 +102,12 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         gbc.ipadx = 0;
         gbc.gridwidth = 1;
         panel.add(new JLabel("Result: "), gbc);
-        String[] columnSummary = {"Element", "Monitored Label", "Monitored Metric", "Desired Value", "Real Value", "Result"};
+        String[] columnSummary = {"Element", "Monitored Label", "Monitored Metric", "Desired Value", "Real Value", "Result", "Baseline?"};
         DefaultTableModel tableModel = new DefaultTableModel(MonitoringConfigurations.createSummaryTable(true), columnSummary){
             public Class getColumnClass(int column){
                 switch(column){
                     case 5: return Icon.class;
+                    case 6: return Boolean.class;
                     default: return super.getColumnClass(column);
                 }
             }
@@ -109,15 +127,23 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         gbc.ipadx = 40;
         gbc.gridwidth = 1;
         panel.add(startButton, gbc);
+        gbc.gridx = 2;
+        gbc.gridy = 4;
+        gbc.ipady = 10;
+        gbc.ipadx = 40;
+        gbc.gridwidth = 1;
+        panel.add(copyButton, gbc);
 
         JDialog dialog = new JDialog(window.getParent(), "Fetch model performance");
         dialog.setLayout(new BorderLayout());
         dialog.add(panel, BorderLayout.NORTH);
+        // dialog.setPreferredSize(new Dimension(1200, 800));
+        // panel.setPreferredSize(new Dimension(1));
         dialog.setVisible(true);
 
 	    return null;
 	}
-    
+
     private void setColor(IPresentation iPresentation, String hexColor){
 
         String currentColor = iPresentation.getProperty("fill.color");
@@ -128,10 +154,36 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         ToolUtilities utilities = ToolUtilities.getToolUtilities();
 
         IElement model = iPresentation.getModel();
-        System.out.println("ID: " + model.getId());        
+        
+        if (model instanceof IGoal) {
+            IGoal goal = (IGoal) model;
+            if (goal.isUndeveloped()) {
+                boolean isOrNodeFailed = true;
+                IDiagram diagram = iPresentation.getDiagram();
+                try {
+                    IPresentation[] presentations = diagram.getPresentations();
+                    for (IPresentation presentation : presentations) {
+                        if(presentation instanceof ILinkPresentation){
+                            ILinkPresentation linkPresentation = (ILinkPresentation) presentation;
+                            IPresentation source = linkPresentation.getSourceEnd();
+                            if(source.getLabel() == iPresentation.getLabel()){
+                                IPresentation subGoal = linkPresentation.getTargetEnd();
+                                String subGoalColor = iPresentation.getProperty("fill.color");
+                                isOrNodeFailed = isOrNodeFailed && subGoalColor.equals(hexColor);
+                            }              
+                        }
+                    }
+                if (!isOrNodeFailed) {
+                    return;
+                }
+
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+            }
+        }
 
         if(model instanceof IRequirement){
-            System.out.println("Canvas Found");
             IRequirement req = (IRequirement) iPresentation.getModel();
             CanvasElement canvasElement = CanvasElementCollection.findCanvasElement(req);
             canvasElement.setColor(hexColor);
@@ -209,6 +261,32 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
                     presentations = element.getPresentations();
                 }
 
+                if(element instanceof IGoal){
+                    IGoal goal = (IGoal) element;
+                    if(goal.isUndeveloped()){
+                        boolean isOrNodeFailed = true;
+                        for (IPresentation iPresentation : presentations) {
+                            IDiagram diagram = iPresentation.getDiagram();
+
+                            IPresentation[] relatedpresentations = diagram.getPresentations();
+                            for (IPresentation presentation : relatedpresentations) {
+                                if(presentation instanceof ILinkPresentation){
+                                    ILinkPresentation linkPresentation = (ILinkPresentation) presentation;
+                                    IPresentation source = linkPresentation.getSourceEnd();
+                                    if(source.getLabel().equals(iPresentation.getLabel())){
+                                        IPresentation subGoal = linkPresentation.getTargetEnd();
+                                        String subGoalColor = subGoal.getProperty("fill.color");
+                                        isOrNodeFailed = isOrNodeFailed && subGoalColor.equals(hexColor);
+                                    }
+                                }
+                            }    
+                        }
+                        if (!isOrNodeFailed) {
+                            return;
+                        }
+                    }
+                }
+
                 if (presentations != null) {
                     for (IPresentation iPresentation : presentations) {
                         if (iPresentation != null) {
@@ -217,11 +295,13 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
                             if(currentColor.equals(hexColor)){
                                 return;
                             }                      
-                        
+
                             transactionManager.beginTransaction();
                             iPresentation.setProperty("fill.color", hexColor);
                             transactionManager.endTransaction();
         
+                            System.out.println("Colored element " + iPresentation.getLabel() + " with color " + iPresentation.getProperty("fill.color"));
+
                             IDiagram openDiagram = iPresentation.getDiagram();
 
                             IPresentation[] relatedpresentations = openDiagram.getPresentations();
@@ -262,11 +342,13 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
     }
 
     private void updateTableData(){
-        String[] columnSummary = {"Element", "Monitored Label", "Monitored Metric", "Desired Value", "Real Value", "Result"};
-        DefaultTableModel tableModel = new DefaultTableModel(MonitoringConfigurations.createSummaryTable(true), columnSummary){
+        String[] columnSummary = {"Element", "Monitored Label", "Monitored Metric", "Desired Value", "Real Value", "Result", "Baseline?"};
+        latestResult = MonitoringConfigurations.createSummaryTable(true);
+        DefaultTableModel tableModel = new DefaultTableModel(latestResult, columnSummary){
             public Class getColumnClass(int column){
                 switch(column){
                     case 5: return Icon.class;
+                    case 6: return Boolean.class;
                     default: return super.getColumnClass(column);
                 }
             }
@@ -303,6 +385,7 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         String selectedVersionString = versionComboBox.getSelectedItem().toString();
 
         int selectedVersionIndex = versionComboBox.getSelectedIndex();
+        
         String[][] versionMap = VersionFetcher.GetVersions();
 
         int[][] confusionMatrix = VersionFetcher.GetConfusionMatrix(versionMap[1][selectedVersionIndex]);
@@ -328,6 +411,71 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
             }
             
         }
+    }
+
+    private void updateBaseline(){
+        for (int i = 0; i < summaryTable.getRowCount(); i++) {
+            Boolean isChecked = (Boolean) summaryTable.getValueAt(i, 6);
+            if (isChecked) {
+                if (latestResult[i][7] instanceof DesiredPerformance) {
+                    DesiredPerformance performance = (DesiredPerformance) latestResult[i][7];
+                    performance.setDesiredValue(performance.getRealPerformance());
+                    performance.updateDescription();
+                    try {
+                        updateContext(performance);
+                    } catch (Exception e) {
+                        System.err.println("Updating justification failed.");
+                    }
+                }
+            }
+        }
+    }
+
+    private void updateContext(DesiredPerformance desiredPerformance) throws InvalidUsingException{
+        ToolUtilities toolUtilities = ToolUtilities.getToolUtilities();
+        ProjectAccessor projectAccessor = toolUtilities.getProjectAccessor();
+        ITransactionManager transactionManager = toolUtilities.getTransactionManager();
+        
+        IGoal monitoredEntity = desiredPerformance.getMonitoredEntity();
+        IPresentation[] presentations = monitoredEntity.getPresentations();
+
+        try {
+            transactionManager.beginTransaction();
+
+            IDiagramEditorFactory diagramEditorFactory = projectAccessor.getDiagramEditorFactory();
+            IFacet facet = projectAccessor.getFacet(IGsnFacet.FACET_SYMBOLIC_NAME);
+            IModule module = facet.getRootElement(IModule.class);
+
+            GsnDiagramEditor diagramEditor = diagramEditorFactory.getDiagramEditor(GsnDiagramEditor.class);
+
+            for (IPresentation selectedPresentation : presentations) {
+                IGsnDiagram diagram = (IGsnDiagram) selectedPresentation.getDiagram();
+                diagramEditor.setDiagram(diagram);
+    
+                IModelEditorFactory modelEditorFactory = projectAccessor.getModelEditorFactory();
+                GsnModelEditor modelEditor = modelEditorFactory.getModelEditor(GsnModelEditor.class);
+
+                INodePresentation selectedNodePresentation = (INodePresentation) selectedPresentation;
+
+                ILinkPresentation[] links = selectedNodePresentation.getLinks();
+
+                Point2D selectedPresentationLocation = selectedNodePresentation.getLocation();
+                Point2D justificationNodeLocation = new Point((int) selectedPresentationLocation.getX(), (int) (selectedPresentationLocation.getY() + 100));
+    
+                IJustification justification = modelEditor.createJustification(module, selectedPresentation.getLabel() + " justification");
+                justification.setContent("Based on experiment " + versionComboBox.getSelectedItem().toString());
+                INodePresentation justificationPresentation = diagramEditor.createNodePresentation(justification, justificationNodeLocation);
+                
+                IInContextOf connection = modelEditor.createInContextOf((IArgumentAsset) selectedPresentation.getModel(), justification);
+                diagramEditor.createLinkPresentation(connection, selectedNodePresentation, justificationPresentation);   
+            }
+
+            transactionManager.endTransaction();  
+        } catch (Exception e) {
+            System.err.println("Justification Generation Failed");
+            System.err.println(e);
+        }
+
     }
 
 }

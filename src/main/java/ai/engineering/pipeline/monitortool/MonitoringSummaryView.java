@@ -7,8 +7,10 @@ import com.change_vision.jude.api.inf.project.ProjectEventListener;
 import com.change_vision.jude.api.inf.project.ProjectEvent;
 
 import java.awt.Component;
+import java.awt.Dimension;
 
 import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class MonitoringSummaryView extends JPanel implements IPluginExtraTabView, ProjectEventListener{
     
     private static JTable summaryTable;
-    private static String[] headerString = {"Element", "Monitored Label", "Monitored Metric", "Desired Value", "Real Value", "Result"};
+    private static String[] headerString = {"Element", "Monitored Label", "Monitored Metric", "Desired Value", "Real Value", "Result", "Baseline?"};
 
     public MonitoringSummaryView(){
 
@@ -27,13 +29,16 @@ public class MonitoringSummaryView extends JPanel implements IPluginExtraTabView
             public Class getColumnClass(int column){
                 switch(column){
                     case 5: return Icon.class;
+                    case 6: return Boolean.class;
                     default: return super.getColumnClass(column);
                 }
             }
         };
         summaryTable = new JTable(tableModel);
 
-        add(new JScrollPane(summaryTable));
+        JScrollPane scrollPane = new JScrollPane(summaryTable);
+        add(scrollPane);
+        scrollPane.setPreferredSize(new Dimension(1400,800));
     } 
 
     public static void updateTable(){
@@ -41,12 +46,12 @@ public class MonitoringSummaryView extends JPanel implements IPluginExtraTabView
             return;
         }
 
-
         Object[][] tableData = MonitoringConfigurations.createSummaryTable(true);
         DefaultTableModel tableModel = new DefaultTableModel(tableData, headerString){
             public Class getColumnClass(int column){
                 switch(column){
                     case 5: return Icon.class;
+                    case 6: return Boolean.class;
                     default: return super.getColumnClass(column);
                 }
             }

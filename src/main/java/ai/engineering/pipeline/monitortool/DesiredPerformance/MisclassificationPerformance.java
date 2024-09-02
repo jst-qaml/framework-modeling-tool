@@ -7,8 +7,8 @@ public class MisclassificationPerformance extends DesiredPerformance{
     
     private String targetLabel;
 
-    public MisclassificationPerformance(IGoal monitoredEntity, String label, String targetLabel, float desiredValue){
-        super(monitoredEntity, label, "Misclassification", desiredValue);
+    public MisclassificationPerformance(IGoal monitoredEntity, String label, String targetLabel, float desiredValue, String desiredValueRange){
+        super(monitoredEntity, label, "Misclassification", desiredValue, desiredValueRange);
         this.targetLabel = targetLabel;
         updateDescription();
         System.out.println(label);
@@ -17,11 +17,15 @@ public class MisclassificationPerformance extends DesiredPerformance{
 
     @Override
     public boolean isSatisfying(){
+        if (desiredValue < 0.0f) {
+            return true;
+        }
+
         return realPerformance <= desiredValue;
     }
 
     @Override
-    protected void updateDescription(){
+    public void updateDescription(){
 
         String goalStatement = monitoredEntity.getContent();
 
@@ -49,8 +53,14 @@ public class MisclassificationPerformance extends DesiredPerformance{
             int index = Integer.parseInt(targetLabel);
             targetLabelString = labels[index+1];
         }
+
+        String desiredValueString = desiredValueRange;
+
+        if (desiredValue >= 0) {
+            desiredValueString = desiredValue + "";
+        }
         
-        String logicString = " [" + metricsType + "(" + monitoredLabelString + ", " + targetLabelString + ") <= " + desiredValue + "]";
+        String logicString = " [" + metricsType + "(" + monitoredLabelString + ", " + targetLabelString + ") <= " + desiredValueString + "]";
 
         goalStatement = goalStatement + " " + logicString;
 

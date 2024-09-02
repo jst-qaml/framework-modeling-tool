@@ -10,17 +10,19 @@ public abstract class DesiredPerformance {
     protected String metricsType;
     protected float desiredValue;
     protected float realPerformance;
+    protected String desiredValueRange;
 
-    public DesiredPerformance(IGoal monitoredEntity, String label, String metricsType, float desiredValue){
+    public DesiredPerformance(IGoal monitoredEntity, String label, String metricsType, float desiredValue, String desiredValueRange){
         this.label = label;
         this.monitoredEntity = monitoredEntity;
         this.metricsType = metricsType;
         this.desiredValue = desiredValue;
+        this.desiredValueRange = desiredValueRange;
 
         realPerformance = -1.0f;
     }
 
-    protected void updateDescription(){}
+    public void updateDescription(){}
 
     public IGoal getMonitoredEntity(){
         return monitoredEntity;
@@ -34,11 +36,19 @@ public abstract class DesiredPerformance {
         this.realPerformance = realPerformance;
     }
 
+    public void setDesiredValue(float desiredValue){
+        this.desiredValue = desiredValue;
+    }
+
     public boolean isTested(){
         return realPerformance >= 0.0;
     }
 
     public boolean isSatisfying(){
+        if (desiredValue < 0.0f) {
+            return true;
+        }
+
         return realPerformance > desiredValue;
     }
 
@@ -56,6 +66,10 @@ public abstract class DesiredPerformance {
 
     public float getRealPerformance(){
         return realPerformance;
+    }
+
+    public String getDesiredValueRange(){
+        return desiredValueRange;
     }
 
 }

@@ -1,5 +1,12 @@
 [
     [
+        "0",
+        {
+            "repair_priority": 0,
+            "prevent_degradation": 0
+        }
+    ],
+    [
         "1",
         {
             "repair_priority": 0,

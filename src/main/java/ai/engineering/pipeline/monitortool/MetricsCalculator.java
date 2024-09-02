@@ -15,35 +15,43 @@ public class MetricsCalculator {
 
         if(metricsType.equals("Accuracy")){
             float accuracy = -1.0f;
-            System.out.println(desiredPerformance.getLabel());
+
             if (desiredPerformance.getLabel().equals("overall") || desiredPerformance.getLabel().equals("-1")) {
                 accuracy = calculateAccuracy(confusionMatrix);
             } else {
                 accuracy = calculateAccuracy(confusionMatrix, desiredPerformance.getLabel());
             }
+
             desiredPerformance.setRealPerformance(accuracy);
+
             return;
         }
 
         if(metricsType.equals("Precision")){
             float precision = -1.0f;
+
             if (desiredPerformance.getLabel().equals("overall") || desiredPerformance.getLabel().equals("-1")) {
                 precision = calculatePrecision(confusionMatrix);
             } else {
                 precision = calculatePrecision(confusionMatrix, desiredPerformance.getLabel());
             }
+
             desiredPerformance.setRealPerformance(precision);
+
             return;
         }
 
         if(metricsType.equals("Recall")){
             float recall = -1.0f;
+
             if (desiredPerformance.getLabel().equals("overall") || desiredPerformance.getLabel().equals("-1")) {
                 recall = calculateRecall(confusionMatrix);
             } else {
                 recall = calculateRecall(confusionMatrix, desiredPerformance.getLabel());
             }
+
             desiredPerformance.setRealPerformance(recall);
+
             return;
         }
 
@@ -57,6 +65,20 @@ public class MetricsCalculator {
                 misclassificationRate = calculateMisclassificationRate(confusionMatrix, misclassificationPerformance.getLabel(), misclassificationPerformance.getTargetLabel());
             }
             misclassificationPerformance.setRealPerformance(misclassificationRate);
+
+            return;
+        }
+
+        if(metricsType.equals("IoU")){
+            float iou = -1.0f;
+
+            if (desiredPerformance.getLabel().equals("overall") || desiredPerformance.getLabel().equals("-1")) {
+                iou = calculateIoU(confusionMatrix);
+            } else {
+                iou = calculateIoU(confusionMatrix, desiredPerformance.getLabel());
+            }
+    
+            desiredPerformance.setRealPerformance(iou);
 
             return;
         }
@@ -142,6 +164,31 @@ public class MetricsCalculator {
         recall = recall / confusionMatrix.length;
 
         return recall;
+    }
+
+    public static float calculateIoU(int[][] confusionMatrix, String labelIndex){
+        float iou = -1.0f;
+
+        int index = Integer.parseInt(labelIndex);
+
+        int TP = calculateTruePositive(confusionMatrix, index);
+        int FN = calculateFalseNegative(confusionMatrix, index);
+        int FP = calculateFalsePositive(confusionMatrix, index);
+
+        if (TP == 0) {
+            return 0;
+        }
+
+        System.out.println(TP);
+        System.out.println(TP+FN+FP);
+
+        iou = (float) TP / (TP+FN+FP);
+
+        return iou;
+    }
+
+    public static float calculateIoU(int[][] confusionMatrix){
+        return calculateAccuracy(confusionMatrix);
     }
 
     public static float calculateMisclassificationRate(int[][] confusionMatrix, String labelIndex){
