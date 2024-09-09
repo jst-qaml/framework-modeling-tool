@@ -14,7 +14,10 @@
 Process Guide Viewを参照しながら、ML Canvas, AI Project Canvas, KAOS Goal Modelなどを作成していき、どのような条件でMLモデルを修正すると良いかを調査していきましょう。
 バックエンドに別途MLモデルの学習機構を用意することで、astah上からMLモデルの修正と結果の確認を容易に行えます。
 
-<img src="./imgs/img21.png" />
+<img src="./imgs/0-1.png" />
+
+以下のメタモデルの各項目の内容を埋めていくように進めます。
+<img src="../metamodels/Metamodel.png" />
 
 ## Features
 
@@ -29,54 +32,86 @@ Process Guide Viewを参照しながら、ML Canvas, AI Project Canvas, KAOS Goa
 3. Restart the Astah System Safety for the installation to be implemented.
 4. The installation is successful if you see ai.engineering.frameworktool in installed plugin list.
 
-<img src="./imgs/img1.png" />
+TODO: pipelineと接続する手順 (?)
+
+<img src="./imgs/0-2.png" />
 
 ## How to use
 
 画面下部に閉じているペインがあるので、それを開いてください。
 本節では、Process Guide Viewの手順に従いながら、適宜補足情報を追加していきます。
 
-<img src="./imgs/img2.png" />
+<img src="./imgs/0-3.png" />
 
 ### 1. Develop AI Project Canvas
 
-<img src="./imgs/img3.png" />
-<img src="./imgs/img4.png" />
+AI Project Canvasを用いて、そのプロジェクトの「価値」にフォーカスして分析しましょう。埋める項目は、Value Proposition, Customers, Stakeholders, Integration, Output, Data, Skills, Cost, Revenueの9項目です。
+metamodelでは灰色のブロックに対応します。
+(TODO: 有用なリンク等)
+
+| | |
+|---|---|
+|<img src="./imgs/1-1.png" />| <img src="./imgs/1-2.png" />|
 
 ### 2. Develop Machine Lerarning Canvas
 
-<img src="./imgs/img5.png" />
+ML Model Canvasを用いて、そのプロジェクトにおいて実施する「ML Task」にフォーカスして分析しましょう。埋める項目は、Value Proposition, Prediction Task, Decisions, Impact Simulation, Making Prediction, Building Models, Data Collection, Data Sources, Features, Monitoringの10項目です。
+metamodelでは緑色のブロックに対応します。
+(TODO: 有用なリンク等)
+
+<img src="./imgs/2-1.png" />
 
 
 ### 3. Develop KAOS Goal Model
 
-<img src="./imgs/img6.png" />
-<img src="./imgs/img17.png" />
-<img src="./imgs/img16.png" />
+KAOS Goal Modelを用いて、達成すべき「目標」と、そのために必要な「要件」に分解していきましょう。ML Canvasの内容を踏まえてTop Goalsを求めて、ML Componentの目標へと分解していきましょう。
+metamodelでは橙色のブロックに対応します。
+(TODO: 有用なリンク等)
+
+<img src="./imgs/3-1.png" />
+
+| | |
+|---|---|
+|<img src="./imgs/3-2.png" /> |<img src="./imgs/3-3.png" />|
 
 ### 4. Develop Architectural Diagram
 
-<img src="./imgs/img7.png" />
-<img src="./imgs/img11.png" />
+Architectural Diagramに対して、必要なML要素や非ML要素を列挙/関連付けていき、「構造」を可視化しましょう。
+metamodelでは赤色のブロックに対応します。
+(TODO: 有用なリンク等)
+
+<img src="./imgs/4-1.png" />
 
 ### 5. Develop STAMP/STPA Analysis
 
-<img src="./imgs/img8.png" />
+STAMP/STPA Analysisを用いて、どのような「問題」が起きる可能性があり、どのような「指標」を用いることで解決/未解決かを判定できるのかを列挙していきましょう。STAMP/STPA Analysisをどのように行うのかについては、公式ドキュメントにチュートリアルなどが載っていますので参照してください。
+metamodelでは右側の黄色のブロックに対応します。
+
+<img src="./imgs/5-1.png" />
 
 ### 6. Develop Safety Case Analysis
 
-<img src="./imgs/img10.png" />
+KAOS Goal Modelを用いて、MLモデルの安全性を「強化」するためにはどうすれば良いかを検討していきましょう。
+metamodelでは青色のブロックに対応します。
+
+<img src="./imgs/6-1.png" />
 
 ### 7. Title is unknown
 
-<img src="./imgs/img13.png" />
+metamodelでは下側の黄色のブロックに対応します。
+
+<img src="./imgs/7-1.png" />
 
 ### 7.x. Train and Test ML models
-<img src="./imgs/img18.png" />
+
+<img src="./imgs/7-2.png" />
 
 ### 7.x. Fetch model performance
-<img src="./imgs/img20.png" />
-<img src="./imgs/img21.png" />
+
+|Before fetch|After fetch|
+|---|---|
+|<img src="./imgs/7-4.png" />| <img src="./imgs/0-1.png" />|
 
 ### 7.x Repair Configuration View
-<img src="./imgs/img24.png" />
+
+<img src="./imgs/7-3.png" />
