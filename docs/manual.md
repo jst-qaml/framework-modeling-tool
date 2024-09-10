@@ -13,11 +13,11 @@
 本プラグインは、astah内でMLモデルのrepairを効率的に行うためのプラグインです。
 Process Guide Viewを参照しながら、ML Canvas, AI Project Canvas, KAOS Goal Modelなどを作成していき、どのような条件でMLモデルを修正すると良いかを調査していきましょう。
 バックエンドに別途MLモデルの学習機構を用意することで、astah上からMLモデルの修正と結果の確認を容易に行えます。
+前半は、メタモデルの各項目の内容を埋めていくように進めます。
 
-<img src="./imgs/0-1.png" />
-
-以下のメタモデルの各項目の内容を埋めていくように進めます。
-<img src="../metamodels/Metamodel.png" />
+|overview|metamodel|
+|---|---|
+|<img src="./imgs/0-1.png" />|<img src="../metamodels/Metamodel.png" />|
 
 ## Features
 
@@ -39,7 +39,7 @@ TODO: pipelineと接続する手順 (?)
 ## How to use
 
 画面下部に閉じているペインがあるので、それを開いてください。
-本節では、Process Guide Viewの手順に従いながら、適宜補足情報を追加していきます。
+本節の前半では、Process Guide Viewの手順に従いながら、適宜補足情報を追加していきます。
 
 <img src="./imgs/0-3.png" />
 
@@ -101,21 +101,48 @@ metamodelでは青色のブロックに対応します。
 
 <img src="./imgs/6-1.png" />
 
-### 7. Title is unknown
+### 7. eAI Framework tools
 
+この項目ではついに、MLモデルの学習とrepairを行っていきましょう。
+この画像中の5つの項目を紹介していきます。
+一部のツールはRequires connection to backendなので注意してください。
 metamodelでは下側の黄色のブロックに対応します。
 
 <img src="./imgs/7-1.png" />
 
-### 7.x. Train and Test ML models
+### 7.x. Train and Test ML models (Requires connection to backend)
+
+Train a new version of ML model at server.
+
+上にある入力項目は、Parameters of new version of ML modelです。
+下のボタンを押すことで、start training at backend.
+
 
 <img src="./imgs/7-2.png" />
 
-### 7.x. Fetch model performance
+### 7.x. Fetch model performance (Requires connection to backend)
+
+Retrieve ML performance test data and propagate red color (indicating failure) from goals with failed expected performance. 
 
 |Before fetch|After fetch|
 |---|---|
 |<img src="./imgs/7-4.png" />| <img src="./imgs/0-1.png" />|
+
+### 7.x. Propagate Test Evidence
+
+To propagate red color (indicating failure) from justification node indicating failure.
+(TODO: 適切な画像の添付)
+
+### 7.x. Repair ML Model (Requires connection to backend)
+
+Execute DNN repair using configured repair configuration. 
+
+New model nameの項目では、New Name for repaired version of ML Modelが設定できます。
+Base model versionの項目ではList of existing version of ML model to be used as the baseが設定できます。
+Existing configurationの項目ではList of repair configurationsが表示されます。
+一番下のRepairのボタンを押すことで、start repair process at backend。
+
+<img src="./imgs/7-x7.png" />
 
 ### 7.x. Pipeline Performance View
 
