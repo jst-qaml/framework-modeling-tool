@@ -92,7 +92,9 @@ metamodelでは右側の黄色のブロックに対応します。
 |ロス、ハザード、安全制約の識別|コントロールストラクチャーの構築|
 |---|---|
 |<img src="./imgs/5-1.png" />|<img src="./imgs/5-2.png" />|
+
 |UCA(Unsafe Control Action)の識別|対策検討|
+|---|---|
 |<img src="./imgs/5-3.png" />|<img src="./imgs/5-4.png" />|
 
 ### 6. Develop Safety Case Analysis
@@ -109,9 +111,9 @@ metamodelでは青色のブロックに対応します。
 一部のツールはRequires connection to backendなので注意してください。
 metamodelでは下側の黄色のブロックに対応します。
 
-<img src="./imgs/7-1.png" />
+<img src="./imgs/7-0-1.png" />
 
-### 7.x. Train and Test ML models (Requires connection to backend)
+### 7.1. Train and Test ML models (Requires connection to backend)
 
 Train a new version of ML model at server.
 
@@ -119,22 +121,22 @@ Train a new version of ML model at server.
 下のボタンを押すことで、start training at backend.
 
 
-<img src="./imgs/7-2.png" />
+<img src="./imgs/7-1-1.png" />
 
-### 7.x. Fetch model performance (Requires connection to backend)
+### 7.2. Fetch model performance (Requires connection to backend)
 
 Retrieve ML performance test data and propagate red color (indicating failure) from goals with failed expected performance. 
 
 |Before fetch|After fetch|
 |---|---|
-|<img src="./imgs/7-4.png" />| <img src="./imgs/0-1.png" />|
+|<img src="./imgs/7-2-1.png" />| <img src="./imgs/0-1.png" />|
 
-### 7.x. Propagate Test Evidence
+### 7.3. Propagate Test Evidence
 
 To propagate red color (indicating failure) from justification node indicating failure.
 (TODO: 適切な画像の添付)
 
-### 7.x. Repair ML Model (Requires connection to backend)
+### 7.4. Repair ML Model (Requires connection to backend)
 
 Execute DNN repair using configured repair configuration. 
 
@@ -143,16 +145,16 @@ Base model versionの項目ではList of existing version of ML model to be used
 Existing configurationの項目ではList of repair configurationsが表示されます。
 一番下のRepairのボタンを押すことで、start repair process at backend。
 
-<img src="./imgs/7-x7.png" />
+<img src="./imgs/7-4-1.png" />
 
 Repair configurationsは、以下のViewで設定/確認が可能です。
 |Repair Configuration View (Set a solution node as repair configuration.)| Repair Configuration Sumamry (Summary of DNN repair configurations.)|
 |---|---|
-|<img src="./imgs/7-3.png" /> |<img src="./imgs/7-x6.png" />|
+|<img src="./imgs/7-4-2.png" /> |<img src="./imgs/7-4-3.png" />|
 
 ### 7.x. Pipeline View
 
 TODO: 詳細な説明。
 
 |Pipeline Performance View(Setting Expected Performance of a goal.)|Pipeline Monitoring Summary(Summary of expected performances sets.)|
-|<img src="./imgs/7-x2.png" /> |<img src="./imgs/7-x5.png" />|
+|<img src="./imgs/7-x-1.png" /> |<img src="./imgs/7-x-2.png" />|
