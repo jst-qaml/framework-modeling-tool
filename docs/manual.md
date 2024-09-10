@@ -17,9 +17,6 @@ By providing a separate ML model learning mechanism in the backend, you can easi
 
 <img src="./imgs/0-1.png" />
 
-You will fill in the contents of each item in the metamodel below.
-<img src="../metamodels/Metamodel.png" />
-
 ## Features
 
 - Create an ML Canvas
@@ -43,6 +40,9 @@ Open the closed pane at the bottom of the screen.
 Up until section 6, we will follow the steps in the Process Guide View, adding supplementary information as appropriate.
 
 <img src="./imgs/0-3.png" />
+
+By following the Process Guide View, you will enter the contents of each item in the metamodel below in order.
+<img src="../metamodels/Metamodel.png" />
 
 ### 1. Develop AI Project Canvas
 
