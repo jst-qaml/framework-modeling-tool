@@ -1,7 +1,7 @@
 # Framework modeling tool (Astah plug-in)
 
-- 画像の大きさは、後程調整します。
 - 画像中の言語が日本語なのは、Astahの言語設定変更方法が動かないためです。
+- ご提供いただいた動画/スライドについて、一部スクリーンショットで使用しております。
 
 ## Details
 ### Compatible with
@@ -80,14 +80,19 @@ Architectural Diagramに対して、必要なML要素や非ML要素を列挙/関
 metamodelでは赤色のブロックに対応します。
 (TODO: 有用なリンク等)
 
-<img src="./imgs/4-1.png" />
+|ブロック定義図|内部ブロック図|
+|---|---|
+|<img src="./imgs/4-1.png" /> |<img src="./imgs/4-2.png" />|
 
 ### 5. Develop STAMP/STPA Analysis
 
-STAMP/STPA Analysisを用いて、どのような「問題」が起きる可能性があり、どのような「指標」を用いることで解決/未解決かを判定できるのかを列挙していきましょう。STAMP/STPA Analysisをどのように行うのかについては、公式ドキュメントにチュートリアルなどが載っていますので参照してください。
+STAMP/STPA Analysisを用いて、どのような「問題」が起きる可能性があり、どのような「指標」を用いることで解決/未解決かを判定できるのかを列挙していきましょう。STAMP/STPA Analysisをどのように行うのかについては、Astahの公式ドキュメントにチュートリアルなどが載っていますので参照してください。
 metamodelでは右側の黄色のブロックに対応します。
 
-<img src="./imgs/5-1.png" />
+| | |
+|---|---|
+|<img src="./imgs/5-1.png" />|<img src="./imgs/5-2.png" />|
+|<img src="./imgs/5-3.png" />|<img src="./imgs/5-4.png" />|
 
 ### 6. Develop Safety Case Analysis
 
@@ -112,6 +117,26 @@ metamodelでは下側の黄色のブロックに対応します。
 |---|---|
 |<img src="./imgs/7-4.png" />| <img src="./imgs/0-1.png" />|
 
+### 7.x. Pipeline Performance View
+
+Setting Expected Performance of a goal.
+
+<img src="./imgs/7-x2.png" />
+
+### 7.x. Pipeline Monitoring Summary
+
+Summary of expected performances sets.
+
+<img src="./imgs/7-x5.png" />
+
 ### 7.x Repair Configuration View
 
+Set a solution node as repair configuration.
+
 <img src="./imgs/7-3.png" />
+
+### 7.x Repair Configuration Sumamry
+
+Summary of DNN repair configurations.
+
+<img src="./imgs/7-x6.png" />
