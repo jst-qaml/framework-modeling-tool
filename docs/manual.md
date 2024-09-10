@@ -13,11 +13,11 @@
 本プラグインは、astah内でMLモデルのrepairを効率的に行うためのプラグインです。
 Process Guide Viewを参照しながら、ML Canvas, AI Project Canvas, KAOS Goal Modelなどを作成していき、どのような条件でMLモデルを修正すると良いかを調査していきましょう。
 バックエンドに別途MLモデルの学習機構を用意することで、astah上からMLモデルの修正と結果の確認を容易に行えます。
-前半は、メタモデルの各項目の内容を埋めていくように進めます。
 
-|overview|metamodel|
-|---|---|
-|<img src="./imgs/0-1.png" />|<img src="../metamodels/Metamodel.png" />|
+<img src="./imgs/0-1.png" />
+
+前半は、以下のメタモデルの各項目の内容を埋めていくように進めます。
+<img src="../metamodels/Metamodel.png" />
 
 ## Features
 
@@ -70,7 +70,7 @@ metamodelでは橙色のブロックに対応します。
 
 <img src="./imgs/3-1.png" />
 
-| | |
+|ML Canvasで作成したモデルは再利用できる|ML Componentが達成すべき条件を設定できる|
 |---|---|
 |<img src="./imgs/3-2.png" /> |<img src="./imgs/3-3.png" />|
 
@@ -89,9 +89,10 @@ metamodelでは赤色のブロックに対応します。
 STAMP/STPA Analysisを用いて、どのような「問題」が起きる可能性があり、どのような「指標」を用いることで解決/未解決かを判定できるのかを列挙していきましょう。STAMP/STPA Analysisをどのように行うのかについては、Astahの公式ドキュメントにチュートリアルなどが載っていますので参照してください。
 metamodelでは右側の黄色のブロックに対応します。
 
-| | |
+|ロス、ハザード、安全制約の識別|コントロールストラクチャーの構築|
 |---|---|
 |<img src="./imgs/5-1.png" />|<img src="./imgs/5-2.png" />|
+|UCA(Unsafe Control Action)の識別|対策検討|
 |<img src="./imgs/5-3.png" />|<img src="./imgs/5-4.png" />|
 
 ### 6. Develop Safety Case Analysis
@@ -144,26 +145,14 @@ Existing configurationの項目ではList of repair configurationsが表示さ�
 
 <img src="./imgs/7-x7.png" />
 
-### 7.x. Pipeline Performance View
+Repair configurationsは、以下のViewで設定/確認が可能です。
+|Repair Configuration View (Set a solution node as repair configuration.)| Repair Configuration Sumamry (Summary of DNN repair configurations.)|
+|---|---|
+|<img src="./imgs/7-3.png" /> |<img src="./imgs/7-x6.png" />|
 
-Setting Expected Performance of a goal.
+### 7.x. Pipeline View
 
-<img src="./imgs/7-x2.png" />
+TODO: 詳細な説明。
 
-### 7.x. Pipeline Monitoring Summary
-
-Summary of expected performances sets.
-
-<img src="./imgs/7-x5.png" />
-
-### 7.x Repair Configuration View
-
-Set a solution node as repair configuration.
-
-<img src="./imgs/7-3.png" />
-
-### 7.x Repair Configuration Sumamry
-
-Summary of DNN repair configurations.
-
-<img src="./imgs/7-x6.png" />
+|Pipeline Performance View(Setting Expected Performance of a goal.)|Pipeline Monitoring Summary(Summary of expected performances sets.)|
+|<img src="./imgs/7-x2.png" /> |<img src="./imgs/7-x5.png" />|
