@@ -2,6 +2,7 @@
 
 - 画像中の言語が日本語なのは、Astahの言語設定変更方法が動かないためです。
 - ご提供いただいた動画/スライドについて、一部スクリーンショットで使用しております。
+- もし使用できない画像が含まれていた場合は、適宜置き換えてください。
 
 ## Details
 ### Compatible with
@@ -111,7 +112,7 @@ metamodelでは青色のブロックに対応します。
 一部のツールはRequires connection to backendなので注意してください。
 metamodelでは下側の黄色のブロックに対応します。
 
-<img src="./imgs/7-0-1.png" />
+<img src="./imgs/7-0-1.png" width="300" />
 
 ### 7.1. Train and Test ML models (Requires connection to backend)
 
@@ -121,7 +122,7 @@ Train a new version of ML model at server.
 下のボタンを押すことで、start training at backend.
 
 
-<img src="./imgs/7-1-1.png" />
+<img src="./imgs/7-1-1.png" width="300" />
 
 ### 7.2. Fetch model performance (Requires connection to backend)
 
@@ -145,16 +146,23 @@ Base model versionの項目ではList of existing version of ML model to be used
 Existing configurationの項目ではList of repair configurationsが表示されます。
 一番下のRepairのボタンを押すことで、start repair process at backend。
 
-<img src="./imgs/7-4-1.png" />
+<img src="./imgs/7-4-1.png" width="300" />
 
 Repair configurationsは、以下のViewで設定/確認が可能です。
 |Repair Configuration View (Set a solution node as repair configuration.)| Repair Configuration Sumamry (Summary of DNN repair configurations.)|
 |---|---|
 |<img src="./imgs/7-4-2.png" /> |<img src="./imgs/7-4-3.png" />|
 
+そしてRepairを実施することで、元々目標値を下回っていた項目が目標値を上回った場合は、赤色ではなくなります。
+
+|Before Repair|After Repair|
+|---|---|
+|<img src="./imgs/7-4-4.png" />|<img src="./imgs/7-4-5.png" />|
+
 ### 7.x. Pipeline View
 
 TODO: 詳細な説明。
 
 |Pipeline Performance View(Setting Expected Performance of a goal.)|Pipeline Monitoring Summary(Summary of expected performances sets.)|
+|---|---|
 |<img src="./imgs/7-x-1.png" /> |<img src="./imgs/7-x-2.png" />|
