@@ -13,3 +13,7 @@ Access the case study folder for accessing the Astah System Safety files of the 
 Currently, there are two case studies available:
 - Traffic sign detection for ADVs.
 - Navigable area detection for personal mobility assistants.
+
+## manual
+
+- [docs/manual.md](docs/manual.md)
