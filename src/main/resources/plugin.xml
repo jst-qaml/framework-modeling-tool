@@ -29,6 +29,14 @@
             id="ai.engineering.internal.RepairConfigurationSummaryView"
             type="extraTab"
             class="ai.engineering.RepairConfigurationSummaryView" />
+      <view
+              id="jp.ac.waseda.cs.washi.www.internal.PatternTransformationView"
+              type="extraTab"
+              class="jp.ac.waseda.cs.washi.www.internal.extraTab.InputPatternValuesTab" />
+      <view
+              id="jp.ac.waseda.cs.washi.www.internal.PatternRecommendationView"
+              type="extraTab"
+              class="jp.ac.waseda.cs.washi.www.internal.extraTab.PatternRecommendTab" />
    </extension>
    <extension point="com.change_vision.astah.ui.actionSets">
       <actionSet
