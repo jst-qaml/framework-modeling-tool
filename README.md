@@ -3,11 +3,11 @@ This plugin is made to facilitate the Multi-view Modeling Framework for ML Syste
 
 For more information on the process: [https://link.springer.com/article/10.1007/s11219-024-09687-z]
 
-## Astah* System Safety
+## Astah* System Safety and System Requirements
 
-This plugin is made for Astah* System Safety version 8.0.0 ([https://astah.net/release-notes/system-safety-8-0/]). Compatibility with newer version is not guaranteed.
+This plugin is made for Astah* System Safety version 8.0.0 ([https://astah.net/release-notes/system-safety-8-0/]). Please refer to Astah* System Safety system requirements for the details.
 
-Please refer to Astah* System Safety system requirements for the details.
+Compatibility with newer version is not guaranteed.
 
 ## Preparation
 
@@ -30,7 +30,9 @@ To setup network connection with the backend side, do the following:
 4. Compile the plugin.
 
 ## Compiling
-To create your own version of the binary, follow the Astah* System Safety plugin development tutorial: [https://astah.net/support/plugin-dev-tutorial/plugin-development-setup-for-astah-system-safety/]
+To create your own version of the binary, follow the Astah* System Safety plugin development tutorial:
+
+[https://astah.net/support/plugin-dev-tutorial/plugin-development-setup-for-astah-system-safety/]
 
 ## Installation
 Intallation can be done in two ways:
