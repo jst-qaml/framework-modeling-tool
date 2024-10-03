@@ -19,12 +19,17 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 
 public class SSHConnector{
-    
-    static String host="192.168.11.80";
-	static String user="code";
-	static String password="#CodeBase@eAI";
-    static String remoteLoc="Main/";
+
+    //Set the host IP, username, password, and port for training server
+    static String host = "";
+    static String user = "";
+    static String password = "";
+    static String port = ""
+
+    //Set the local folder to hold temporary files
     static String local = "D:";
+	
+    static String remoteLoc="Main/";
     static String fileName = "/PerformanceTest.csv";
 
     static Session session;
@@ -39,7 +44,6 @@ public class SSHConnector{
 	        session.setPassword(password);
 	        session.setConfig(config);
 	        session.connect();
-	        //System.out.println("Connected to " + host);
             return session;
         } catch (Exception e) {
             return null;
