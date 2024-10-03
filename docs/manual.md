@@ -2,16 +2,16 @@
 
 - The language in the images is Japanese due to issues with changing Astah's language settings.
 - Some screenshots from the provided videos/slides have been used.
-- If any included images cannot be used, please replace them as necessary.
+- If any included images cannot use, please replace them as necessary.
 
 ## Details
 ### Compatible with
 - astah System Safety
-    - Version: 8 (Model Version 9)
+    - Version: ???
 
 ## Plugin Overview
 
-This plugin allows you to run the Multi-view Modeling Framework for ML System (M3S) process within Astah* System Safety.
+This plugin allows you to efficiently repair ML models within Astah.
 While referring to the Process Guide View, create an ML Canvas, AI Project Canvas, KAOS Goal Model, etc., and investigate under what conditions it is best to repair the ML model.
 By providing a separate ML model learning mechanism in the backend, you can easily repair ML models and check the results from Astah.
 
@@ -21,9 +21,7 @@ By providing a separate ML model learning mechanism in the backend, you can easi
 
 - Create an ML Canvas
 - Create an AI Project Canvas
-- Train a new version of the ML Model.
-- Validate whether a version of the ML Model satisfies the requirements or not.
-- Repair ML model based on specification in assurance case.
+- A mechanism for repairing ML models (TODO: Break down into smaller elements)
 
 ## Installation Instructions
 
@@ -48,54 +46,24 @@ By following the Process Guide View, you will enter the contents of each item in
 
 ### 1. Develop AI Project Canvas
 
-References: [https://towardsdatascience.com/introducing-the-ai-project-canvas-e88e29eb7024]
-
 Use AI Project Canvas to analyze the project by focusing on its "Value".
 There are nine items to fill in: Value Proposition, Customers, Stakeholders, Integration, Output, Data, Skills, Cost, and Revenue.
 These correspond to the grey blocks in the metamodel.
-
-Create requirement SysML element with the following stereotype to mark their position in the AI Project Canvas:
-
-| Stereotype          | Position in the canvas |
-| ------------------- | ---------------------- |
-| AI.ValueProposition | Value Proposition      |
-| AI.Customers        | Customers              |
-| AI.Stakeholders     | Stakeholders           |
-| AI.Integration      | Integration            |
-| AI.Output           | Output                 |
-| AI.Data             | Data                   |
-| AI.Skills           | Skills                 |
-| AI.Cost             | Cost                   |
-| AI.Revenue          | Revenue                |
+(TODO: Useful links, etc.)
 
 | | |
 |---|---|
 |<img src="./imgs/1-1.png" />| <img src="./imgs/1-2.png" />|
 
-### 2. Develop Machine Learning Canvas
+### 2. Develop Machine Lerarning Canvas
 
-References: [https://www.ownml.co/machine-learning-canvas]
-
-Use the ML Canvas to analyze the project by focusing on the "ML Task" to be performed.
+Use the ML Model Canvas to analyze the project by focusing on the "ML Task" to be performed.
 There are 10 items to fill in: Value Proposition, Prediction Task, Decisions, Impact Simulation, Making Prediction, Building Models, Data Collection, Data Sources, Features, and Monitoring.
 These correspond to the green blocks in the metamodel.
-
-Create requirement SysML element with the following stereotype to mark their position in the AI Project Canvas:
-
-| Stereotype          | Position in the canvas |
-| ------------------- | ---------------------- |
-| ML.ValueProposition | Value Proposition      |
-| ML.Decision         | Decision               |
-| ML.PredictionTask   | Prediction Task        |
-| ML.ImpactSimulation | Impact Simulation      |
-| ML.MakingPrediction | Making Prediction      |
-| ML.DataCollection   | Data Collection        |
-| ML.DataSources      | Data Sources           |
-| ML.BuildingModels   | Building Models        |
-| ML.Features         | Features               |
-| ML.LiveMonitoring   | Live Monitoring        |
+(TODO: Useful links, etc.)
 
 <img src="./imgs/2-1.png" />
+
 
 ### 3. Develop KAOS Goal Model
 
@@ -199,28 +167,3 @@ TODO: Detailed explanation.
 |Pipeline Performance View(Setting Expected Performance of a goal.)|Pipeline Monitoring Summary(Summary of expected performances sets.)|
 |---|---|
 |<img src="./imgs/7-x-1.png" /> |<img src="./imgs/7-x-2.png" />|
-
-
-
-# framework-modeling-tool
-Astah System Safety plugin to support the framework team's process.
-
-## installation
-Drop the .jar file in the releases into the opened Astah System Safety instance to install. Restart the Astah System Safety for the installation to be implemented.
-
-## compiling
-To create your own version of the binary, follow the Astah* System Safety plugin development tutorial: https://astah.net/support/plugin-dev-tutorial/plugin-development-setup-for-astah-system-safety/
-
-## metamodel
-Access the metamodel folder to access the integrated metamodel of M3S.
-
-## case study
-Access the case study folder to access the Astah System Safety files of the case studies.
-
-Currently, there are two case studies available:
-- Traffic sign detection for ADVs.
-- Navigable area detection for personal mobility assistants.
-
-## manual
-
-- [docs/manual.md](docs/manual.md)
