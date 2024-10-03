@@ -25,14 +25,31 @@ By providing a separate ML model learning mechanism in the backend, you can easi
 - Validate whether a version of the ML Model satisfies the requirements or not.
 - Repair ML model based on specification in assurance case.
 
+## Network Setup
+To set a network connection with the backend side, do the following:
+
+1. Clone the repository
+2. Access the [SSHFramework.java](src/main/java/ai/engineering/pipeline/SSHConnector.java).
+3. Set the IP address, username, password, and port in the following section:
+   ```
+   //Set the host IP, username, password, and port for training server
+    static String host = "";
+    static String user = "";
+    static String password = "";
+    static String port = ""
+   ```
+4. Set the local directory for temporary files to be stored. The default is the D drive root folder.
+   ```
+   //Set the local folder to hold temporary files
+   static String local = "D:";
+   ```
+5. Compile the plugin.
+
 ## Installation Instructions
+1. Drop the .jar file in the releases into the opened Astah System Safety instance to install.
+2. Restart the Astah System Safety for the installation to be implemented.
+3. The installation is successful if you see ai.engineering.frameworktool in installed plugin list.
 
-1. Clone the framework-modeling-tool repository.
-2. Drop the .jar file in the releases into the opened Astah System Safety instance to install.
-3. Restart the Astah System Safety for the installation to be implemented.
-4. The installation is successful if you see ai.engineering.frameworktool in installed plugin list.
-
-TODO: How to connect to pipeline (?)
 
 <img src="./imgs/0-2.png" />
 
