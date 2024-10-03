@@ -109,6 +109,12 @@ These correspond to the orange blocks in the metamodel.
 |---|---|
 |<img src="./imgs/3-2.png" /> |<img src="./imgs/3-3.png" />|
 
+You can also use the form at **Pipeline Performance View** to set the conditions that ML Components must achieve. All conditions that each ML Components must achieve is summarized in the **Pipeline Monitoring Summary**.
+
+|Pipeline Performance View(Setting Expected Performance of a goal.)|Pipeline Monitoring Summary(Summary of expected performances sets.)|
+|---|---|
+|<img src="./imgs/7-x-1.png" /> |<img src="./imgs/7-x-2.png" />|
+
 ### 4. Develop Architectural Diagram
 
 Let's visualize the "Architecture" by enumerating and associating the necessary ML and non-ML elements to the Architectural Diagram.
@@ -164,12 +170,7 @@ Retrieve ML performance test data and propagate red color (indicating failure) f
 |---|---|
 |<img src="./imgs/7-2-1.png" />| <img src="./imgs/0-1.png" />|
 
-### 7.3. Propagate Test Evidence
-
-To propagate red color (indicating failure) from justification node indicating failure.
-(TODO: Attach a proper image)
-
-### 7.4. Repair ML Model (Requires connection to backend)
+### 7.3. Repair ML Model (Requires connection to backend)
 
 Execute DNN repair using configured repair configuration. 
 In the New model name field, you can set the New Name for repaired version of ML Model.
@@ -190,10 +191,3 @@ And if an item that was originally below the target value now exceeds the target
 |---|---|
 |<img src="./imgs/7-4-4.png" />|<img src="./imgs/7-4-5.png" />|
 
-### 7.x. Pipeline View
-
-TODO: Detailed explanation.
-
-|Pipeline Performance View(Setting Expected Performance of a goal.)|Pipeline Monitoring Summary(Summary of expected performances sets.)|
-|---|---|
-|<img src="./imgs/7-x-1.png" /> |<img src="./imgs/7-x-2.png" />|
