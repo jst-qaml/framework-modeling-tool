@@ -52,15 +52,15 @@ More complete instructions on how to operate the plugin are available on the man
 [docs/manual.md](docs/manual.md)
 
 ## Integrated Metamodel
-Access the metamodel folder to access the integrated metamodel of M3S. Editable Astah* Professional file is also available.
+Access the [metamodel folder](https://github.com/jst-qaml/framework-modeling-tool/tree/main/metamodels) to access the integrated metamodel of M3S. Editable Astah* Professional file is also available.
 
 <img src="metamodels/Metamodel.png" />
 
 ## Case Study
 
-We prepared the case study of traffic sign image classification to demonstrate how M3S works with our plugin. Please refer to (our publication)[https://link.springer.com/article/10.1007/s11219-024-09687-z] for the details.
+We prepared the case study of traffic sign image classification to demonstrate how M3S works with our plugin. Please refer to [our publication](https://link.springer.com/article/10.1007/s11219-024-09687-z) for the details.
 
-The following files are provided:
+The following files are provided in the [case study folder](https://github.com/jst-qaml/framework-modeling-tool/tree/main/case%20study):
 
 | File (.axmz)                    | Description                                     |
 | ------------------------------- | ----------------------------------------------- |
