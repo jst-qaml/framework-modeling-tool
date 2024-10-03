@@ -5,7 +5,7 @@ For more information on the process: [https://link.springer.com/article/10.1007/
 
 ## Astah* System Safety and System Requirements
 
-This plugin is made for Astah* System Safety version 8.0.0 ([https://astah.net/release-notes/system-safety-8-0/]). Please refer to Astah* System Safety system requirements for the details.
+This plugin is made for Astah* System Safety version 8.0.0 (https://astah.net/release-notes/system-safety-8-0/). Please refer to Astah* System Safety system requirements for the details.
 
 Compatibility with newer version is not guaranteed.
 
