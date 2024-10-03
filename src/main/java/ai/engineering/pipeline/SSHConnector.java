@@ -40,7 +40,7 @@ public class SSHConnector{
             java.util.Properties config = new java.util.Properties(); 
 	        config.put("StrictHostKeyChecking", "no");
 	        JSch jsch = new JSch();
-	        Session session=jsch.getSession(user, host, 22);
+	        Session session=jsch.getSession(user, host, port);
 	        session.setPassword(password);
 	        session.setConfig(config);
 	        session.connect();
