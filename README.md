@@ -74,10 +74,10 @@ The following files are provided in the [case study folder](https://github.com/j
 ## Pattern Application
 
 > [!IMPORTANT]  
-> This feature requires Astah* System Safety with object constraint language (OCL) support to work. Please contact the Astah* representative for availability of the availability of the product.
+> This feature requires Astah* System Safety with object constraint language (OCL) support to work. Please contact the Astah* representative for the availability of the product.
 
 ### Install
-First of all, you need to install the plugin into astah* System Safety. Please visit the [plugin download page](/target/astah_pattern_application-1.0-SNAPSHOT.jar) and download it. Then, you can install it. The plugin can be installed in one of the following ways:
+First of all, you need to install the plugin into astah* System Safety. Please visit the pattern-application branch and download it. Then, you can install it. The plugin can be installed in one of the following ways:
 
 1. Drag and drop the plugin file onto the Astah* window.
 2. Install from the "Install" button on the plugin list.
