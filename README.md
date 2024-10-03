@@ -73,7 +73,7 @@ The following files are provided:
 ## Pattern Application
 
 > [!IMPORTANT]  
-> This feature requires Astah* System Safety with object constraint language (OCL) to work. Please contact Astah representative for availability.
+> This feature requires Astah* System Safety with object constraint language (OCL) support to work. Please contact the Astah* representative for availability of the availability of the product.
 
 ### Install
 First of all, you need to install the plugin into astah* System Safety. Please visit the [plugin download page](/target/astah_pattern_application-1.0-SNAPSHOT.jar) and download it. Then, you can install it. The plugin can be installed in one of the following ways:
@@ -110,7 +110,7 @@ First, open the pattern selection support view and activate the plug-in. If ther
 
 #### Step 2 Select a pattern
 
-Selecting a pattern that was displayed in green will display the pattern application method options. Select the appropriate option from here (Figure 2). If P1 is selected in Figure 1, the result is Fogure 2. In this case, there are three options: G31 matches the pattern, G31 and S3 match the pattern, or G31 and S4 match the pattern.
+Selecting a pattern that was displayed in green will display the pattern application method options. Select the appropriate option from here (Figure 2). If P1 is selected in Figure 1, the result is Figure 2. In this case, there are three options: G31 matches the pattern, G31 and S3 match the pattern, or G31 and S4 match the pattern.
 
 <img width="796" alt="CaseStudy_selection2" src="https://github.com/user-attachments/assets/be08f01f-1e36-4967-952d-b66420d342a9">
 
