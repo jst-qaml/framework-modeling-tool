@@ -1,7 +1,7 @@
 # eAI Framework Modeling Plugin
 This plugin is made to facilitate the Multi-view Modeling Framework for ML System (M3S) inside Astah* System Safety.
 
-For more information on the process: [https://link.springer.com/article/10.1007/s11219-024-09687-z]
+For more information on the process, please refer to our publication: https://link.springer.com/article/10.1007/s11219-024-09687-z
 
 ## Astah* System Safety and System Requirements
 
