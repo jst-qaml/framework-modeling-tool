@@ -49,6 +49,7 @@ OR
 
 ## Manual
 More complete instructions on how to operate the plugin are available on the manual below.
+
 [docs/manual.md](docs/manual.md)
 
 ## Integrated Metamodel
