@@ -2,16 +2,16 @@
 
 - The language in the images is Japanese due to issues with changing Astah's language settings.
 - Some screenshots from the provided videos/slides have been used.
-- If any included images cannot use, please replace them as necessary.
+- If any included images cannot be used, please replace them as necessary.
 
 ## Details
 ### Compatible with
 - astah System Safety
-    - Version: ???
+    - Version: 8 (Model Version 9)
 
 ## Plugin Overview
 
-This plugin allows you to efficiently repair ML models within Astah.
+This plugin allows you to run the Multi-view Modeling Framework for ML System (M3S) process within Astah* System Safety.
 While referring to the Process Guide View, create an ML Canvas, AI Project Canvas, KAOS Goal Model, etc., and investigate under what conditions it is best to repair the ML model.
 By providing a separate ML model learning mechanism in the backend, you can easily repair ML models and check the results from Astah.
 
@@ -21,7 +21,9 @@ By providing a separate ML model learning mechanism in the backend, you can easi
 
 - Create an ML Canvas
 - Create an AI Project Canvas
-- A mechanism for repairing ML models (TODO: Break down into smaller elements)
+- Train a new version of the ML Model.
+- Validate whether a version of the ML Model satisfies the requirements or not.
+- Repair ML model based on specification in assurance case.
 
 ## Installation Instructions
 
@@ -46,31 +48,60 @@ By following the Process Guide View, you will enter the contents of each item in
 
 ### 1. Develop AI Project Canvas
 
+References: [https://towardsdatascience.com/introducing-the-ai-project-canvas-e88e29eb7024]
+
 Use AI Project Canvas to analyze the project by focusing on its "Value".
 There are nine items to fill in: Value Proposition, Customers, Stakeholders, Integration, Output, Data, Skills, Cost, and Revenue.
 These correspond to the grey blocks in the metamodel.
-(TODO: Useful links, etc.)
+
+Create requirement SysML element with the following stereotype to mark their position in the AI Project Canvas:
+
+| Stereotype          | Position in the canvas |
+| ------------------- | ---------------------- |
+| AI.ValueProposition | Value Proposition      |
+| AI.Customers        | Customers              |
+| AI.Stakeholders     | Stakeholders           |
+| AI.Integration      | Integration            |
+| AI.Output           | Output                 |
+| AI.Data             | Data                   |
+| AI.Skills           | Skills                 |
+| AI.Cost             | Cost                   |
+| AI.Revenue          | Revenue                |
 
 | | |
 |---|---|
 |<img src="./imgs/1-1.png" />| <img src="./imgs/1-2.png" />|
 
-### 2. Develop Machine Lerarning Canvas
+### 2. Develop Machine Learning Canvas
 
-Use the ML Model Canvas to analyze the project by focusing on the "ML Task" to be performed.
+References: [https://www.ownml.co/machine-learning-canvas]
+
+Use the ML Canvas to analyze the project by focusing on the "ML Task" to be performed.
 There are 10 items to fill in: Value Proposition, Prediction Task, Decisions, Impact Simulation, Making Prediction, Building Models, Data Collection, Data Sources, Features, and Monitoring.
 These correspond to the green blocks in the metamodel.
-(TODO: Useful links, etc.)
+
+Create requirement SysML element with the following stereotype to mark their position in the AI Project Canvas:
+
+| Stereotype          | Position in the canvas |
+| ------------------- | ---------------------- |
+| ML.ValueProposition | Value Proposition      |
+| ML.Decision         | Decision               |
+| ML.PredictionTask   | Prediction Task        |
+| ML.ImpactSimulation | Impact Simulation      |
+| ML.MakingPrediction | Making Prediction      |
+| ML.DataCollection   | Data Collection        |
+| ML.DataSources      | Data Sources           |
+| ML.BuildingModels   | Building Models        |
+| ML.Features         | Features               |
+| ML.LiveMonitoring   | Live Monitoring        |
 
 <img src="./imgs/2-1.png" />
-
 
 ### 3. Develop KAOS Goal Model
 
 Let's use the KAOS Goal Model to break it down into the "Goal" to be achieved and the requirement necessary to achieve them.
 Determine the Top Goals based on the contents of the ML Canvas and break them down into the goals of the ML Component.
 These correspond to the orange blocks in the metamodel.
-(TODO: Useful links, etc.)
 
 <img src="./imgs/3-1.png" />
 
@@ -82,7 +113,6 @@ These correspond to the orange blocks in the metamodel.
 
 Let's visualize the "Architecture" by enumerating and associating the necessary ML and non-ML elements to the Architectural Diagram.
 These correspond to the red blocks in the metamodel.
-(TODO: Useful links, etc.)
 
 |Block definition diagram|Internal block diagram|
 |---|---|
@@ -94,7 +124,7 @@ Let's use STAMP/STPA Analysis to list which "Safety" measures we want to improve
 For information on how to perform STAMP/STPA Analysis, please refer to the Astah official documentation, which includes tutorials.
 In the metamodel, this corresponds to the yellow block on the right.
 
-|Identification of losses, hazards and safety constraints|Building a control structure|
+|Identification of losses, hazards, and safety constraints|Building a control structure|
 |---|---|
 |<img src="./imgs/5-1.png" />|<img src="./imgs/5-2.png" />|
 
@@ -102,7 +132,7 @@ In the metamodel, this corresponds to the yellow block on the right.
 |---|---|
 |<img src="./imgs/5-3.png" />|<img src="./imgs/5-4.png" />|
 
-### 6. Develop Safety Case Analysis
+### 6. Develop a Safety Case Analysis
 
 Let's use the KAOS Goal Model to consider how to "strengthen" the safety of ML models.
 These correspond to the blue blocks in the metamodel.
