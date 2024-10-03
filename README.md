@@ -32,7 +32,7 @@ To set a network connection with the backend side, do the following:
 ## Compiling
 To create your own version of the binary, follow the Astah* System Safety plugin development tutorial:
 
-[https://astah.net/support/plugin-dev-tutorial/plugin-development-setup-for-astah-system-safety/]
+https://astah.net/support/plugin-dev-tutorial/plugin-development-setup-for-astah-system-safety/
 
 ## Installation
 Installation can be done in two ways:
