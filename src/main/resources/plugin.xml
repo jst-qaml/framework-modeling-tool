@@ -30,13 +30,13 @@
             type="extraTab"
             class="ai.engineering.RepairConfigurationSummaryView" />
       <view
-              id="jp.ac.waseda.cs.washi.www.internal.PatternTransformationView"
+              id="ai.engineering.internal.PatternTransformationView"
               type="extraTab"
-              class="jp.ac.waseda.cs.washi.www.internal.extraTab.InputPatternValuesTab" />
+              class="ai.engineering.patternApplication.internal.extraTab.InputPatternValuesTab" />
       <view
-              id="jp.ac.waseda.cs.washi.www.internal.PatternRecommendationView"
+              id="ai.engineering.internal.PatternRecommendationView"
               type="extraTab"
-              class="jp.ac.waseda.cs.washi.www.internal.extraTab.PatternRecommendTab" />
+              class="ai.engineering.patternApplication.internal.extraTab.PatternRecommendTab" />
    </extension>
    <extension point="com.change_vision.astah.ui.actionSets">
       <actionSet

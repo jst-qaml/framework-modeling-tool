@@ -1,10 +1,9 @@
-package jp.ac.waseda.cs.washi.www.internal.entity;
+package ai.engineering.patternApplication.internal.entity;
 
 import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.inf.model.*;
 
 import java.awt.*;
-import java.util.*;
 
 public class Const {
     public final String[] argumentElementTypeNames = {

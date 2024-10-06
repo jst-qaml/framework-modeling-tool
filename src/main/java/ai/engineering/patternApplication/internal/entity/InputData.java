@@ -1,4 +1,4 @@
-package jp.ac.waseda.cs.washi.www.internal.entity;
+package ai.engineering.patternApplication.internal.entity;
 
 public class InputData {
     private String patternName;

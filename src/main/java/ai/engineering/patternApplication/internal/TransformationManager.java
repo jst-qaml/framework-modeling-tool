@@ -1,5 +1,7 @@
-package jp.ac.waseda.cs.washi.www.internal;
+package ai.engineering.patternApplication.internal;
 
+import ai.engineering.patternApplication.internal.entity.*;
+import ai.engineering.patternApplication.internal.utility.*;
 import com.change_vision.jude.api.gsn.editor.*;
 import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.inf.editor.*;
@@ -7,8 +9,6 @@ import com.change_vision.jude.api.inf.exception.*;
 import com.change_vision.jude.api.inf.model.*;
 import com.change_vision.jude.api.inf.presentation.*;
 import com.change_vision.jude.api.inf.project.*;
-import jp.ac.waseda.cs.washi.www.internal.entity.*;
-import jp.ac.waseda.cs.washi.www.internal.utility.*;
 
 import java.awt.geom.*;
 import java.util.*;

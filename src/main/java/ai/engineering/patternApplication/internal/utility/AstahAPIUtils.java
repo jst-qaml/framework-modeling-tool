@@ -1,4 +1,4 @@
-package jp.ac.waseda.cs.washi.www.internal.utility;
+package ai.engineering.patternApplication.internal.utility;
 
 /*
  * パッケージ名は、生成したプラグインのパッケージ名よりも
@@ -10,6 +10,7 @@ package jp.ac.waseda.cs.washi.www.internal.utility;
  *   learning                                 => X
  */
 
+import ai.engineering.patternApplication.internal.exception.*;
 import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.inf.*;
 import com.change_vision.jude.api.inf.editor.*;
@@ -17,7 +18,6 @@ import com.change_vision.jude.api.inf.exception.*;
 import com.change_vision.jude.api.inf.model.*;
 import com.change_vision.jude.api.inf.project.*;
 import com.change_vision.jude.api.inf.view.*;
-import jp.ac.waseda.cs.washi.www.internal.exception.*;
 
 import javax.swing.*;
 import java.util.*;

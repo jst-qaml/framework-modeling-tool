@@ -1,4 +1,4 @@
-package jp.ac.waseda.cs.washi.www.internal.extraTab;
+package ai.engineering.patternApplication.internal.extraTab;
 
 /*
  * パッケージ名は、生成したプラグインのパッケージ名よりも
@@ -11,12 +11,12 @@ package jp.ac.waseda.cs.washi.www.internal.extraTab;
  */
 
 
+import ai.engineering.patternApplication.internal.*;
+import ai.engineering.patternApplication.internal.entity.*;
+import ai.engineering.patternApplication.internal.utility.*;
 import com.change_vision.jude.api.inf.*;
 import com.change_vision.jude.api.inf.project.*;
 import com.change_vision.jude.api.inf.ui.*;
-import jp.ac.waseda.cs.washi.www.internal.*;
-import jp.ac.waseda.cs.washi.www.internal.entity.*;
-import jp.ac.waseda.cs.washi.www.internal.utility.*;
 
 import javax.swing.*;
 import java.awt.*;

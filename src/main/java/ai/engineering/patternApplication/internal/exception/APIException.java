@@ -1,4 +1,4 @@
-package jp.ac.waseda.cs.washi.www.internal.exception;
+package ai.engineering.patternApplication.internal.exception;
 
 public class APIException extends RuntimeException {
 

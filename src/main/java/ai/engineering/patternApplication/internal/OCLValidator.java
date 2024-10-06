@@ -1,15 +1,11 @@
-package jp.ac.waseda.cs.washi.www.internal;
+package ai.engineering.patternApplication.internal;
 
+import ai.engineering.patternApplication.internal.entity.*;
 import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.inf.model.*;
-import com.change_vision.jude.api.inf.presentation.*;
-import jp.ac.waseda.cs.washi.www.internal.entity.*;
-import org.eclipse.emf.common.util.*;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.*;
 //import org.eclipse.ocl.ParserException;
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.*;
 import org.eclipse.emf.ecore.resource.impl.*;
 import org.eclipse.emf.ecore.xmi.impl.*;
@@ -18,12 +14,10 @@ import org.eclipse.ocl.ecore.*;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.ecore.OCL.Helper;
 import org.eclipse.ocl.ecore.OCLExpression;
-import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.expressions.*;
 import org.eclipse.ocl.types.*;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;

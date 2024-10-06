@@ -1,4 +1,4 @@
-package jp.ac.waseda.cs.washi.www;
+package ai.engineering.patternApplication;
 
 import com.change_vision.jude.api.inf.*;
 import com.change_vision.jude.api.inf.editor.*;

@@ -1,9 +1,9 @@
-package jp.ac.waseda.cs.washi.www.internal.entity;
+package ai.engineering.patternApplication.internal.entity;
 
+import ai.engineering.patternApplication.internal.utility.*;
 import com.change_vision.jude.api.gsn.editor.*;
 import com.change_vision.jude.api.inf.model.*;
 import com.change_vision.jude.api.inf.presentation.*;
-import jp.ac.waseda.cs.washi.www.internal.utility.*;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package jp.ac.waseda.cs.washi.www;
+package ai.engineering.patternApplication;
 
 
 import org.osgi.framework.*;

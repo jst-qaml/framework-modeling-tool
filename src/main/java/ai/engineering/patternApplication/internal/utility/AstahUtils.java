@@ -1,4 +1,4 @@
-package jp.ac.waseda.cs.washi.www.internal.utility;
+package ai.engineering.patternApplication.internal.utility;
 /*
  * パッケージ名は、生成したプラグインのパッケージ名よりも
  * 下に移してください。

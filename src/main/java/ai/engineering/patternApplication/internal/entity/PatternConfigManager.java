@@ -1,4 +1,4 @@
-package jp.ac.waseda.cs.washi.www.internal.entity;
+package ai.engineering.patternApplication.internal.entity;
 
 import java.util.*;
 public class PatternConfigManager {
