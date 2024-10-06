@@ -18,6 +18,8 @@ public class PossibilitySupportController {
     private PatternConfigManager patternConfigManager = new PatternConfigManager();
     private TransformationManager transformationManager = new TransformationManager();
 
+    private OCLValidator oclValidator = new OCLValidator();
+
     public boolean PatternPossibilitySupport(SelectionSupportDataBase selectionSupportDataBase){
         IDiagram currentDiagram = astahAPIUtils.getDiagram();
         //現在の図がnullの場合はエラーを出力して終了
@@ -44,11 +46,12 @@ public class PossibilitySupportController {
         boolean isMatched = false;
         //トップゴールのマッチング
         for(int i = 0; i < iNodePresentations.length; i++){
-            IOCLContext iOCLContext = (IOCLContext) iNodePresentations[i].getModel();
+            //IOCLContext iOCLContext = (IOCLContext) iNodePresentations[i].getModel();
 
             for(int j = 0; j < patternConfigManager.oclInv.length; j++){
                 try {
-                    if((boolean)iOCLContext.evaluateOCL(patternConfigManager.oclInv[j][0])){
+                    //if((boolean)iOCLContext.evaluateOCL(patternConfigManager.oclInv[j][0])){
+                    if(oclValidator.Validate(iNodePresentations[i].getModel(), patternConfigManager.oclInv[j][0])){
                         isMatched = true;
                         selectionSupportDataBase.matchedPatterns.get(i).add(j);
                     }

@@ -23,6 +23,9 @@ public class PatternMatchingController {
 
     public SelectionSupportDataBase selectionSupportDataBase = new SelectionSupportDataBase();
 
+
+    private OCLValidator oclValidator = new OCLValidator();
+
     //仮
     /*
     private final ProjectEventListener projectEventListener = new ProjectEventListener() {
@@ -268,7 +271,7 @@ public class PatternMatchingController {
 
         //Graph pattern matching
         try{
-            IOCLContext selectedContext = (IOCLContext) selectedPresentationIElement;
+            //IOCLContext selectedContext = (IOCLContext) selectedPresentationIElement;
 
             IElement parentIElement = selectedPresentationIElement;
             int counter = 0;
@@ -286,7 +289,8 @@ public class PatternMatchingController {
 
                         counter = 0;
 
-                        if((boolean)selectedContext.evaluateOCL(patternConfigManager.oclInv[i][j])){
+                        //if((boolean)selectedContext.evaluateOCL(patternConfigManager.oclInv[i][j])){
+                        if(oclValidator.Validate(selectedPresentationIElement, patternConfigManager.oclInv[i][j])){//note.getLinks()[0].getTarget()はselectされたpresentation
                             ArrayList<IElement> tmpList = new ArrayList<IElement>();
                             tmpList.add(selectedPresentationIElement);
                             matchedIElements.add(tmpList);
@@ -321,9 +325,10 @@ public class PatternMatchingController {
 
                     boolean isChildMatched = false;
                     for(int k = 0; k < childIElements.size(); k++){
-                        IOCLContext childContext = (IOCLContext) childIElements.get(k);
+                        //IOCLContext childContext = (IOCLContext) childIElements.get(k);
 
-                        if((boolean)childContext.evaluateOCL(patternConfigManager.oclInv[i][matchedIElements.get(counter).size()])){
+                        //if((boolean)childContext.evaluateOCL(patternConfigManager.oclInv[i][matchedIElements.get(counter).size()])){
+                        if(oclValidator.Validate(childIElements.get(k), patternConfigManager.oclInv[i][matchedIElements.get(counter).size()])){
                             ArrayList<IElement> copyList = new ArrayList<IElement>(matchedIElements.get(counter));
                             copyList.add(childIElements.get(k));
                             matchedIElements.add(copyList);

@@ -1,6 +1,10 @@
 package jp.ac.waseda.cs.washi.www.internal.entity;
 
+import com.change_vision.jude.api.gsn.model.*;
+import com.change_vision.jude.api.inf.model.*;
+
 import java.awt.*;
+import java.util.*;
 
 public class Const {
     public final String[] argumentElementTypeNames = {
@@ -23,4 +27,22 @@ public class Const {
 
     public final int fontStyle = Font.BOLD;
     public final int fontSize = 16;
+
+    public final int GetIndexOfType(IElement element) {
+        if(element instanceof IGoal){
+            return 0;
+        }else if(element instanceof IStrategy){
+            return 1;
+        }else if(element instanceof ISolution){
+            return 2;
+        }else if(element instanceof IContext){
+            return 3;
+        }else if(element instanceof IJustification){
+            return 4;
+        }else if(element instanceof IAssumption){
+            return 5;
+        }else {
+            return -1;
+        }
+    }
 }
