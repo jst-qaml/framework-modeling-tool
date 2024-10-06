@@ -33,40 +33,23 @@ public class OCLValidator {
 
     private Const constClass = new Const();
 
+    private static Resource resource = null;
+
+    private static boolean isFirstInstance = true;
+
+    public OCLValidator() {
+        if (isFirstInstance) {
+            SetResource();
+            isFirstInstance = false;
+        }
+    }
+
     public boolean Validate(IElement iElement, String oclExpression) {
         EObject node = CreateNode(iElement);
         return EvaluateOCL(node, oclExpression);
     }
 
     public EObject CreateNode(IElement iElement) {
-        //todo高速化
-        Resource resource = null;
-
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL resourceURL = classLoader.getResource("GSN.ecore");//GSN.ecoreファイルのはresourcesの配下にあるが実行時にパスが変わるため、URLを取得
-
-        if (resourceURL == null) {
-            System.out.println("GSN.ecore ファイルが見つかりません");
-        } else {
-            File file = new File(resourceURL.getFile());
-            System.out.println("GSN.ecore ファイルが見つかりました: " + file.getAbsolutePath());
-
-            // ResourceSetの作成
-            ResourceSet resourceSet = new ResourceSetImpl();
-            // .ecoreファイルを扱うためにリソースファクトリを登録
-            resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
-
-            // リソースをInputStreamから読み込む
-            try (InputStream inputStream = resourceURL.openStream()) {
-                URI uri = URI.createURI(resourceURL.toString());
-                resource = resourceSet.createResource(uri);
-                resource.load(inputStream, Collections.EMPTY_MAP);
-                System.out.println("GSN.ecore がロードされました");
-            } catch (IOException e) {
-                e.printStackTrace(); // エラーハンドリング
-            }
-        }
-
         // リソースからモデル要素を取得
         assert resource != null;
         if (!resource.getContents().isEmpty()) {
@@ -132,6 +115,33 @@ public class OCLValidator {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    private void SetResource(){
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resourceURL = classLoader.getResource("GSN.ecore");//GSN.ecoreファイルのはresourcesの配下にあるが実行時にパスが変わるため、URLを取得
+
+        if (resourceURL == null) {
+            System.out.println("GSN.ecore ファイルが見つかりません");
+        } else {
+            File file = new File(resourceURL.getFile());
+            System.out.println("GSN.ecore ファイルが見つかりました: " + file.getAbsolutePath());
+
+            // ResourceSetの作成
+            ResourceSet resourceSet = new ResourceSetImpl();
+            // .ecoreファイルを扱うためにリソースファクトリを登録
+            resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+
+            // リソースをInputStreamから読み込む
+            try (InputStream inputStream = resourceURL.openStream()) {
+                URI uri = URI.createURI(resourceURL.toString());
+                resource = resourceSet.createResource(uri);
+                resource.load(inputStream, Collections.EMPTY_MAP);
+                System.out.println("GSN.ecore がロードされました");
+            } catch (IOException e) {
+                e.printStackTrace(); // エラーハンドリング
+            }
         }
     }
 
