@@ -2,7 +2,6 @@
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/relatedelement/metamodelNodes/ClassNode.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/challenger/TestEvidenceChecker.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/internal/extraTab/InputPatternValuesTab.java
-/Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/internal/TransformationMain.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/canvas/aiprojectcanvas/AIProjectCanvas.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/internal/exception/APIException.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/relatedelement/metamodelNodes/RelationNode.java
@@ -24,7 +23,6 @@
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/internal/entity/SelectionSupportDataBase.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/internal/entity/Const.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/internal/TransformationManager.java
-/Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/internal/TransformationRule.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/internal/utility/AstahAPIUtils.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/relatedelement/ElementNode.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/relatedelement/metamodelNodes/StereotypeNode.java
@@ -33,7 +31,6 @@
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/Activator.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/relatedelement/RelationLine.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/pipeline/monitortool/PerformanceCheckerAction.java
-/Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/Transformation.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/pipeline/modeltrainer/TrainPanel.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/internal/PossibilitySupportController.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/pipeline/monitortool/DesiredPerformance/DesiredPerformance.java
@@ -43,7 +40,6 @@
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/pipeline/monitortool/ConfigJsonGenerator.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/pipeline/repairtool/RepairConfiguration.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/canvas/CanvasModel.java
-/Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/TransformationTest.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/utilities/ElementTypeChecker.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/internal/PatternMatchingController.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/canvas/CanvasModelListener.java
@@ -64,7 +60,6 @@
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/canvas/mlcanvas/MLCanvas.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/pipeline/modeltrainer/TestPanel.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/relationchecker/RelationCheckerAction.java
-/Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/patternApplication/TemplateAction.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/pipeline/monitortool/DesiredPerformance/MisclassificationPerformance.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/pipeline/modeltrainer/ModelTrainer.java
 /Applications/astahPluginDev/framework-modeling-tool/src/main/java/ai/engineering/pipeline/monitortool/PipelinePerformanceView.java

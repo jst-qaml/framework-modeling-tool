@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Astah-Edition: safety
 Astah-Version: 6.0.0
-Bnd-LastModified: 1728190654956
+Bnd-LastModified: 1728191409734
 Build-Jdk: 1.8.0_421
 Built-By: ayukawa
 Bundle-Activator: ai.engineering.Activator
@@ -55,26 +55,22 @@ Export-Package: ai.engineering;version="1.5.0.EXPERIMENT";uses:="com.cha
  i.inf.ui,com.change_vision.jude.api.inf.view,com.change_vision.jude.api
  .stpa.model,javax.swing,javax.swing.event,javax.swing.table,org.osgi.fr
  amework,org.w3c.dom",ai.engineering.patternApplication;version="1.5.0.E
- XPERIMENT";uses:="com.change_vision.jude.api.inf.editor,com.change_visi
- on.jude.api.inf.exception,com.change_vision.jude.api.inf.model,com.chan
- ge_vision.jude.api.inf.presentation,com.change_vision.jude.api.inf.proj
- ect,com.change_vision.jude.api.inf.ui,com.change_vision.jude.api.inf.vi
- ew,org.osgi.framework",ai.engineering.patternApplication.internal;versi
- on="1.5.0.EXPERIMENT";uses:="ai.engineering.patternApplication.internal
- .entity,com.change_vision.jude.api.inf.model,com.change_vision.jude.api
- .inf.ui",ai.engineering.patternApplication.internal.entity;version="1.5
- .0.EXPERIMENT";uses:="com.change_vision.jude.api.gsn.editor,com.change_
- vision.jude.api.inf.model,com.change_vision.jude.api.inf.presentation",
- ai.engineering.patternApplication.internal.exception;version="1.5.0.EXP
- ERIMENT",ai.engineering.patternApplication.internal.extraTab;version="1
- .5.0.EXPERIMENT";uses:="com.change_vision.jude.api.inf.project,com.chan
- ge_vision.jude.api.inf.ui,javax.swing",ai.engineering.patternApplicatio
- n.internal.utility;version="1.5.0.EXPERIMENT";uses:="com.change_vision.
- jude.api.gsn.editor,com.change_vision.jude.api.gsn.model,com.change_vis
- ion.jude.api.inf.editor,com.change_vision.jude.api.inf.exception,com.ch
- ange_vision.jude.api.inf.model,com.change_vision.jude.api.inf.presentat
- ion,com.change_vision.jude.api.inf.project,com.change_vision.jude.api.i
- nf.view,javax.swing"
+ XPERIMENT";uses:="org.osgi.framework",ai.engineering.patternApplication
+ .internal;version="1.5.0.EXPERIMENT";uses:="ai.engineering.patternAppli
+ cation.internal.entity,com.change_vision.jude.api.inf.model",ai.enginee
+ ring.patternApplication.internal.entity;version="1.5.0.EXPERIMENT";uses
+ :="com.change_vision.jude.api.gsn.editor,com.change_vision.jude.api.inf
+ .model,com.change_vision.jude.api.inf.presentation",ai.engineering.patt
+ ernApplication.internal.exception;version="1.5.0.EXPERIMENT",ai.enginee
+ ring.patternApplication.internal.extraTab;version="1.5.0.EXPERIMENT";us
+ es:="com.change_vision.jude.api.inf.project,com.change_vision.jude.api.
+ inf.ui,javax.swing",ai.engineering.patternApplication.internal.utility;
+ version="1.5.0.EXPERIMENT";uses:="com.change_vision.jude.api.gsn.editor
+ ,com.change_vision.jude.api.gsn.model,com.change_vision.jude.api.inf.ed
+ itor,com.change_vision.jude.api.inf.exception,com.change_vision.jude.ap
+ i.inf.model,com.change_vision.jude.api.inf.presentation,com.change_visi
+ on.jude.api.inf.project,com.change_vision.jude.api.inf.view,javax.swing
+ "
 Import-Package: ai.engineering.patternApplication.internal.entity;resolu
  tion:=optional;version="[1.5,2)",ai.engineering.patternApplication.inte
  rnal.exception;resolution:=optional;version="[1.5,2)",ai.engineering.pa

@@ -7,7 +7,6 @@ ai/engineering/patternApplication/internal/extraTab/IntegerNaturalNumberInputVer
 ai/engineering/RelationNode.class
 ai/engineering/AIProjectCanvas.class
 ai/engineering/MonitoringSummaryView$2.class
-ai/engineering/patternApplication/internal/TransformationMain.class
 ai/engineering/MLCanvasView.class
 ai/engineering/AIProjectCanvasView.class
 ai/engineering/TraceabilityMaps.class
@@ -28,16 +27,13 @@ ai/engineering/TestPanel.class
 ai/engineering/PerformanceCheckerAction$2.class
 ai/engineering/MLCanvasType.class
 ai/engineering/ProcessEventHandler.class
-ai/engineering/patternApplication/TransformationTest.class
 ai/engineering/ToolUtilities.class
 ai/engineering/RepairConfigurationView.class
 ai/engineering/AIProjectCanvasType.class
-ai/engineering/patternApplication/Transformation.class
 ai/engineering/patternApplication/internal/extraTab/InputPatternValuesTab$1.class
 ai/engineering/TrainPanel.class
 ai/engineering/patternApplication/internal/PatternMatchingController$1.class
 ai/engineering/PipelinePerformanceView$1.class
-ai/engineering/patternApplication/TemplateAction.class
 ai/engineering/ElementPicker.class
 ai/engineering/MonitoringConfigurations.class
 ai/engineering/GoalParser.class
@@ -62,14 +58,12 @@ ai/engineering/TrainPanel$1.class
 ai/engineering/TestPanel$1.class
 ai/engineering/patternApplication/internal/OCLValidator$1.class
 ai/engineering/NamedElementPicker.class
-ai/engineering/patternApplication/TransformationTest$CalculateUnExpectedException.class
 ai/engineering/MonitoringSummaryView.class
 ai/engineering/Activator.class
 ai/engineering/RelatedElementModel.class
 ai/engineering/patternApplication/internal/exception/APIException.class
 ai/engineering/TraceabilityRecommenderView.class
 ai/engineering/PerformanceCheckerAction.class
-ai/engineering/patternApplication/Transformation$CalculateUnExpectedException.class
 ai/engineering/MisclassificationPerformance.class
 ai/engineering/RepairModelAction$1.class
 ai/engineering/RelationLine.class
@@ -79,7 +73,6 @@ ai/engineering/patternApplication/internal/OCLValidator.class
 ai/engineering/patternApplication/internal/PatternMatchingController.class
 ai/engineering/patternApplication/internal/utility/AstahAPIUtils.class
 ai/engineering/RepairConfiguration.class
-ai/engineering/patternApplication/internal/TransformationRule.class
 ai/engineering/TemplateAction.class
 ai/engineering/RelationCheckerAction.class
 ai/engineering/RepairConfigurationSummaryView.class
