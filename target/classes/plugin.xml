@@ -29,6 +29,14 @@
             id="ai.engineering.internal.RepairConfigurationSummaryView"
             type="extraTab"
             class="ai.engineering.RepairConfigurationSummaryView" />
+      <view
+              id="ai.engineering.internal.PatternTransformationView"
+              type="extraTab"
+              class="ai.engineering.patternApplication.internal.extraTab.InputPatternValuesTab" />
+      <view
+              id="ai.engineering.internal.PatternRecommendationView"
+              type="extraTab"
+              class="ai.engineering.patternApplication.internal.extraTab.PatternRecommendTab" />
    </extension>
    <extension point="com.change_vision.astah.ui.actionSets">
       <actionSet

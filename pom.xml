@@ -301,5 +301,22 @@
   			<artifactId>jackson-databind</artifactId>
   			<version>2.9.6</version>
 		</dependency>
+		<!-- set ocl library -->
+<!--		<dependency>-->
+<!--			<groupId>org.openehealth.ipf.eclipse.ocl</groupId>-->
+<!--			<artifactId>ipf-eclipse-ocl</artifactId>-->
+<!--			<version>3.1.0.v20110913-1213</version>-->
+<!--		</dependency>-->
+		<dependency>
+			<groupId>org.openehealth.ipf.eclipse.ocl</groupId>
+			<artifactId>ipf-eclipse-ocl-ecore</artifactId>
+			<version>3.1.1.v20110823-1646</version>
+		</dependency>
+		<dependency>
+			<groupId>lpg.runtime</groupId>
+			<artifactId>java</artifactId>
+			<version>2.0.17-v201004271640</version>
+		</dependency>
+		<!-- end ocl library -->
 	</dependencies>
 </project>
