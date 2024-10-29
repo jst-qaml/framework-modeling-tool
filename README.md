@@ -71,15 +71,7 @@ The following files are provided in the [case study folder](https://github.com/j
 | Case study_repair_balanced      | Third version with aggressive repair implemented |
 | Case study_update               | Final version with requirements updated         |
 
-## Pattern Application
-### Install
-First of all, you need to install the plugin into astah* System Safety. Please visit the pattern-application branch and download it. Then, you can install it. The plugin can be installed in one of the following ways:
-
-1. Drag and drop the plugin file onto the Astah* window.
-2. Install from the "Install" button on the plugin list.
-
-To use the installed plugins, you must restart Astah* after installation ([install the plugin in astah* System Safety official site](https://astah.change-vision.com/ja/manual-sys/reference/basic_function/plugin.html#id3)).
-
+## Pattern Selection/Application Support
 ### Machine Learning Reliability Solution Patterns
 With this plugin, you can use the following Machine Learning Reliability Solution Patterns (Table 2).
 
