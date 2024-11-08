@@ -364,7 +364,7 @@ public class InputPatternValuesTab extends JPanel
         }
 
 
-        transformationManager.ApplyPattern(patternName, inputPatternParameterNames, repeatN, supportedElementString, solutionParameterValue, false, null, "");
+        transformationManager.ApplyPattern(patternName, inputPatternParameterNames, repeatN, supportedElementString, solutionParameterValue, false, null, "", false);
 
     }
 

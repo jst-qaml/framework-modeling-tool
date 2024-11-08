@@ -20,13 +20,37 @@ public class TransformationManager {
 
     private int patternIndex = -1;
 
-    public void ApplyPattern(String patternName, String[] inputPatternParameterNames, int repeatN, String supportedElement, String[][] inputSolutionParameterValues, boolean isSelectionSupport, SelectionSupportDataBase selectionSupportDataBase, String selectionColor){
+    public void ApplyPattern(String patternName, String[] inputPatternParameterNames, int repeatN, String supportedElement, String[][] inputSolutionParameterValues, boolean isSelectionSupport, SelectionSupportDataBase selectionSupportDataBase, String selectionColor, boolean isValueSupport){
         patternIndex = patternConfigManager.GetPatternIndex(patternName);
 
         String[] configPatternParameterNames = patternConfigManager.patternParameterExplanationNames[patternIndex];
         String[] configPatternParameterTypes = patternConfigManager.patternParameterTypes[patternIndex];
         int[][] configPatternLinkPair = patternConfigManager.patternLinkPair[patternIndex];
         String[][] configSolutionParameterValues = patternConfigManager.solutionParameter[patternIndex];
+
+        SolutionValueSupport solutionValueSupport = new SolutionValueSupport();
+        //SolutionValueSupportの場合のrepeatN関連の処理
+        if(isValueSupport){
+            repeatN = solutionValueSupport.GetRepeatN(patternIndex, repeatN);
+            //(repeatN-1)*repeatPartLengthの分だけ""をinputPatternParameterNamesに追加する
+            String[] tmp = new String[inputPatternParameterNames.length + (repeatN-1) * patternConfigManager.repeatPartLength[patternIndex]];
+            for(int i = 0; i < inputPatternParameterNames.length; i++){
+                tmp[i] = inputPatternParameterNames[i];
+            }
+            for(int i = 0; i < (repeatN-1) * patternConfigManager.repeatPartLength[patternIndex]; i++){
+                tmp[inputPatternParameterNames.length + i] = "";
+            }
+            inputPatternParameterNames = tmp;
+
+
+            String[][] tmpSolutionParameterValue = new String[patternConfigManager.solutionParameter[patternIndex].length*repeatN][];
+            for(int i = 0; i < tmpSolutionParameterValue.length; i++){
+                tmpSolutionParameterValue[i] = new String[patternConfigManager.solutionParameter[patternIndex][0].length];//毎回0番目を取得するため注意
+                Arrays.fill(tmpSolutionParameterValue[i], "");
+
+            }
+            inputSolutionParameterValues = tmpSolutionParameterValue;
+        }
 
         //繰り返しがある場合,repeatNの値によってParameterやLinkの繋ぎ方を変更
 
@@ -56,7 +80,13 @@ public class TransformationManager {
                 for(int j = 0; j < repeatPartLength; j++){
                     //Namesのコピー
                     String tmp = patternConfigManager.patternParameterExplanationNames[patternIndex][samePartLength + j];
-                    tmp = tmp.replace("{X[0]}", String.valueOf(i+1));
+
+                    //SolutionValueSupportの場合の文字の置き換え
+                    if(isValueSupport){
+                        tmp = solutionValueSupport.ReplaceSolutionValue(patternIndex, tmp,i);
+                    }else{
+                        tmp = tmp.replace("{X[0]}", String.valueOf(i+1));
+                    }
                     configPatternParameterNames[samePartLength + repeatPartLength * i + j] = tmp;
 
                     //Typesのコピー
@@ -106,7 +136,7 @@ public class TransformationManager {
 
         }
 
-        //パターン適応
+        //パターン適用
         try {
             ApplyPatternInstance(configPatternParameterNames,
                     configPatternParameterTypes,

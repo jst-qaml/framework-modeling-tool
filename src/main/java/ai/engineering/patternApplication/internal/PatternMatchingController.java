@@ -439,7 +439,7 @@ public class PatternMatchingController {
                         //System.out.println(((IArgumentAsset)matchedAllIElements.get(i).get(j).get(0)).getContent());
                         //ApplyFunctionの呼び出し
                         //Recommendationの表示
-                        ShowRecommendationView(i, matchedAllIElements.get(i).get(j), true,selectionColor);
+                        ShowRecommendationView(i, matchedAllIElements.get(i).get(j), true,selectionColor, false);
 
 
                     }
@@ -505,7 +505,7 @@ public class PatternMatchingController {
         return;
     }
 
-    private void ShowRecommendationView(int matchedPatternIndex, ArrayList<IElement> matchedIElements, boolean isSelectionSupport, String selectionColor){
+    private void ShowRecommendationView(int matchedPatternIndex, ArrayList<IElement> matchedIElements, boolean isSelectionSupport, String selectionColor, boolean isValueSupport){
         //RecommendationViewの表示
         String patternName = patternConfigManager.patternNames[matchedPatternIndex];
         String[] inputPatternParameterNames = new String[patternConfigManager.patternParameterExplanationNames[matchedPatternIndex].length];
@@ -533,7 +533,7 @@ public class PatternMatchingController {
         if(!isSelectionSupport){
             argSelectionSupportDataBase = null;
         }
-        transformationManager.ApplyPattern(patternName, inputPatternParameterNames, repeatN, supportedElementString, solutionParameterValue, isSelectionSupport, argSelectionSupportDataBase, selectionColor);
+        transformationManager.ApplyPattern(patternName, inputPatternParameterNames, repeatN, supportedElementString, solutionParameterValue, isSelectionSupport, argSelectionSupportDataBase, selectionColor, isValueSupport);
 
     }
 
@@ -583,7 +583,7 @@ public class PatternMatchingController {
                                 SelectionSupportDeleteViewOperation();
 
                                 //選択された部分を正式にApplyする
-                                ShowRecommendationView(i, selectionSupportDataBase.matchedAllIElements.get(i).get(j), false, "");
+                                ShowRecommendationView(i, selectionSupportDataBase.matchedAllIElements.get(i).get(j), false, "", true);
                                 RemoveApplySelectionPatternListenerTmp();
                                 //return;
                             }

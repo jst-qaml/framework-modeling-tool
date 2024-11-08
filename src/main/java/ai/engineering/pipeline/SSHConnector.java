@@ -24,7 +24,7 @@ public class SSHConnector{
     static String host = "";
     static String user = "";
     static String password = "";
-    static String port = ""
+    static int port;
 
     //Set the local folder to hold temporary files
     static String local = "D:";
