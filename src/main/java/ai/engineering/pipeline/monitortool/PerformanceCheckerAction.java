@@ -265,6 +265,7 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
                 }
 
                 if(element instanceof IGoal){
+		/*IGoal here cannot be used in astah-professional*/
                     IGoal goal = (IGoal) element;
                     if(goal.isUndeveloped()){
                         boolean isOrNodeFailed = true;
@@ -368,6 +369,7 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         List<DesiredPerformance> desiredPerformances = MonitoringConfigurations.getDesiredPerformances();
 
         for (DesiredPerformance desiredPerformance : desiredPerformances) {
+	/*IGoal here cannot be used in astah-profesiional*/
             IGoal monitoredEntity = desiredPerformance.getMonitoredEntity();
             try {
                 IPresentation[] selectedPresentations = monitoredEntity.getPresentations();
@@ -395,6 +397,7 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
 
         for (DesiredPerformance desiredPerformance : desiredPerformances) {
             //float result = VersionFetcher.GetPerformanceResult(desiredPerformance, selectedVersionString);
+	    /*IGoal here cannot be used in astah-professional*/
             IGoal monitoredEntity = desiredPerformance.getMonitoredEntity();
             try {
                 IPresentation[] selectedPresentations = monitoredEntity.getPresentations();
@@ -438,7 +441,7 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         ToolUtilities toolUtilities = ToolUtilities.getToolUtilities();
         ProjectAccessor projectAccessor = toolUtilities.getProjectAccessor();
         ITransactionManager transactionManager = toolUtilities.getTransactionManager();
-        
+        /*IGoal cannot be used in astah-professional*/
         IGoal monitoredEntity = desiredPerformance.getMonitoredEntity();
         IPresentation[] presentations = monitoredEntity.getPresentations();
 
@@ -446,16 +449,19 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
             transactionManager.beginTransaction();
 
             IDiagramEditorFactory diagramEditorFactory = projectAccessor.getDiagramEditorFactory();
+	    /*IFacet, IModule, IGsnFacet, and GsnDIagramEditor cannot be used in astah-professional*/
             IFacet facet = projectAccessor.getFacet(IGsnFacet.FACET_SYMBOLIC_NAME);
             IModule module = facet.getRootElement(IModule.class);
 
             GsnDiagramEditor diagramEditor = diagramEditorFactory.getDiagramEditor(GsnDiagramEditor.class);
 
             for (IPresentation selectedPresentation : presentations) {
+		/*IGsnDiagram cannot be used in astah-professional*/
                 IGsnDiagram diagram = (IGsnDiagram) selectedPresentation.getDiagram();
                 diagramEditor.setDiagram(diagram);
     
                 IModelEditorFactory modelEditorFactory = projectAccessor.getModelEditorFactory();
+		/*GsnModelEditor cannot be used in astah-professional*/
                 GsnModelEditor modelEditor = modelEditorFactory.getModelEditor(GsnModelEditor.class);
 
                 INodePresentation selectedNodePresentation = (INodePresentation) selectedPresentation;
@@ -464,11 +470,13 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
 
                 Point2D selectedPresentationLocation = selectedNodePresentation.getLocation();
                 Point2D justificationNodeLocation = new Point((int) selectedPresentationLocation.getX(), (int) (selectedPresentationLocation.getY() + 100));
-    
+
+		/*IJustification cannot be used in astah-professional*/
                 IJustification justification = modelEditor.createJustification(module, selectedPresentation.getLabel() + " justification");
                 justification.setContent("Based on experiment " + versionComboBox.getSelectedItem().toString());
                 INodePresentation justificationPresentation = diagramEditor.createNodePresentation(justification, justificationNodeLocation);
-                
+
+		/*IInContextof and IArgumentAsset cannot be used in astah-professional*/
                 IInContextOf connection = modelEditor.createInContextOf((IArgumentAsset) selectedPresentation.getModel(), justification);
                 diagramEditor.createLinkPresentation(connection, selectedNodePresentation, justificationPresentation);   
             }
