@@ -23,6 +23,7 @@ import javax.swing.table.TableModel;
 
 import com.change_vision.jude.api.inf.project.*;
 import com.change_vision.jude.api.inf.editor.*;
+/*These two imports cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.editor.*;
 import com.change_vision.jude.api.gsn.model.*;
 
@@ -33,6 +34,7 @@ import com.change_vision.jude.api.inf.presentation.IPresentation;
 import com.change_vision.jude.api.inf.presentation.INodePresentation;
 import com.change_vision.jude.api.inf.presentation.ILinkPresentation;
 
+/*IGoal cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.model.IGoal;
 
 import com.change_vision.jude.api.inf.view.IDiagramViewManager;
@@ -156,6 +158,7 @@ public class PerformanceCheckerAction implements IPluginActionDelegate{
         IElement model = iPresentation.getModel();
         
         if (model instanceof IGoal) {
+	/*IGoal here cannot be used in astah-professional*/
             IGoal goal = (IGoal) model;
             if (goal.isUndeveloped()) {
                 boolean isOrNodeFailed = true;
