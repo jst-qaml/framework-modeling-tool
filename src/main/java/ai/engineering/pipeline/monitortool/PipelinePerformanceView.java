@@ -196,6 +196,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
             return;
         }
 
+        /*IGoal cannot be used in astah-professional*/
         if (currentPresentation.getModel() instanceof IGoal) {
             IGoal goal = (IGoal) currentPresentation.getModel();
             if(GoalParser.isParsable(goal)){
@@ -309,6 +310,7 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
             transactionManager.beginTransaction();
 
             IDiagramEditorFactory diagramEditorFactory = projectAccessor.getDiagramEditorFactory();
+            /*IFacet and IModule cannot be used in astah-professional*/
             IFacet facet = projectAccessor.getFacet(IGsnFacet.FACET_SYMBOLIC_NAME);
             IModule module = facet.getRootElement(IModule.class);
 
@@ -325,10 +327,12 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
             Point2D selectedPresentationLocation = selectedNodePresentation.getLocation();
             Point2D assumptionNodeLocation = new Point((int) selectedPresentationLocation.getX(), (int) (selectedPresentationLocation.getY() + 100));
 
+            /*IAssumption cannot be used in astah-professional*/
             IAssumption assumption = modelEditor.createAssumption(module, selectedPresentation.getLabel());
             assumption.setContent("To be updated with a baseline experiment.");
             INodePresentation assumptionPresentation = diagramEditor.createNodePresentation(assumption, assumptionNodeLocation);
-            
+
+            /*IInContextof and IArgumentAsset cannot be used in astah-professional */
             IInContextOf connection = modelEditor.createInContextOf((IArgumentAsset) selectedPresentation.getModel(), assumption);
             diagramEditor.createLinkPresentation(connection, selectedNodePresentation, assumptionPresentation);
 
