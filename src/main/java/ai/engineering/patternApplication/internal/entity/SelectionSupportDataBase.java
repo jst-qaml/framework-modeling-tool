@@ -1,6 +1,7 @@
 package ai.engineering.patternApplication.internal.entity;
 
 import ai.engineering.patternApplication.internal.utility.*;
+/*This import cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.editor.*;
 import com.change_vision.jude.api.inf.model.*;
 import com.change_vision.jude.api.inf.presentation.*;
@@ -16,7 +17,7 @@ public class SelectionSupportDataBase {
     public ArrayList<ArrayList<ArrayList<IElement>>> matchedAllIElements = new ArrayList<ArrayList<ArrayList<IElement>>>();
     public ArrayList<ArrayList<ArrayList<IElement>>> createdAllIElements = new ArrayList<ArrayList<ArrayList<IElement>>>();
 
-
+    /*Since Const and AstahAPIUtils are also dependent on system-safety in a different way, they must be fixed first.*/
     private Const constClass = new Const();
     private AstahAPIUtils astahAPIUtils = new AstahAPIUtils();
 
