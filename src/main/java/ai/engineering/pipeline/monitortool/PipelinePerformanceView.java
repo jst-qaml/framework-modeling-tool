@@ -312,11 +312,13 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
             IFacet facet = projectAccessor.getFacet(IGsnFacet.FACET_SYMBOLIC_NAME);
             IModule module = facet.getRootElement(IModule.class);
 
+            /*GsnDiagramEditor cannot be used in astah-professional because gsn.editor does not exist*/
             GsnDiagramEditor diagramEditor = diagramEditorFactory.getDiagramEditor(GsnDiagramEditor.class);
             IGsnDiagram diagram = (IGsnDiagram) selectedPresentation.getDiagram();
             diagramEditor.setDiagram(diagram);
 
             IModelEditorFactory modelEditorFactory = projectAccessor.getModelEditorFactory();
+            /*GsnModelEditor cannot be used in astah-professional because gsn.editor does not exist*/
             GsnModelEditor modelEditor = modelEditorFactory.getModelEditor(GsnModelEditor.class);
 
             INodePresentation selectedNodePresentation = (INodePresentation) selectedPresentation;
