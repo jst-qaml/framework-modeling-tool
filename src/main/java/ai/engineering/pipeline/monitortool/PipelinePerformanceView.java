@@ -2,6 +2,7 @@ package ai.engineering;
 
 import com.change_vision.jude.api.inf.project.*;
 import com.change_vision.jude.api.inf.editor.*;
+/*This import cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.editor.*;
 
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
@@ -23,7 +24,7 @@ import com.change_vision.jude.api.inf.presentation.ILinkPresentation;
 
 import com.change_vision.jude.api.inf.view.IEntitySelectionListener;
 import com.change_vision.jude.api.inf.view.IEntitySelectionEvent;
-
+/*This import cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.model.*;
 
 import java.awt.*;
