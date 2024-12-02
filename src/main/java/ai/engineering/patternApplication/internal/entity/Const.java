@@ -1,5 +1,6 @@
 package ai.engineering.patternApplication.internal.entity;
 
+/*This import cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.inf.model.*;
 
