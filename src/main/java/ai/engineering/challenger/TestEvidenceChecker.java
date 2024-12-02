@@ -7,6 +7,7 @@ import com.change_vision.jude.api.inf.presentation.IPresentation;
 import com.change_vision.jude.api.inf.presentation.INodePresentation;
 import com.change_vision.jude.api.inf.presentation.ILinkPresentation;
 
+/*These two packages cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.model.IGoal;
 import com.change_vision.jude.api.gsn.model.IJustification;
 
@@ -20,7 +21,7 @@ import com.change_vision.jude.api.inf.editor.ITransactionManager;
 public class TestEvidenceChecker implements IPluginActionDelegate{
     
     public Object run(IWindow window){
-	    
+	/*IJustification cannot be used in astah-professional*/
         List<IJustification> justifications = ElementPicker.getAllJustifications();
 
         for (IJustification justification : justifications) {
@@ -55,6 +56,7 @@ public class TestEvidenceChecker implements IPluginActionDelegate{
         IElement model = iPresentation.getModel();
         
         if (model instanceof IGoal) {
+	   /*IGoal cannot be used in astah-professional*/
             IGoal goal = (IGoal) model;
             if (goal.isUndeveloped()) {
                 boolean isOrNodeFailed = true;
@@ -161,6 +163,7 @@ public class TestEvidenceChecker implements IPluginActionDelegate{
                 }
 
                 if(element instanceof IGoal){
+		    /*IGoal here cannot be used in astah-professional*/
                     IGoal goal = (IGoal) element;
                     if(goal.isUndeveloped()){
                         boolean isOrNodeFailed = true;
