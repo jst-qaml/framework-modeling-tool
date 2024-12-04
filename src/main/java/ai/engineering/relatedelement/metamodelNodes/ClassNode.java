@@ -7,6 +7,7 @@ import org.w3c.dom.Element;
 
 import com.change_vision.jude.api.inf.model.IEntity;
 import com.change_vision.jude.api.inf.model.IRequirement;
+/*These two cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.stpa.model.*;
 
@@ -108,6 +109,7 @@ public class ClassNode{
                 break;
             case SAFETY_CASE:
                 stereotypes.add(new StereotypeNode("Safety Case"));
+                /*IGoal, IStrategy, and ISolution must be replaced when applying to astah-professional*/
                 if(entity instanceof IGoal){
                     name = "Safety Goal";
                 }else if(entity instanceof IStrategy){
@@ -118,6 +120,7 @@ public class ClassNode{
                 break;
             case STPA:
                 stereotypes.add(new StereotypeNode("STAMP"));
+                /*All of these instances must also be replaced when applying to astah-professional*/
                 if(entity instanceof IAccident){
                     name = "Accident";
                 }else if(entity instanceof IHazard){
