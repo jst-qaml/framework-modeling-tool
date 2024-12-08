@@ -1,13 +1,10 @@
 package ai.engineering.patternApplication.internal.entity;
 
-/*This import cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.inf.model.*;
 
 import java.awt.*;
 
-/*Since these names are all from System-Safety Dependent Packages, they must be changed according to the packages used to be
-capable of astah-professional*/
 public class Const {
     public final String[] argumentElementTypeNames = {
             "Goal",//0
@@ -30,7 +27,6 @@ public class Const {
     public final int fontStyle = Font.BOLD;
     public final int fontSize = 16;
 
-    /*Same thing can be said for the packages below too. IElement is an exception*/
     public final int GetIndexOfType(IElement element) {
         if(element instanceof IGoal){
             return 0;
