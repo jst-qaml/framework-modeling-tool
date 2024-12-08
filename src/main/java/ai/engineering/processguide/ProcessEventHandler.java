@@ -16,7 +16,6 @@ import com.change_vision.jude.api.inf.editor.*;
 import com.change_vision.jude.api.inf.view.*;
 import com.change_vision.jude.api.inf.model.*;
 import com.change_vision.jude.api.inf.project.*;
-/*gsn imports cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.editor.*;
 import com.change_vision.jude.api.gsn.model.*;
 import com.change_vision.jude.api.inf.presentation.*;
@@ -88,7 +87,6 @@ public class ProcessEventHandler extends MouseAdapter{
             transactionManager.beginTransaction();
 
             IDiagramEditorFactory diagramEditorFactory = projectAccessor.getDiagramEditorFactory();
-            /*IFacet, IModule, IGsnFacet,GsnDiagramEditor, IGsnDiagram, and GsnModelEditor cannot be used in astah-professional*/
             IFacet facet = projectAccessor.getFacet(IGsnFacet.FACET_SYMBOLIC_NAME);
             IModule module = facet.getRootElement(IModule.class);
 
@@ -97,10 +95,8 @@ public class ProcessEventHandler extends MouseAdapter{
 
             IModelEditorFactory modelEditorFactory = projectAccessor.getModelEditorFactory();
             GsnModelEditor modelEditor = modelEditorFactory.getModelEditor(GsnModelEditor.class);
-            /*Talking about the codes above about the previous comment*/
             
             List<IRequirement> valuePropositions = ElementPicker.getMLCanvasElements("ML.ValueProposition");
-            /*IGoal cannot be used in astah-professional*/
             IGoal rootGoal = modelEditor.createGoal(module, "Root KAOS Goal");
             rootGoal.setContent(valuePropositions.get(0).getName());
             rootGoal.createElementHyperlink(valuePropositions.get(0), "");
@@ -108,7 +104,6 @@ public class ProcessEventHandler extends MouseAdapter{
             INodePresentation rootGoalPresentation = diagramEditor.createNodePresentation(rootGoal, new Point(500, 50));
             
             List<IRequirement> decisions = ElementPicker.getMLCanvasElements("ML.Decision");
-            /*IGoal and ISupportedBy here must also be replaced*/
             List<IGoal> decisionGoals = new ArrayList<IGoal>();
             for (int i = 0; i < decisions.size(); i++) {
                 IGoal decisionGoal = modelEditor.createGoal(module, "Decision Goal " + (i+1));
@@ -126,7 +121,6 @@ public class ProcessEventHandler extends MouseAdapter{
             List<IRequirement> tasks = ElementPicker.getMLCanvasElements("ML.PredictionTask");
             List<IGoal> taskGoals = new ArrayList<IGoal>();
             
-            /*IGoal, ISupportedBy within this part too*/
             IGoal decisionGoal = decisionGoals.get(0);
             for (int i = 0; i < tasks.size(); i++) {
                 IGoal taskGoal = modelEditor.createGoal(module, "Prediction Task Goal " + (i+1));
@@ -165,7 +159,6 @@ public class ProcessEventHandler extends MouseAdapter{
             transactionManager.beginTransaction();
 
             IDiagramEditorFactory diagramEditorFactory = projectAccessor.getDiagramEditorFactory();
-            /*IFacet, IModule, GsnModelEditor, IGoal, GsnDiagramEditor, IGsnDiagram cannot be used in astah-professional*/
             IFacet facet = projectAccessor.getFacet(IGsnFacet.FACET_SYMBOLIC_NAME);
             IModule module = facet.getRootElement(IModule.class);
 
