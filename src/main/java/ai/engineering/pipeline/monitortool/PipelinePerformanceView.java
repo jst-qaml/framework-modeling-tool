@@ -2,7 +2,6 @@ package ai.engineering;
 
 import com.change_vision.jude.api.inf.project.*;
 import com.change_vision.jude.api.inf.editor.*;
-/*This import cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.editor.*;
 
 import com.change_vision.jude.api.inf.ui.IPluginExtraTabView;
@@ -24,7 +23,6 @@ import com.change_vision.jude.api.inf.presentation.ILinkPresentation;
 
 import com.change_vision.jude.api.inf.view.IEntitySelectionListener;
 import com.change_vision.jude.api.inf.view.IEntitySelectionEvent;
-/*This import cannot be used in astah-professional*/
 import com.change_vision.jude.api.gsn.model.*;
 
 import java.awt.*;
@@ -196,7 +194,6 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
             return;
         }
 
-        /*IGoal cannot be used in astah-professional*/
         if (currentPresentation.getModel() instanceof IGoal) {
             IGoal goal = (IGoal) currentPresentation.getModel();
             if(GoalParser.isParsable(goal)){
@@ -310,29 +307,23 @@ public class PipelinePerformanceView extends JPanel implements IPluginExtraTabVi
             transactionManager.beginTransaction();
 
             IDiagramEditorFactory diagramEditorFactory = projectAccessor.getDiagramEditorFactory();
-            /*IFacet, IModule, and IGsnFacet cannot be used in astah-professional*/
             IFacet facet = projectAccessor.getFacet(IGsnFacet.FACET_SYMBOLIC_NAME);
             IModule module = facet.getRootElement(IModule.class);
 
-            /*GsnDiagramEditor and IGsnDiagram cannot be used in astah-professional because gsn.editor does not exist*/
             GsnDiagramEditor diagramEditor = diagramEditorFactory.getDiagramEditor(GsnDiagramEditor.class);
             IGsnDiagram diagram = (IGsnDiagram) selectedPresentation.getDiagram();
             diagramEditor.setDiagram(diagram);
 
             IModelEditorFactory modelEditorFactory = projectAccessor.getModelEditorFactory();
-            /*GsnModelEditor cannot be used in astah-professional because gsn.editor does not exist*/
             GsnModelEditor modelEditor = modelEditorFactory.getModelEditor(GsnModelEditor.class);
 
             INodePresentation selectedNodePresentation = (INodePresentation) selectedPresentation;
             Point2D selectedPresentationLocation = selectedNodePresentation.getLocation();
             Point2D assumptionNodeLocation = new Point((int) selectedPresentationLocation.getX(), (int) (selectedPresentationLocation.getY() + 100));
 
-            /*IAssumption cannot be used in astah-professional*/
             IAssumption assumption = modelEditor.createAssumption(module, selectedPresentation.getLabel());
             assumption.setContent("To be updated with a baseline experiment.");
             INodePresentation assumptionPresentation = diagramEditor.createNodePresentation(assumption, assumptionNodeLocation);
-
-            /*IInContextof and IArgumentAsset cannot be used in astah-professional */
             IInContextOf connection = modelEditor.createInContextOf((IArgumentAsset) selectedPresentation.getModel(), assumption);
             diagramEditor.createLinkPresentation(connection, selectedNodePresentation, assumptionPresentation);
 
