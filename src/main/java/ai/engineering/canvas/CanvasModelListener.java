@@ -8,11 +8,6 @@ import javax.swing.text.*;
 
 import com.change_vision.jude.api.inf.model.IRequirement;
 import com.change_vision.jude.api.inf.editor.ITransactionManager;
-/* SysmlModelEditor cannot be used in astah-professional. 
-Try to change here to other Editor package. For instance, if you want 
-to use UseCase Diagram, repace with the following code.
-import com.change_vision.jude.api.inf.editor.UseCaseDiagramEditor;
-*/
 import com.change_vision.jude.api.inf.editor.SysmlModelEditor;
 
 
@@ -21,7 +16,6 @@ public class CanvasModelListener implements DocumentListener{
     IRequirement requirement;
     String oldRequirementString;
     ITransactionManager transactionManager;
-    /* Change SysmlModelEditor to appropriate Editor package */
     SysmlModelEditor modelEditor;
     JTextArea textArea;
 
@@ -29,7 +23,6 @@ public class CanvasModelListener implements DocumentListener{
         this.requirement = requirement;
         ToolUtilities utilities = ToolUtilities.getToolUtilities();
         transactionManager = utilities.getTransactionManager();
-        /*change getSysmlModelEditor to other get class*/
         modelEditor = utilities.getSysmlModelEditor();
         this.textArea = textArea;
         try {
